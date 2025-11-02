@@ -59,6 +59,12 @@ npm run test:all        # Unit tests + E2E tests
 # Run specific test file
 npx playwright test tests/e2e/homepage.spec.js
 
+# Run specific test folder
+npx playwright test tests/e2e/navigation/
+
+# Run specific navigation test file
+npx playwright test tests/e2e/navigation/home-navigation.spec.js
+
 # Run with specific browser
 npx playwright test --project=chromium
 
@@ -76,8 +82,10 @@ npx playwright show-report
 tests/
 ├── e2e/                    # E2E test files
 │   ├── homepage.spec.js    # Homepage tests
-│   ├── navigation.spec.js  # Navigation tests
-│   └── interactive-features.spec.js
+│   ├── interactive-features.spec.js # Interactive element tests
+│   └── navigation/         # Navigation tests (organized by page)
+│       ├── home-navigation.spec.js      # Navigation from homepage
+│       └── curriculum-navigation.spec.js # Navigation from curriculum page
 ├── fixtures/               # Test data and utilities
 │   └── test-fixtures.js    # Custom fixtures for eliminating code duplication
 └── test-results/          # Generated reports and artifacts
