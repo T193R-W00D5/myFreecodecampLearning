@@ -20,6 +20,14 @@ export const test = base.extend({
     await use(page);
   },
 
+  // Custom fixture for curriculum page testing
+  curriculumPage: async ({ page }, use) => {
+    await page.goto('/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html');
+    // Wait for page to be fully loaded
+    await page.waitForLoadState('networkidle');
+    await use(page);
+  },
+
   // Custom fixture for testing interactive elements
   interactivePage: async ({ page }, use) => {
     await page.goto('/pages/interactive-features.html');

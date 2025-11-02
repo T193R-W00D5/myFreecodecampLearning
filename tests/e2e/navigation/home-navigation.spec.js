@@ -1,6 +1,6 @@
-import { test, expect } from '../fixtures/test-fixtures.js';
+import { test, expect } from '../../fixtures/test-fixtures.js';
 
-test.describe('Course Navigation Tests', () => {
+test.describe('Home Page Navigation Tests', () => {
   test('should navigate to course curriculum page', async ({ homePage }) => {
     // Click on the course link
     const courseLink = homePage.locator('a[href*="Certified-Full-Stack-Developer-Curriculum"]');
