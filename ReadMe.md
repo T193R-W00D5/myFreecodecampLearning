@@ -71,18 +71,21 @@ Your server's now on autopilot ✈️
 
 ## Testing
 
-This project includes both unit tests (Jest) and end-to-end tests (Playwright).
+This project includes both unit tests (Jest) and end-to-end tests (Playwright) with **TypeScript** support for enhanced type safety and better development experience.
 
 ### Quick Start Testing
 ```bash
 # Run all unit tests
 npm test
 
-# Run all E2E tests (headless)
+# Run all E2E tests (headless) - TypeScript files
 npm run test:e2e
 
 # Run E2E tests with browser visible (great for debugging)
 npm run test:e2e:headed
+
+# Run TypeScript type checking
+npx tsc --noEmit
 
 # Run both unit and E2E tests
 npm run test:all
@@ -94,7 +97,7 @@ npm run test:all
 npm test                # Jest unit tests
 npm run test:unit       # Same as above
 
-# E2E Tests (Playwright)
+# E2E Tests (Playwright with TypeScript)
 npm run test:e2e        # All browsers, headless
 npm run test:e2e:headed # All browsers, visible
 npm run test:e2e:debug  # Debug mode with pauses
@@ -104,12 +107,22 @@ npm run test:e2e:ui     # Interactive UI mode
 npm run test:e2e:chrome    # Chromium only
 npm run test:e2e:firefox   # Firefox only  
 npm run test:e2e:webkit    # WebKit/Safari only
+
+# TypeScript
+npx tsc --noEmit        # Type checking without output
 ```
 
 ### Test Setup
 1. **Unit tests** are in `__tests__/` directory (Jest)
-2. **E2E tests** are in `tests/e2e/` directory (Playwright)
-3. **Test results** saved to `test-results/` directory
+2. **E2E tests** are in `tests/e2e/` directory (TypeScript + Playwright)
+3. **Test fixtures** provide type-safe, reusable test setup
+4. **Test results** saved to `test-results/` directory
+
+### TypeScript Integration
+- All Playwright tests use TypeScript (`.ts` files)
+- Enhanced type safety and IntelliSense support
+- Automatic type checking in CI pipeline
+- Custom fixtures with proper type definitions
 
 For detailed testing information, see [docs/PLAYWRIGHT_GUIDE.md](docs/PLAYWRIGHT_GUIDE.md).
 

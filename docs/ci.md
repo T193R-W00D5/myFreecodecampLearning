@@ -1,33 +1,211 @@
-# CI (GitHub Actions) for this project
+# CI/CD Pipeline Documentation
 
-This repo uses two CI jobs in a single workflow (`.github/workflows/node.js.yml`):
+This project uses a comprehensive CI/CD pipeline with GitHub Actions for quality assurance, testing, and type safety.
 
-1. Compatibility matrix
-  - Runs a matrix across Node versions: 18.x, 20.x, 22.x.
-  - Purpose: broad compatibility testing across supported Node major versions.
+## Overview
 
-2. Pinned job (smoke test)
-   - Reads the pinned Node version from `package.json` (the `volta.node` field) and runs tests against that exact version.
-   - Purpose: ensure CI mirrors the exact developer environment (Volta pin).
+The CI/CD setup consists of three main workflows:
 
-Before those jobs run, a small assertion job ensures the compatibility matrix actually covers the pinned Node version. The assertion accepts either:
-- an exact match (e.g. `22.21.0` in the matrix), or
-- a major.x entry that matches the pinned major (e.g. `22.x` covers `22.21.0`).
+1. **E2E Tests** (`.github/workflows/e2e-tests.yml`) - Playwright testing with TypeScript
+2. **CI Quality Checks** (`.github/workflows/ci.yml`) - Linting, TypeScript checking, and security
+3. **Node.js Compatibility** (`.github/workflows/node.js.yml`) - Cross-version compatibility testing
 
-Why this setup?
-- Developers use Volta to pin an exact Node version in `package.json` for reproducibility.
-- CI verifies both breadth (matrix) and exact-match (pinned) so you get good coverage and a guarantee that the developer-pin is tested.
+## Workflow Details
 
-Notes for contributors
-- To change the pinned Node version locally:
-  - Use Volta: `volta install node@<version>` and `volta pin node@<version>`.
-  - Commit the updated `package.json` so CI picks up the new pin.
- - To change the pinned Node version locally:
-   - Use Volta: `volta install node@<version>` and `volta pin node@<version>`.
-   - Commit the updated `package.json` so CI picks up the new pin.
-- If you update the pinned Node major and expect the compatibility matrix to cover it, the assertion will pass if the matrix contains the matching major (e.g. `22.x`). If you change the pinned major but the matrix does not include it, CI will fail and you should update the workflow matrix accordingly.
-- If you want CI to test additional Node versions, edit the `compatibility` matrix in `.github/workflows/node.js.yml`.
- - If you want CI to test additional Node versions, edit the `compatibility` matrix in `.github/workflows/node.js.yml`.
+### 1. E2E Tests Workflow
+
+**Purpose**: Run end-to-end tests with Playwright across multiple browsers
+
+**Triggers**: 
+- Push to `main`, `develop` branches
+- Pull requests to `main`
+
+**Jobs**:
+- **Unit Tests**: Jest unit tests
+- **E2E Tests**: Chrome-only testing for fast feedback (configurable)
+- **E2E Tests Full**: All browsers on main branch pushes only
+
+**Key Features**:
+- TypeScript test files (`.ts`) automatically handled
+- Matrix testing across browsers (Chromium, Firefox, WebKit, Mobile)
+- Artifact collection for test results and reports
+- Volta integration for consistent Node.js version
+
+### 2. CI Quality Checks Workflow
+
+**Purpose**: Code quality, TypeScript validation, and security auditing
+
+**Triggers**:
+- Push to `main`, `develop` branches  
+- Pull requests to `main`
+
+**Jobs**:
+- **Lint, TypeScript Check, and Build**:
+  - JavaScript syntax validation
+  - **TypeScript type checking** (`npx tsc --noEmit`)
+  - Server startup validation
+  - Package.json validation
+  - Playwright configuration validation
+
+- **Security Audit**:
+  - Dependency vulnerability scanning
+  - Security advisory checks
+
+**TypeScript Integration**:
+```yaml
+- name: Check for syntax errors
+  run: |
+    # Check JavaScript syntax
+    node --check src/script.js
+    node --check server.js
+    
+    # Check TypeScript compilation
+    npx tsc --noEmit
+    
+    # Check if server starts without errors
+    timeout 10s npm start || [ $? -eq 124 ]
+```
+
+### 3. Node.js Compatibility Matrix
+
+**Purpose**: Ensure compatibility across Node.js versions
+
+**Matrix Testing**: Node versions 18.x, 20.x, 22.x
+**Pinned Testing**: Exact Volta-pinned version from `package.json`
+
+## TypeScript Integration
+
+### Compilation Checking
+- All TypeScript files are type-checked in CI
+- Compilation errors fail the build
+- No JavaScript output generated (`noEmit: true`)
+
+### Test Execution
+- Playwright automatically handles `.ts` test files
+- Custom fixtures with TypeScript types
+- Enhanced error reporting with type information
+
+## Performance Optimizations
+
+### Fast CI Strategy
+- **Default**: Chrome-only E2E testing for quick feedback
+- **Full testing**: All browsers only on main branch pushes
+- **Result**: ~70% reduction in CI time
+
+### Configuration
+```yaml
+# Fast CI (default)
+matrix:
+  browser: [chromium]
+
+# Full testing (uncomment when needed)
+# matrix:
+#   browser: [chromium, firefox, webkit]
+```
+
+## Local CI Simulation
+
+### Run Full Test Suite Locally
+```bash
+# All tests (Jest + Playwright)
+npm run test:all
+
+# Just E2E tests (all browsers)
+npm run test:e2e
+
+# TypeScript type checking
+npx tsc --noEmit
+
+# Simulate CI environment
+CI=true npm run test:e2e  # Bash/Linux
+$env:CI = "true"; npm run test:e2e  # PowerShell
+```
+
+### Debugging CI Failures
+
+**TypeScript Errors**:
+```bash
+# Check types locally
+npx tsc --noEmit
+
+# Fix type errors and re-run
+```
+
+**Test Failures**:
+```bash
+# Run specific failing test
+npx playwright test tests/e2e/failing-test.spec.ts --project=chromium
+
+# Generate test report
+npx playwright show-report
+```
+
+## Artifact Collection
+
+### What's Collected
+- Test results (HTML reports)
+- Screenshots on failure
+- Video recordings on failure
+- Test traces for debugging
+
+### Retention
+- Standard results: 30 days
+- Comprehensive results (main branch): 90 days
+
+## Branch Protection
+
+### Requirements
+- All CI checks must pass
+- TypeScript compilation must succeed
+- No security vulnerabilities in dependencies
+- Unit tests must pass
+- E2E tests must pass (Chrome minimum)
+
+## Contributing Guidelines
+
+### Before Committing
+1. Run TypeScript check: `npx tsc --noEmit`
+2. Run tests locally: `npm run test:all`
+3. Ensure no lint errors
+4. Update documentation if needed
+
+### Updating Dependencies
+1. Security audit: `npm audit`
+2. Test compatibility: `npm run test:all`
+3. Check TypeScript compatibility
+4. Update CI if major version changes
+
+## Volta Integration
+
+### Node.js Version Management
+- **Pinned version**: Defined in `package.json` (`volta.node`)
+- **CI consistency**: Same version used in all workflows
+- **Developer alignment**: Local and CI environments match
+
+### Updating Node.js Version
+```bash
+# Local update
+volta install node@22.21.0
+volta pin node@22.21.0
+
+# Commit updated package.json
+git add package.json
+git commit -m "Update Node.js to 22.21.0"
+```
+
+## Monitoring and Maintenance
+
+### Regular Tasks
+- Monitor CI performance and adjust browser matrix as needed
+- Update dependencies and security patches
+- Review and update TypeScript configuration
+- Optimize test performance and reliability
+
+### Metrics to Watch
+- CI execution time
+- Test flakiness rate
+- TypeScript compilation time
+- Security vulnerability count
 
 Engines and matrix choices (short note)
 -------------------------------------

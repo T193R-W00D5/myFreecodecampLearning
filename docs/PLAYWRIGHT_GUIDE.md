@@ -56,14 +56,14 @@ npm run test:all        # Unit tests + E2E tests
 
 ### Direct Playwright Commands
 ```bash
-# Run specific test file
-npx playwright test tests/e2e/homepage.spec.js
+# Run specific test file (TypeScript)
+npx playwright test tests/e2e/homepage.spec.ts
 
 # Run specific test folder
 npx playwright test tests/e2e/navigation/
 
 # Run specific navigation test file
-npx playwright test tests/e2e/navigation/home-navigation.spec.js
+npx playwright test tests/e2e/navigation/home-navigation.spec.ts
 
 # Run with specific browser
 npx playwright test --project=chromium
@@ -73,6 +73,9 @@ npx playwright test --headed --max-failures=1
 
 # Generate test report
 npx playwright show-report
+
+# TypeScript type checking
+npx tsc --noEmit
 ```
 
 ## Local Development
@@ -80,16 +83,26 @@ npx playwright show-report
 ### Project Structure
 ```
 tests/
-├── e2e/                    # E2E test files
-│   ├── homepage.spec.js    # Homepage tests
-│   ├── interactive-features.spec.js # Interactive element tests
+├── e2e/                    # E2E test files (TypeScript)
+│   ├── homepage.spec.ts    # Homepage tests
+│   ├── interactive-features.spec.ts # Interactive element tests
 │   └── navigation/         # Navigation tests (organized by page)
-│       ├── home-navigation.spec.js      # Navigation from homepage
-│       └── curriculum-navigation.spec.js # Navigation from curriculum page
+│       ├── home-navigation.spec.ts      # Navigation from homepage
+│       └── curriculum-navigation.spec.ts # Navigation from curriculum page
 ├── fixtures/               # Test data and utilities
-│   └── test-fixtures.js    # Custom fixtures for eliminating code duplication
+│   └── test-fixtures.ts    # Custom fixtures with TypeScript types
 └── test-results/          # Generated reports and artifacts
 ```
+
+### TypeScript Integration
+
+This project uses **TypeScript** for all test files, providing enhanced type safety and better IDE support.
+
+#### Benefits of TypeScript Testing:
+- **Type safety** - Catch errors at compile time
+- **Better IntelliSense** - Enhanced autocomplete and refactoring
+- **Improved maintainability** - Clear interfaces and type definitions
+- **Runtime error prevention** - TypeScript catches common mistakes early
 
 ### Custom Test Fixtures
 
@@ -159,13 +172,14 @@ test('homepage title', async ({ homePage }) => {
 - **Manual start**: `npm start` (if needed for debugging)
 
 ### Test Configuration
-Key settings in `playwright.config.js`:
+Key settings in `playwright.config.ts`:
 - **Parallel execution**: Tests run in parallel for speed
 - **Retries**: 2 retries on CI, 0 locally
 - **Timeouts**: 30s test timeout, 5s assertion timeout
 - **Screenshots**: Only on failure
 - **Videos**: Retained on failure
 - **Traces**: On first retry
+- **TypeScript support**: Automatic `.ts` file handling
 
 ## Debugging Tests
 
@@ -210,13 +224,13 @@ npx playwright show-trace test-results/[test-name]/trace.zip
 
 ### Test File Template
 
-#### Using Custom Fixtures (Recommended)
-```javascript
+#### Using Custom Fixtures (Recommended - TypeScript)
+```typescript
 import { test, expect } from '../fixtures/test-fixtures.js';
 
 test.describe('Feature Name', () => {
   test('should test homepage feature', async ({ homePage }) => {
-    // homePage is already loaded and ready
+    // homePage is already loaded and ready with full TypeScript support
     await expect(homePage.locator('selector')).toBeVisible();
   });
 
@@ -227,13 +241,13 @@ test.describe('Feature Name', () => {
 
   test('should verify server is running', async ({ serverRunning }) => {
     // Server health is automatically validated
-    // Your test code here
+    // TypeScript provides type checking for all page methods
   });
 });
 ```
 
 #### Using Standard Playwright (Alternative)
-```javascript
+```typescript
 import { test, expect } from '@playwright/test';
 
 test.describe('Feature Name', () => {
@@ -242,7 +256,7 @@ test.describe('Feature Name', () => {
   });
 
   test('should do something', async ({ page }) => {
-    // Your test code here
+    // Your test code here with TypeScript type safety
     await expect(page.locator('selector')).toBeVisible();
   });
 });
@@ -280,10 +294,12 @@ await expect(page.locator('selector')).toHaveText('Text');
 
 ### GitHub Actions Workflows
 - **`e2e-tests.yml`**: Runs E2E tests on push/PR
-- **`ci.yml`**: Code quality and security checks
+- **`ci.yml`**: Code quality, TypeScript checking, and security checks
+- **`node.js.yml`**: Node.js compatibility matrix testing
 
 ### Workflow Features
 - **Matrix testing**: Configurable browser testing (Chrome-only by default for speed)
+- **TypeScript type checking**: Validates types before running tests
 - **Artifact collection**: Test results and screenshots
 - **Volta integration**: Uses pinned Node.js version
 - **Conditional execution**: Full cross-browser tests only on main branch pushes

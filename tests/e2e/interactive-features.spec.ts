@@ -72,8 +72,8 @@ test.describe('Interactive Features Tests', () => {
 
   test('should load required JavaScript files', async ({ interactivePage }) => {
     // Check if the main script is loaded by looking for network requests
-    const scriptRequests = [];
-    interactivePage.on('request', request => {
+    const scriptRequests: string[] = [];
+    interactivePage.on('request', (request) => {
       if (request.url().includes('.js')) {
         scriptRequests.push(request.url());
       }

@@ -1,7 +1,15 @@
-import { test as base } from '@playwright/test';
+import { test as base, Page } from '@playwright/test';
+
+// Define custom fixtures interface
+interface CustomFixtures {
+  serverRunning: Page;
+  homePage: Page;
+  curriculumPage: Page;
+  interactivePage: Page;
+}
 
 // Extend base test with custom fixtures
-export const test = base.extend({
+export const test = base.extend<CustomFixtures>({
   // Custom fixture for testing with server running
   serverRunning: async ({ page }, use) => {
     // Verify server is responding before running tests
