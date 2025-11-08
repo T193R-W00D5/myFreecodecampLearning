@@ -2,6 +2,7 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
 
+// Simple Node.js server for serving static files and handling routes
 const server = http.createServer((req, res) => {
     let filePath = '.' + req.url;
     if (filePath === './') filePath = './pages/_Home.html';
