@@ -18,6 +18,12 @@ on:
         type: boolean
         default: false
 
+# Add explicit permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   # Quick staging deployment with optional testing
   auto-staging-deploy:

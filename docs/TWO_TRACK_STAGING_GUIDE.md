@@ -81,12 +81,29 @@ When you need to test the exact production deployment:
 
 ## **GitHub Environment Settings Required:**
 
-### **No Changes Needed! ✅**
+### **Setup Prerequisites:**
 
+Before the workflows will work, ensure these GitHub settings are configured:
+
+#### **1. Actions Permissions (CRITICAL)**
+- Go to **Settings → Actions → General → Workflow permissions**  
+- Select **"Read and write permissions"**
+- Enable **"Allow GitHub Actions to create and approve pull requests"**
+
+#### **2. GitHub Pages Configuration**
+- Go to **Settings → Pages**
+- Set **Source: "Deploy from a branch"**
+- Select **Branch: `gh-pages` / `/ (root)`**
+
+#### **3. Environment Settings (Already Configured)**
 Your current GitHub environment settings support both workflows:
 
 - **Staging Environment:** No approval required (fast iteration)
 - **Production Environment:** Approval required + 2-minute timer
+
+### **No Additional Changes Needed! ✅**
+
+Once the prerequisites above are set, both workflows will work perfectly.
 
 ## **Real-World Usage Scenarios:**
 

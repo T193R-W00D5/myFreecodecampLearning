@@ -170,7 +170,87 @@ npx playwright test --grep "@critical|@smoke"
 3. **Parallelize test execution** where possible
 4. **Cache dependencies** in CI/CD pipeline
 
+## Setup Prerequisites
+
+Before using the deployment workflows, ensure the following are configured:
+
+### GitHub Repository Settings
+
+#### 1. Actions Permissions (REQUIRED)
+1. Go to **GitHub Repository → Settings → Actions → General**
+2. Under **Workflow permissions**, select:
+   - ✅ **Read and write permissions**
+   - ✅ **Allow GitHub Actions to create and approve pull requests**
+3. Click **Save**
+
+#### 2. GitHub Pages Configuration (REQUIRED)
+1. Go to **GitHub Repository → Settings → Pages**
+2. Under **Build and deployment**:
+   - **Source:** Deploy from a branch
+   - **Branch:** `gh-pages` / `/ (root)`
+3. Click **Save**
+
+**Note:** If `gh-pages` doesn't appear in the dropdown, create it first:
+```bash
+git checkout -b gh-pages
+git push --set-upstream origin gh-pages
+git checkout main
+```
+
+#### 3. Environment Protection (OPTIONAL)
+1. Go to **GitHub Repository → Settings → Environments**
+2. Create environments: `staging` and `production`
+3. Configure protection rules as needed
+
+### Initial Setup Commands
+```bash
+# Clone and setup repository
+git clone https://github.com/your-username/your-repo.git
+cd your-repo
+npm install
+
+# Create gh-pages branch for GitHub Pages
+git checkout -b gh-pages
+git push --set-upstream origin gh-pages
+git checkout main
+
+# Test local development
+npm start
+npx playwright test --grep "@critical"
+```
+
 ## Troubleshooting
+
+### Common Setup Issues
+
+#### **Error: Git exit code 128**
+**Symptoms:** Deployment workflows fail with "The process '/usr/bin/git' failed with exit code 128"
+
+**Cause:** GitHub Actions doesn't have write permissions
+
+**Solution:**
+1. Check **Settings → Actions → General → Workflow permissions**
+2. Ensure **"Read and write permissions"** is selected
+3. Enable **"Allow GitHub Actions to create and approve pull requests"**
+4. Re-run the failed workflow
+
+#### **Error: gh-pages branch not available**
+**Symptoms:** Can't select `gh-pages` branch in GitHub Pages settings
+
+**Solution:**
+1. Create the branch locally: `git checkout -b gh-pages`
+2. Push to GitHub: `git push --set-upstream origin gh-pages`
+3. Return to main: `git checkout main`
+4. Refresh GitHub Pages settings
+
+#### **Error: Staging site not accessible**
+**Symptoms:** Staging URL returns 404
+
+**Possible Causes & Solutions:**
+1. **First deployment in progress:** Wait 2-3 minutes for GitHub Pages to propagate
+2. **Deployment failed:** Check GitHub Actions for error messages
+3. **Wrong URL:** Verify staging URL: `https://username.github.io/repo-name/staging`
+4. **GitHub Pages not enabled:** Follow GitHub Pages configuration steps above
 
 ### Common Issues
 
