@@ -1,0 +1,103 @@
+name: Auto-Deploy to Staging (Modern)
+
+# Modern GitHub Pages deployment using GitHub Actions
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+      - '.github/workflows/**'
+
+  workflow_dispatch:
+    inputs:
+      skip_tests:
+        description: 'Skip tests for faster deployment'
+        required: true
+        type: boolean
+        default: false
+
+# Required permissions for GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build the site
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Setup Node.js (if running tests)
+        if: github.event.inputs.skip_tests != 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies (if running tests)
+        if: github.event.inputs.skip_tests != 'true'
+        run: npm ci
+
+      - name: Run quick smoke tests
+        if: github.event.inputs.skip_tests != 'true'
+        run: |
+          npx playwright install chromium --with-deps
+          npm start &
+          sleep 5
+          npx playwright test --grep "@smoke" --project=chromium --reporter=line
+        continue-on-error: true
+        env:
+          CI: true
+
+      - name: Prepare staging site
+        run: |
+          echo "🚀 AUTO-STAGING DEPLOYMENT" > deployment-info.txt
+          echo "Trigger: ${{ github.event_name }}" >> deployment-info.txt
+          echo "Branch: ${{ github.ref_name }}" >> deployment-info.txt
+          echo "Commit: $(git rev-parse HEAD)" >> deployment-info.txt
+          echo "Timestamp: $(date)" >> deployment-info.txt
+          
+          # Create staging directory structure
+          mkdir -p _site/staging
+          
+          # Copy all files except excluded ones
+          rsync -av --exclude='.github' --exclude='node_modules' --exclude='tests' --exclude='__tests__' --exclude='docs/Ai_chats' --exclude='*.config.js' --exclude='*.config.ts' --exclude='tsconfig.json' --exclude='package*.json' ./ _site/staging/
+          
+          # Create root redirect to staging
+          echo '<meta http-equiv="refresh" content="0; URL=./staging/">' > _site/index.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  # Deploy to GitHub Pages
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Create deployment notification
+        run: |
+          echo "## ✅ Staging Auto-Deployment Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Staging URL:** ${{ steps.deployment.outputs.page_url }}staging/" >> $GITHUB_STEP_SUMMARY
+          echo "**Main URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY

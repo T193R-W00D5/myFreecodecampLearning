@@ -20,9 +20,10 @@ on:
 
 # Add explicit permissions for GitHub Pages deployment
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  actions: read
 
 jobs:
   # Quick staging deployment with optional testing
@@ -70,6 +71,8 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           destination_dir: staging
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
           exclude_assets: |
             .github
             node_modules
