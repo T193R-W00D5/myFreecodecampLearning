@@ -1,0 +1,16 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "PowerShell (Project - check node)": {
+      "path": "powershell.exe",
+      "args": [
+        "-NoExit",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& '${workspaceFolder}\\.vscode\\check-node-version.ps1'"
+      ],
+      "icon": "terminal-powershell"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell (Project - check node)"
+}
