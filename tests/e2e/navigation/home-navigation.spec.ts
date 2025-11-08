@@ -1,7 +1,7 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 
 test.describe('Home Page Navigation Tests', () => {
-  test('should navigate to course curriculum page', async ({ homePage }) => {
+  test('should navigate to course curriculum page @critical', async ({ homePage }) => {
     // Click on the course link
     const courseLink = homePage.locator('a[href*="Certified-Full-Stack-Developer-Curriculum"]');
     
@@ -23,20 +23,20 @@ test.describe('Home Page Navigation Tests', () => {
     expect(response.status()).toBeLessThanOrEqual(404);
   });
 
-  test('should handle static file serving', async ({ homePage }) => {
+  test('should handle static file serving @smoke', async ({ homePage }) => {
     // Test CSS file loads
     const response = await homePage.goto('/css/styles-freecodecamp.css');
     expect(response?.status()).toBe(200);
     expect(response?.headers()['content-type']).toContain('text/css');
   });
 
-  test('should handle favicon properly', async ({ homePage }) => {
+  test('should handle favicon properly @smoke', async ({ homePage }) => {
     // Test favicon loads
     const response = await homePage.goto('/assets/favicon/Wizard.ico');
     expect(response?.status()).toBe(200);
   });
 
-  test('should handle 404 gracefully', async ({ homePage }) => {
+  test('should handle 404 gracefully @regression', async ({ homePage }) => {
     // Test non-existent page
     const response = await homePage.goto('/non-existent-page', { 
       waitUntil: 'networkidle' 

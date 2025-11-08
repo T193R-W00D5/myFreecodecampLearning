@@ -1,7 +1,7 @@
 import { test, expect } from '../fixtures/test-fixtures.js';
 
 test.describe('Homepage Tests', () => {
-  test('should load the home page successfully', async ({ homePage }) => {
+  test('should load the home page successfully @critical @smoke', async ({ homePage }) => {
     // Check that the page loads and has the correct title
     await expect(homePage).toHaveTitle('freecodecamp.org copies');
     
@@ -12,7 +12,7 @@ test.describe('Homepage Tests', () => {
     await expect(homePage.locator('h2')).toHaveText('Welcome!');
   });
 
-  test('should have working navigation links', async ({ homePage }) => {
+  test('should have working navigation links @critical', async ({ homePage }) => {
     // Test the "Bottom of page" link
     const bottomLink = homePage.locator('a[href="#idFooter"]');
     await expect(bottomLink).toBeVisible();
@@ -23,7 +23,7 @@ test.describe('Homepage Tests', () => {
     await expect(homePage.locator('#idFooter')).toBeInViewport();
   });
 
-  test('should display course navigation', async ({ homePage }) => {
+  test('should display course navigation @smoke', async ({ homePage }) => {
     // Check courses section exists
     await expect(homePage.locator('main section').nth(1).locator('h1')).toHaveText('Courses');
     
@@ -33,7 +33,7 @@ test.describe('Homepage Tests', () => {
     await expect(courseLink).toHaveText('Certified Full Stack Developer Curriculum');
   });
 
-  test('should have proper page structure', async ({ homePage }) => {
+  test('should have proper page structure @regression', async ({ homePage }) => {
     // Verify semantic HTML structure
     await expect(homePage.locator('header#idHeader')).toBeVisible();
     await expect(homePage.locator('main')).toBeVisible();
@@ -46,7 +46,7 @@ test.describe('Homepage Tests', () => {
     await expect(homePage.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '/css/styles-freecodecamp.css');
   });
 
-  test('should be responsive on mobile', async ({ homePage }) => {
+  test('should be responsive on mobile @regression', async ({ homePage }) => {
     // Set mobile viewport
     await homePage.setViewportSize({ width: 375, height: 667 });
     await homePage.reload(); // Reload to apply viewport changes

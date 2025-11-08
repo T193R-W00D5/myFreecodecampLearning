@@ -1,12 +1,12 @@
 import { test, expect } from '../fixtures/test-fixtures.js';
 
 test.describe('Interactive Features Tests', () => {
-  test('should load interactive features page', async ({ interactivePage }) => {
+  test('should load interactive features page @critical @smoke', async ({ interactivePage }) => {
     await expect(interactivePage).toHaveTitle('Cafe Menu');
     await expect(interactivePage.locator('h1')).toHaveText('Interactive Features');
   });
 
-  test('should show message when Click Me button is clicked', async ({ interactivePage }) => {
+  test('should show message when Click Me button is clicked @critical', async ({ interactivePage }) => {
     const messageBtn = interactivePage.locator('#messageBtn');
     const messageBox = interactivePage.locator('#textMessage');
 
@@ -26,7 +26,7 @@ test.describe('Interactive Features Tests', () => {
     await expect(messageBox).toBeVisible();
   });
 
-  test('should trigger alert test functionality', async ({ interactivePage }) => {
+  test('should trigger alert test functionality @smoke', async ({ interactivePage }) => {
     const alertBtn = interactivePage.locator('#alert_test');
     
     // Verify alert button exists
@@ -44,7 +44,7 @@ test.describe('Interactive Features Tests', () => {
     await expect(snackbar).toBeVisible();
   });
 
-  test('should have proper accessibility attributes', async ({ interactivePage }) => {
+  test('should have proper accessibility attributes @smoke', async ({ interactivePage }) => {
     // Check aria-labels
     await expect(interactivePage.locator('#messageBtn')).toHaveAttribute('aria-label', 'message_test');
     await expect(interactivePage.locator('#alert_test')).toHaveAttribute('aria-label', 'alert_test');
@@ -56,7 +56,7 @@ test.describe('Interactive Features Tests', () => {
     await expect(interactivePage.locator('#messageBtn')).toHaveAttribute('tabindex', '0');
   });
 
-  test('should handle keyboard navigation', async ({ interactivePage }) => {
+  test('should handle keyboard navigation @regression', async ({ interactivePage }) => {
     // Test tab navigation to buttons
     await interactivePage.keyboard.press('Tab');
     await expect(interactivePage.locator('#messageBtn')).toBeFocused();
@@ -70,7 +70,7 @@ test.describe('Interactive Features Tests', () => {
     await expect(interactivePage.locator('#alert_test')).toBeFocused();
   });
 
-  test('should load required JavaScript files', async ({ interactivePage }) => {
+  test('should load required JavaScript files @regression', async ({ interactivePage }) => {
     // Check if the main script is loaded by looking for network requests
     const scriptRequests: string[] = [];
     interactivePage.on('request', (request) => {

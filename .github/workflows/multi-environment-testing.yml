@@ -1,0 +1,144 @@
+name: Multi-Locale Testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_scope:
+        description: 'Testing scope'
+        required: true
+        type: choice
+        options:
+          - critical-multi-locale
+          - full-multi-environment
+          - locale-specific
+      target_locale:
+        description: 'Specific locale (for locale-specific testing)'
+        required: false
+        default: ''
+
+jobs:
+  # Test across multiple locales and browsers
+  multi-locale-testing:
+    if: github.event.inputs.test_scope == 'critical-multi-locale' || github.event.inputs.test_scope == 'full-multi-environment'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        locale: [en-US, de-DE, ko-KR, ja-JP, fr-FR]
+        browser: [chromium, firefox, webkit]
+        include:
+          # Special configurations for specific combinations
+          - locale: ko-KR
+            timezone: Asia/Seoul
+          - locale: de-DE  
+            timezone: Europe/Berlin
+          - locale: ja-JP
+            timezone: Asia/Tokyo
+          - locale: fr-FR
+            timezone: Europe/Paris
+          - locale: en-US
+            timezone: America/New_York
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Set locale and timezone
+        run: |
+          echo "LANG=${{ matrix.locale }}.UTF-8" >> $GITHUB_ENV
+          echo "LC_ALL=${{ matrix.locale }}.UTF-8" >> $GITHUB_ENV
+          echo "TZ=${{ matrix.timezone || 'UTC' }}" >> $GITHUB_ENV
+
+      - name: Run locale-specific tests
+        run: |
+          npx playwright test --grep "@critical" --project=${{ matrix.browser }} \
+            --reporter=html \
+            --output-dir=test-results-${{ matrix.locale }}-${{ matrix.browser }}
+        env:
+          # Set browser locale
+          PLAYWRIGHT_BROWSER_LOCALE: ${{ matrix.locale }}
+          PLAYWRIGHT_TIMEZONE: ${{ matrix.timezone || 'UTC' }}
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.locale }}-${{ matrix.browser }}
+          path: test-results-${{ matrix.locale }}-${{ matrix.browser }}/
+          retention-days: 7
+
+  # Windows-specific testing (limited availability)
+  windows-testing:
+    if: github.event.inputs.test_scope == 'full-multi-environment'
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Windows-specific tests
+        run: npx playwright test --grep "@critical" --reporter=line
+        env:
+          PLAYWRIGHT_BROWSER_LOCALE: en-US
+
+  # macOS testing with Safari (limited availability)
+  macos-safari-testing:
+    if: github.event.inputs.test_scope == 'full-multi-environment'  
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run Safari tests
+        run: npx playwright test --grep "@critical" --project=webkit --reporter=line
+        env:
+          PLAYWRIGHT_BROWSER_LOCALE: en-US
+
+  # Test summary and analysis
+  test-summary:
+    if: always()
+    needs: [multi-locale-testing, windows-testing, macos-safari-testing]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create test summary
+        run: |
+          echo "## 🌍 Multi-Environment Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "**Test Scope:** ${{ github.event.inputs.test_scope }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Locales Tested:** en-US, de-DE, ko-KR, ja-JP, fr-FR" >> $GITHUB_STEP_SUMMARY
+          echo "**Browsers Tested:** Chromium, Firefox, WebKit" >> $GITHUB_STEP_SUMMARY
+          echo "**OS Coverage:** Linux, Windows, macOS" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📊 **Results Summary:**" >> $GITHUB_STEP_SUMMARY
+          echo "- Multi-locale: ${{ needs.multi-locale-testing.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Windows testing: ${{ needs.windows-testing.result }}" >> $GITHUB_STEP_SUMMARY  
+          echo "- macOS Safari: ${{ needs.macos-safari-testing.result }}" >> $GITHUB_STEP_SUMMARY

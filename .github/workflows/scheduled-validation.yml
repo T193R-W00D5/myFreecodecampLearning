@@ -1,0 +1,249 @@
+name: Scheduled E2E Validation
+
+on:
+  # Scheduled runs
+  schedule:
+    - cron: '0 8 * * 1-5'    # 8 AM weekdays
+    - cron: '0 20 * * 0'     # 8 PM Sundays (weekly full suite)
+  
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      test_suite:
+        description: 'Test suite to run'
+        required: true
+        default: 'critical'
+        type: choice
+        options:
+          - critical
+          - smoke
+          - regression
+          - full
+
+  # Trigger after merge to main (Option B preparation)
+  # push:
+  #   branches: [main]
+
+jobs:
+  # Critical tests (block production if failed)
+  critical-validation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run TypeScript type checking
+        run: npx tsc --noEmit
+
+      - name: Start application server
+        run: |
+          npm start &
+          sleep 10
+        env:
+          CI: true
+
+      - name: Run critical E2E tests
+        run: npx playwright test --grep "@critical" --reporter=html,json
+        env:
+          CI: true
+
+      - name: Parse test results
+        id: test_results
+        run: |
+          # Count failed tests
+          FAILED_TESTS=$(cat test-results.json | jq '.suites[].specs[] | select(.tests[].results[].status == "failed") | .title' | wc -l)
+          echo "failed_count=$FAILED_TESTS" >> $GITHUB_OUTPUT
+          echo "Critical tests failed: $FAILED_TESTS"
+          
+          # Block if 2 or more tests failed (configurable)
+          if [ $FAILED_TESTS -ge 2 ]; then
+            echo "production_blocked=true" >> $GITHUB_OUTPUT
+            echo "🚫 Production deployment BLOCKED: $FAILED_TESTS critical tests failed"
+          else
+            echo "production_blocked=false" >> $GITHUB_OUTPUT
+            echo "✅ Production deployment APPROVED: $FAILED_TESTS critical tests failed (under threshold)"
+          fi
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: critical-test-results
+          path: |
+            playwright-report/
+            test-results.json
+          retention-days: 14
+
+      - name: Create deployment readiness issue
+        if: steps.test_results.outputs.production_blocked == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'deployment-ready',
+              state: 'open'
+            });
+            
+            // Close existing deployment-ready issues
+            for (const issue of issues) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed'
+              });
+            }
+            
+            // Create new deployment-ready issue
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚀 Production Deployment Ready',
+              body: `## ✅ Critical E2E Tests Passed
+              
+              All critical end-to-end tests have passed successfully.
+              
+              **Test Results:**
+              - Failed tests: ${{ steps.test_results.outputs.failed_count }}
+              - Threshold: 2 failed tests (blocking limit)
+              - Status: ✅ APPROVED for production deployment
+              
+              **Next Steps:**
+              1. Review any test warnings
+              2. Trigger manual deployment via Actions tab
+              3. Monitor deployment success
+              
+              **Deployment Commands:**
+              - [Deploy to Production](../actions/workflows/deploy.yml)
+              - [Deploy to Staging](../actions/workflows/deploy.yml)
+              
+              This issue will be automatically closed when new tests run.`,
+              labels: ['deployment-ready', 'automated']
+            });
+
+      - name: Block deployment issue
+        if: steps.test_results.outputs.production_blocked == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '🚫 Production Deployment Blocked',
+              body: `## ❌ Critical E2E Tests Failed
+              
+              Critical end-to-end tests have failed and production deployment is blocked.
+              
+              **Test Results:**
+              - Failed tests: ${{ steps.test_results.outputs.failed_count }}
+              - Threshold: 2 failed tests (blocking limit)
+              - Status: 🚫 BLOCKED from production deployment
+              
+              **Required Actions:**
+              1. Review failed test details in the [test report](../actions)
+              2. Fix failing tests
+              3. Re-run validation tests
+              4. Ensure test count drops below threshold
+              
+              **Do not deploy to production until this issue is resolved.**`,
+              labels: ['deployment-blocked', 'automated', 'bug']
+            });
+
+  # Smoke tests (warnings only, don't block)
+  smoke-validation:
+    if: github.event.inputs.test_suite == 'smoke' || github.event.inputs.test_suite == 'full' || github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Start application server
+        run: |
+          npm start &
+          sleep 10
+        env:
+          CI: true
+
+      - name: Run smoke tests
+        run: npx playwright test --grep "@smoke" --reporter=html
+        continue-on-error: true
+        env:
+          CI: true
+
+      - name: Upload smoke test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-test-results
+          path: playwright-report/
+          retention-days: 7
+
+  # Weekly regression tests (comprehensive)
+  regression-validation:
+    if: github.event.inputs.test_suite == 'regression' || github.event.inputs.test_suite == 'full' || (github.event_name == 'schedule' && github.event.schedule == '0 20 * * 0')
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Start application server
+        run: |
+          npm start &
+          sleep 10
+        env:
+          CI: true
+
+      - name: Run regression tests
+        run: npx playwright test --grep "@regression" --project=${{ matrix.browser }} --reporter=html
+        continue-on-error: true
+        env:
+          CI: true
+
+      - name: Upload regression test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-test-results-${{ matrix.browser }}
+          path: playwright-report/
+          retention-days: 14

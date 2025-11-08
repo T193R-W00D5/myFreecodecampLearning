@@ -1,0 +1,107 @@
+name: Emergency Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to rollback'
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      rollback_to_commit:
+        description: 'Commit SHA to rollback to'
+        required: true
+      reason:
+        description: 'Reason for rollback'
+        required: true
+        default: 'Emergency rollback due to production issue'
+      skip_tests:
+        description: 'Skip tests for emergency rollback'
+        required: true
+        type: boolean
+        default: false
+
+jobs:
+  emergency-rollback:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout rollback commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.rollback_to_commit }}
+
+      - name: Verify rollback commit
+        run: |
+          echo "🚨 EMERGENCY ROLLBACK INITIATED" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Rolling back to:** $(git rev-parse HEAD)" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit details:** $(git log --oneline -n 1)" >> $GITHUB_STEP_SUMMARY
+          echo "**Reason:** ${{ github.event.inputs.reason }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Initiated by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Run critical tests (unless skipped)
+        if: github.event.inputs.skip_tests == 'false'
+        run: |
+          npm ci
+          npx playwright install --with-deps
+          npx playwright test --grep "@critical" --reporter=line
+        continue-on-error: true
+
+      - name: Deploy rollback to staging
+        if: github.event.inputs.environment == 'staging'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          destination_dir: staging
+          exclude_assets: |
+            .github
+            node_modules
+            tests
+            __tests__
+            docs/Ai_chats
+            *.config.js
+            *.config.ts
+            tsconfig.json
+            package*.json
+
+      - name: Deploy rollback to production
+        if: github.event.inputs.environment == 'production'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: |
+            .github
+            node_modules
+            tests
+            __tests__
+            docs/Ai_chats
+            *.config.js
+            *.config.ts
+            tsconfig.json
+            package*.json
+
+      - name: Create rollback notification
+        run: |
+          echo "## ✅ Emergency Rollback Complete" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Rollback successful:** $(date)" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ github.event.inputs.environment }}" == "production" ]; then
+            echo "**Live URL:** https://t193r-w00d5.github.io/myFreecodecampLearning" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Staging URL:** https://t193r-w00d5.github.io/myFreecodecampLearning/staging" >> $GITHUB_STEP_SUMMARY
+          fi
+          
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**⚠️ Action Items:**" >> $GITHUB_STEP_SUMMARY
+          echo "1. Verify rollback is working correctly" >> $GITHUB_STEP_SUMMARY
+          echo "2. Investigate root cause of issue" >> $GITHUB_STEP_SUMMARY
+          echo "3. Create hotfix for the issue" >> $GITHUB_STEP_SUMMARY
+          echo "4. Test hotfix thoroughly before next deployment" >> $GITHUB_STEP_SUMMARY

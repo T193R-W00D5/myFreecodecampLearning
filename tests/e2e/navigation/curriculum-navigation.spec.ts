@@ -1,7 +1,7 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 
 test.describe('Curriculum Page Navigation Tests', () => {
-  test('should navigate to Basic HTML from curriculum page', async ({ curriculumPage }) => {
+  test('should navigate to Basic HTML from curriculum page @critical', async ({ curriculumPage }) => {
     // Click on the Basic HTML link
     const basicHtmlLink = curriculumPage.locator('a[href*="Basic-HTML"]');
     
@@ -23,7 +23,7 @@ test.describe('Curriculum Page Navigation Tests', () => {
     expect(response.status()).toBeLessThanOrEqual(404);
   });
 
-  test('should navigate to Home from curriculum page', async ({ curriculumPage }) => {
+  test('should navigate to Home from curriculum page @smoke', async ({ curriculumPage }) => {
     // Click on the Home link (using the one in header)
     const homeLink = curriculumPage.locator('header a[href*="_Home.html"]');
     

@@ -341,12 +341,12 @@ if(-not $current.StartsWith($volta)) {
 # Use nvm
 nvm use 18.17.0
 # Prepend nvm's node path for current session only (example path — adjust if different)
-$env:PATH = 'C:\Users/<username>/AppData\Roaming\nvm;' + $env:PATH
+$env:PATH = 'C:\Users\<username>\AppData\Roaming\nvm;' + $env:PATH
 node -v
 ```
 - Or call the nvm-installed node by full path:
 ```powershell
-& 'C:\Users/<username>/AppData\Roaming\nvm\v18.17.0\node.exe' -v
+& 'C:\Users\<username>\AppData\Roaming\nvm\v18.17.0\node.exe' -v
 ```
 
 6) Potential problems to watch for
@@ -1597,11 +1597,11 @@ Read [](file:///c%3A/Users/<username>/Projects/freecodecampOrg/.github/workflows
 
 Read [](file:///c%3A/Users/<username>/Projects/freecodecampOrg/.github/workflows/node.js.yml#120-120), lines 120 to 141
 
-Ran terminal command: powershell -Command "$i=1; Get-Content 'c:\Users/<username>/Projects\freecodecampOrg\.github\workflows\node.js.yml' | ForEach-Object { '{0,4}: {1}' -f $i, $_; $i++ }"
+Ran terminal command: powershell -Command "$i=1; Get-Content 'c:\Users\<username>\Projects\freecodecampOrg\.github\workflows\node.js.yml' | ForEach-Object { '{0,4}: {1}' -f $i, $_; $i++ }"
 
-Ran terminal command: powershell -Command "$lines = Get-Content 'c:\Users/<username>/Projects\freecodecampOrg\.github\workflows\node.js.yml'; for ($i=0; $i -lt $lines.Count; $i++) { $n = $i+1; Write-Output (\"{0}: {1}\" -f $n, $lines[$i]) }"
+Ran terminal command: powershell -Command "$lines = Get-Content 'c:\Users\<username>\Projects\freecodecampOrg\.github\workflows\node.js.yml'; for ($i=0; $i -lt $lines.Count; $i++) { $n = $i+1; Write-Output (\"{0}: {1}\" -f $n, $lines[$i]) }"
 
-Ran terminal command: powershell -Command "Get-Content 'c:\Users/<username>/Projects\freecodecampOrg\.github\workflows\node.js.yml' | ForEach-Object -Begin {$i=1} -Process { \"$i`: $_\"; $i++ }"
+Ran terminal command: powershell -Command "Get-Content 'c:\Users\<username>\Projects\freecodecampOrg\.github\workflows\node.js.yml' | ForEach-Object -Begin {$i=1} -Process { \"$i`: $_\"; $i++ }"
 
 Read [](file:///c%3A/Users/<username>/Projects/freecodecampOrg/.github/workflows/node.js.yml#30-30), lines 30 to 50
 
@@ -3487,7 +3487,7 @@ Nice — here are clear, step-by-step Git commands you can run in PowerShell to 
 
 Before you start
 - From PowerShell make sure you're in the repo root:
-  Set-Location 'C:\Users/<username>/Projects\freecodecampOrg'
+  Set-Location 'C:\Users\<username>\Projects\freecodecampOrg'
 
 Step 0 — sanity checks (optional but useful)
 - See current branch and status:
@@ -3596,7 +3596,7 @@ Great — here are the updated, PowerShell-ready manual Git steps tailored for p
 
 1) Change to repo root (if needed)
 ```powershell
-Set-Location 'C:\Users/<username>/Projects\freecodecampOrg'
+Set-Location 'C:\Users\<username>\Projects\freecodecampOrg'
 ```
 
 2) Confirm you're on `main` and up to date

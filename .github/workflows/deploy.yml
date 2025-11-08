@@ -1,0 +1,190 @@
+name: Deploy to GitHub Pages
+
+# Option A: Manual deployment (active)
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - staging
+          - production
+      confirm:
+        description: 'Type "deploy" to confirm deployment'
+        required: true
+        default: ''
+      run_critical_tests:
+        description: 'Run critical E2E tests before deployment'
+        required: true
+        default: true
+        type: boolean
+      target_commit:
+        description: 'Specific commit SHA to deploy (leave empty for latest)'
+        required: false
+        default: ''
+      target_branch:
+        description: 'Branch to deploy from'
+        required: true
+        default: 'main'
+        type: choice
+        options:
+          - main
+          - develop
+          - release/*
+
+# Option B: Auto-deploy after merge (see auto-staging-deploy.yml)
+# Manual deployment workflow
+
+jobs:
+  # Pre-deployment validation
+  pre-deployment-tests:
+    if: github.event.inputs.confirm == 'deploy'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout specific commit or latest
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.target_commit || github.event.inputs.target_branch || 'main' }}
+          
+      - name: Display deployment info
+        run: |
+          echo "🚀 DEPLOYMENT INFORMATION" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.event.inputs.target_branch || 'main' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** $(git rev-parse HEAD)" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit Message:** $(git log --oneline -n 1)" >> $GITHUB_STEP_SUMMARY
+          echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Timestamp:** $(date)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run TypeScript type checking
+        run: npx tsc --noEmit
+
+      - name: Run critical E2E tests
+        if: github.event.inputs.run_critical_tests == 'true'
+        run: npx playwright test --grep "@critical" --reporter=html
+        env:
+          CI: true
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report-pre-deployment
+          path: playwright-report/
+          retention-days: 7
+
+  # Production deployment
+  deploy-production:
+    if: |
+      github.event.inputs.confirm == 'deploy' && 
+      github.event.inputs.environment == 'production' &&
+      needs.pre-deployment-tests.result == 'success'
+    needs: pre-deployment-tests
+    runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: ${{ vars.SITE_URL || 'https://t193r-w00d5.github.io/myFreecodecampLearning' }}
+    steps:
+      - name: Checkout specific commit for production
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.target_commit || github.event.inputs.target_branch || 'main' }}
+
+      - name: Log production deployment details
+        run: |
+          echo "📦 PRODUCTION DEPLOYMENT" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit being deployed:** $(git rev-parse HEAD)" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit details:** $(git log --oneline -n 1)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          exclude_assets: |
+            .github
+            node_modules
+            tests
+            __tests__
+            docs/Ai_chats
+            *.config.js
+            *.config.ts
+            tsconfig.json
+            package*.json
+
+  # Staging deployment (for future Option B)
+  deploy-staging:
+    if: |
+      github.event.inputs.confirm == 'deploy' && 
+      github.event.inputs.environment == 'staging' &&
+      needs.pre-deployment-tests.result == 'success'
+    needs: pre-deployment-tests
+    runs-on: ubuntu-latest
+    environment: 
+      name: staging
+      url: ${{ vars.SITE_URL || 'https://t193r-w00d5.github.io/myFreecodecampLearning/staging' }}
+    steps:
+      - name: Checkout specific commit for staging
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.target_commit || github.event.inputs.target_branch || 'main' }}
+
+      - name: Log staging deployment details
+        run: |
+          echo "🧪 STAGING DEPLOYMENT" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit being deployed:** $(git rev-parse HEAD)" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit details:** $(git log --oneline -n 1)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Deploy to GitHub Pages (staging)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          destination_dir: staging
+          exclude_assets: |
+            .github
+            node_modules
+            tests
+            __tests__
+            docs/Ai_chats
+            *.config.js
+            *.config.ts
+            tsconfig.json
+            package*.json
+
+  # Deployment success notification
+  deployment-success:
+    if: |
+      always() &&
+      (needs.deploy-production.result == 'success' || needs.deploy-staging.result == 'success')
+    needs: [pre-deployment-tests, deploy-production, deploy-staging]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create deployment summary
+        run: |
+          echo "## 🚀 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployed by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ github.event.inputs.environment }}" == "production" ]; then
+            echo "**Live URL:** https://t193r-w00d5.github.io/myFreecodecampLearning" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "**Staging URL:** https://t193r-w00d5.github.io/myFreecodecampLearning/staging" >> $GITHUB_STEP_SUMMARY
+          fi
