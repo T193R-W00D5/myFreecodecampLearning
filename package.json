@@ -1,7 +1,7 @@
 {
   "name": "freecodecamporg-website-copies",
   "version": "1.0.0",
-  "description": "This is a webiste to page copies of freecodecamp.org's course pages 1) Open a new terminal inside VS Code pointed to your project root folder location. 2) Run from terminal: node server.js  3) Open <http://localhost:3010> in your browser. You should see the webpage!",
+  "description": "This is a webiste to help me with my freecodecamp learning and to try out and learn new things 1) Open a new terminal inside VS Code pointed to your project root folder location. 2) Run from terminal: node server.js  3) Open <http://localhost:3010> in your browser. You should see the webpage!",
   "main": "./src/script.js",
   "type": "module",
   "scripts": {
@@ -34,5 +34,10 @@
   },
   "volta": {
     "node": "22.21.0"
+  },
+  "dependencies": {
+    "compression": "^1.8.1",
+    "express": "^5.1.0",
+    "js-yaml": "^4.1.1"
   }
 }

@@ -222,26 +222,92 @@ npx playwright show-trace test-results/[test-name]/trace.zip
 
 ## Writing New Tests
 
+### Debug Console Integration
+
+All tests should use the centralized debug console for consistent debug output:
+
+```typescript
+import { test, expect } from '../fixtures/test-fixtures.js';
+import { debugConsole } from '../../src/scripts/debug-console.js';
+
+test.describe('Feature Name', () => {
+  test('should test navigation', async ({ curriculumPage, paths }) => {
+    const actualHref = await homeLink.getAttribute('href');
+    
+    // Use debugConsole instead of console.log
+    debugConsole.log('Expected href:', paths.page_home);
+    debugConsole.log('Actual href:', actualHref);
+    
+    await expect(homeLink).toHaveAttribute('href', paths.page_home);
+  });
+});
+```
+
+**Debug output control:** Set `bDebug = true/false` in `src/scripts/debug-console.js` to toggle debug output globally.
+
+### Parallel Test Execution
+
+For independent tests that don't share state, enable parallel execution:
+
+```typescript
+test.describe('Navigation Tests', () => {
+  // Enable parallel execution for faster test runs
+  test.describe.configure({ mode: 'parallel' });
+
+  test('header navigation test @smoke', async ({ curriculumPage }) => {
+    // This test runs in parallel with other tests
+  });
+
+  test('footer navigation test @smoke', async ({ curriculumPage }) => {
+    // This test also runs in parallel
+  });
+});
+```
+
+**When to use parallel mode:**
+- ✅ Tests are completely independent
+- ✅ No shared state or dependencies
+- ✅ Each test uses fresh page fixtures
+- ❌ Don't use if tests depend on each other
+
+### Worker Configuration
+
+Current setup (in `playwright.config.ts`):
+```typescript
+workers: process.env.CI ? 1 : 4
+```
+
+- **Local development**: 4 workers (faster execution)
+- **CI environment**: 1 worker (stability and resource conservation)
+- **Perfect for current scale**: 3-17 tests run efficiently
+
 ### Test File Template
 
 #### Using Custom Fixtures (Recommended - TypeScript)
 ```typescript
 import { test, expect } from '../fixtures/test-fixtures.js';
+import { debugConsole } from '../../src/scripts/debug-console.js';
 
 test.describe('Feature Name', () => {
-  test('should test homepage feature', async ({ homePage }) => {
+  // Enable parallel execution if tests are independent
+  test.describe.configure({ mode: 'parallel' });
+
+  test('should test homepage feature @smoke', async ({ homePage, paths }) => {
     // homePage is already loaded and ready with full TypeScript support
+    debugConsole.log('Testing homepage feature');
     await expect(homePage.locator('selector')).toBeVisible();
   });
 
-  test('should test interactive feature', async ({ interactivePage }) => {
+  test('should test interactive feature @critical', async ({ interactivePage }) => {
     // interactivePage is already loaded with JavaScript ready
+    debugConsole.log('Testing interactive features');
     await expect(interactivePage.locator('#calculator')).toBeVisible();
   });
 
   test('should verify server is running', async ({ serverRunning }) => {
     // Server health is automatically validated
     // TypeScript provides type checking for all page methods
+    debugConsole.log('Server health validated');
   });
 });
 ```
@@ -501,4 +567,4 @@ $env:DEBUG = $null
 
 ---
 
-For more advanced usage, see the [official Playwright documentation](https://playwright.dev/docs).
+For more advanced usage, see the [official Playwright documentation](https://playwright.dev/docs/intro).

@@ -3,10 +3,10 @@ import { test, expect } from '../fixtures/test-fixtures.js';
 test.describe('Homepage Tests', () => {
   test('should load the home page successfully @critical @smoke', async ({ homePage }) => {
     // Check that the page loads and has the correct title
-    await expect(homePage).toHaveTitle('freecodecamp.org copies');
+    await expect(homePage).toHaveTitle('My freecodecamp learning');
     
     // Check main heading is present
-    await expect(homePage.locator('h1').first()).toHaveText('freecodecamp.org copies');
+    await expect(homePage.locator('h1').first()).toHaveText('My freecodecamp learning');
     
     // Check welcome section exists
     await expect(homePage.locator('h2')).toHaveText('Welcome!');
@@ -57,7 +57,7 @@ test.describe('Homepage Tests', () => {
     
     // Check that the h1 exists in DOM (may be hidden by CSS on mobile)
     const h1Element = homePage.locator('h1').first();
-    await expect(h1Element).toHaveText('freecodecamp.org copies');
+    await expect(h1Element).toHaveText('My freecodecamp learning');
     
     // Check navigation link is still accessible
     await expect(homePage.locator('nav ul li a')).toBeAttached();
