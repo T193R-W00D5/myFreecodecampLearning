@@ -50,6 +50,8 @@ npm run test:e2e:chrome    # Chromium only
 npm run test:e2e:firefox   # Firefox only
 npm run test:e2e:webkit    # WebKit (Safari) only
 
+# Note: Mobile browser testing removed for CI stability
+
 # Combined tests
 npm run test:all        # Unit tests + E2E tests
 ```
