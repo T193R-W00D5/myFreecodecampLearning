@@ -3,10 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>freecodecamp.org copies - Basic HTML - Workshop - Build a Curriculum Outline</title>
+  <title>My freecodecamp learning - Basic HTML - Workshop - Build a Curriculum Outline</title>
   <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
-  <!-- <link rel="stylesheet" href="/css/prism.css"> -->
-  <link rel="stylesheet" href="/css/styles-freecodecamp.css">  
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/assets/images/bg-techy-002.svg" as="image">
+  
+  <!-- Load CSS asynchronously to prevent render blocking -->
+  <link rel="preload" href="/css/styles-freecodecamp.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/styles-freecodecamp.css"></noscript>
 </head>
 <body>
 
@@ -20,7 +25,7 @@
     </div>
     <div class="header-center">
       <a href="#idFooter">Bottom of page</a> |
-      <a href="/pages/_Home.html">Home</a> |
+      <a class="home-link-header">Home</a> |
       <a href="/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML Home</a>
     </div>
     <div class="header-right">
@@ -39,7 +44,7 @@
 <!---------- Start mainContent -------------------------------------------------------------------->
 <section id="mainContent">
 
-<h1 tabindex="0">Basic HTML &#9655; Build a Curriculum Outline</h1>
+<h1 tabindex="0">Basic HTML &#9655; Workshop: Build a Curriculum Outline</h1>
 <br>
 
 
@@ -197,7 +202,7 @@
     </div>
     <div class="footer-center">
       <a href="#idHeader">Top of page</a> |
-      <a href="/pages/_Home.html">Home</a> |
+      <a class="home-link-footer">Home</a> |
       <a href="/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML Home</a>
     </div>
     <div class="footer-right">
@@ -211,15 +216,27 @@
 
 
 <!----- Start scripts ----------------------------------------------------------------------------->
+
 <script type="module" src="/src/scripts/prism.js"></script>
 
 <script type="module">
+  // Combined module script to reduce bfcache blocking
+  import { paths, ariaLabels } from '/src/scripts/shared-constants__main.js';
   import { pHome_Basic_HTML, p100201 } from '/src/scripts/basic-html-helper.js';
-  window.addEventListener('DOMContentLoaded', function() {    
+  
+  window.addEventListener('DOMContentLoaded', function() {
+    // Set home links
+    document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
+    document.querySelector('.home-link-header')?.setAttribute('href', paths.page_home);
+    document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
+    document.querySelector('.home-link-footer')?.setAttribute('href', paths.page_home);
+    
+    // Set navigation links 
     document.querySelectorAll('.prev-link').forEach(el => el.href = pHome_Basic_HTML);
     document.querySelectorAll('.next-link').forEach(el => el.href = p100201);
   });
 </script>
+
 <!----- End scripts ------------------------------------------------------------------------------->
 
 
