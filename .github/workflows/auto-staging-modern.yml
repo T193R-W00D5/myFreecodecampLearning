@@ -74,6 +74,16 @@ jobs:
           
           # Copy all files to root (not staging subdirectory)
           rsync -av --exclude='.github' --exclude='node_modules' --exclude='tests' --exclude='__tests__' --exclude='docs/Ai_chats' --exclude='*.config.js' --exclude='*.config.ts' --exclude='tsconfig.json' --exclude='package*.json' ./ _site/
+          
+          # Fix absolute paths for GitHub Pages deployment
+          # GitHub Pages serves from a subdirectory, so we need to handle absolute paths
+          echo "Fixing absolute paths in HTML files for GitHub Pages..."
+          find _site -name "*.html" -type f -exec sed -i 's|href="/css/|href="./css/|g' {} +
+          find _site -name "*.html" -type f -exec sed -i 's|href="/assets/|href="./assets/|g' {} +
+          find _site -name "*.html" -type f -exec sed -i 's|src="/assets/|src="./assets/|g' {} +
+          
+          echo "Path fixing complete. Sample files processed:"
+          ls -la _site/*.html | head -3
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -96,5 +106,6 @@ jobs:
         run: |
           echo "## ✅ Staging Auto-Deployment Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Staging URL:** ${{ steps.deployment.outputs.page_url }}staging/" >> $GITHUB_STEP_SUMMARY
-          echo "**Main URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Deployment URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Note:** Absolute paths have been automatically converted to relative paths for GitHub Pages compatibility." >> $GITHUB_STEP_SUMMARY
