@@ -69,14 +69,11 @@ jobs:
           echo "Commit: $(git rev-parse HEAD)" >> deployment-info.txt
           echo "Timestamp: $(date)" >> deployment-info.txt
           
-          # Create staging directory structure
-          mkdir -p _site/staging
+          # Create deployment directory structure
+          mkdir -p _site
           
-          # Copy all files except excluded ones
-          rsync -av --exclude='.github' --exclude='node_modules' --exclude='tests' --exclude='__tests__' --exclude='docs/Ai_chats' --exclude='*.config.js' --exclude='*.config.ts' --exclude='tsconfig.json' --exclude='package*.json' ./ _site/staging/
-          
-          # Create root redirect to staging
-          echo '<meta http-equiv="refresh" content="0; URL=./staging/">' > _site/index.html
+          # Copy all files to root (not staging subdirectory)
+          rsync -av --exclude='.github' --exclude='node_modules' --exclude='tests' --exclude='__tests__' --exclude='docs/Ai_chats' --exclude='*.config.js' --exclude='*.config.ts' --exclude='tsconfig.json' --exclude='package*.json' ./ _site/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
