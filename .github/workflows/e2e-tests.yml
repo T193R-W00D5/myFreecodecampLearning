@@ -49,13 +49,6 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps ${{ matrix.browser }}
 
-    - name: Start development server
-      run: |
-        npm start &
-        sleep 5
-        # Verify server is running
-        curl -f http://localhost:3010 || exit 1
-
     - name: Run Playwright tests
       run: npx playwright test --project=${{ matrix.browser }}
       env:
@@ -97,13 +90,6 @@ jobs:
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-
-    - name: Start development server
-      run: |
-        npm start &
-        sleep 5
-        # Verify server is running
-        curl -f http://localhost:3010 || exit 1
 
     - name: Run all Playwright tests
       run: npm run test:e2e
