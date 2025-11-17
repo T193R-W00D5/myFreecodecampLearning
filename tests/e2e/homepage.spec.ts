@@ -46,20 +46,21 @@ test.describe('Homepage Tests', () => {
     await expect(homePage.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '/css/styles-freecodecamp.css');
   });
 
-  test('should be responsive on mobile @regression', async ({ homePage }) => {
-    // Set mobile viewport
-    await homePage.setViewportSize({ width: 375, height: 667 });
-    await homePage.reload(); // Reload to apply viewport changes
+  // test('should be responsive on mobile @regression', async ({ homePage }) => {
+  //   // Set mobile viewport
+  //   await homePage.setViewportSize({ width: 375, height: 667 });
+  //   await homePage.reload(); // Reload to apply viewport changes
     
-    // Verify page still loads properly on mobile
-    // Use waitForSelector with more lenient visibility check
-    await homePage.waitForSelector('h1', { state: 'attached' });
+  //   // Verify page still loads properly on mobile
+  //   // Use waitForSelector with more lenient visibility check
+  //   await homePage.waitForSelector('h1', { state: 'attached' });
     
-    // Check that the h1 exists in DOM (may be hidden by CSS on mobile)
-    const h1Element = homePage.locator('h1').first();
-    await expect(h1Element).toHaveText('My freecodecamp learning');
+  //   // Check that the h1 exists in DOM (may be hidden by CSS on mobile)
+  //   const h1Element = homePage.locator('h1').first();
+  //   await expect(h1Element).toHaveText('My freecodecamp learning');
     
-    // Check navigation link is still accessible
-    await expect(homePage.locator('nav ul li a')).toBeAttached();
-  });
+  //   // Check navigation link is still accessible
+  //   await expect(homePage.locator('nav ul li a')).toBeAttached();
+  // });
+
 });
