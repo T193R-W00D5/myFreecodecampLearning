@@ -27,7 +27,7 @@ The CI/CD setup consists of three main workflows:
 
 **Key Features**:
 - TypeScript test files (`.ts`) automatically handled
-- Matrix testing across desktop browsers (Chromium, Firefox, WebKit, Edge)
+- Matrix testing across browsers (Chromium, Firefox, WebKit, ~~Mobile~~)
 - Artifact collection for test results and reports
 - Volta integration for consistent Node.js version
 

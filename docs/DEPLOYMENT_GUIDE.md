@@ -35,7 +35,7 @@ Fast tests that verify basic functionality. Run frequently to catch obvious issu
 Detailed tests that verify complex scenarios and edge cases. Run weekly or before major releases.
 
 **Examples:**
-- Mobile responsiveness
+- ~~Mobile responsiveness~~ (I am not designing this web app for mobile at this time)
 - Accessibility features
 - Error handling
 - Performance characteristics

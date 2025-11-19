@@ -51,6 +51,17 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
 
+    // I am not designing the site for mobile at this time.
+    /* Test against mobile viewports. */
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'] },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'] },
+    // },
+
     /* Test against branded browsers. */
     {
       name: 'msedge',
