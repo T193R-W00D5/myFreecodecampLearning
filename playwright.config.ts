@@ -53,7 +53,7 @@ export default defineConfig({
 
     /* Test against branded browsers. */
     {
-      name: 'Microsoft Edge',
+      name: 'msedge',
       use: { ...devices['Desktop Edge'], channel: 'msedge' },
     },
     // Chrome requires admin privileges to install, using Chromium instead

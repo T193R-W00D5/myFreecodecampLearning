@@ -33,7 +33,7 @@ jobs:
       fail-fast: false
       matrix:
         # Run all desktop browsers for comprehensive CI testing
-        browser: [chromium, firefox, webkit, "Microsoft Edge"]
+        browser: [chromium, firefox, webkit, msedge]
         # browser: [chromium]  # <-- Use this line for faster CI when needed
 
     steps:
