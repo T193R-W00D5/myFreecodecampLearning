@@ -53,7 +53,7 @@ export default defineConfig({
 
     /* Test against branded browsers. */
     {
-      name: 'Microsoft Edge',
+      name: 'msedge',
       use: { ...devices['Desktop Edge'], channel: 'msedge' },
     },
     // Chrome requires admin privileges to install, using Chromium instead
@@ -67,7 +67,10 @@ export default defineConfig({
   webServer: {
     command: 'npm start',
     url: 'http://localhost:3010',
-    reuseExistingServer: !process.env.CI,
+    // 11/19/2025 T193R-W00D5: Using 'reuseExistingServer: !process.env.CI,' may have been causing issues in GitHub CI environments
+    //  See project "/docs/Ai_chats/20251119a GitHub CoPilot - fix parallel worker tests using same port.md" for more details.
+    // reuseExistingServer: !process.env.CI,   <- 11/19/2025 T193R-W00D5: commented out and changed to "true" to try to fix CI port-in-use issues
+    reuseExistingServer: true,   // <- 11/19/2025 T193R-W00D5: changed to always reuse existing server (prevents port-in-use on CI)
     stdout: 'ignore',
     stderr: 'pipe',
   },

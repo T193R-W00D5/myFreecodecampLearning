@@ -22,8 +22,8 @@ The CI/CD setup consists of three main workflows:
 
 **Jobs**:
 - **Unit Tests**: Jest unit tests
-- **E2E Tests**: Chrome-only testing for fast feedback (configurable)
-- **E2E Tests Full**: All browsers on main branch pushes only
+- **E2E Tests**: All desktop browsers for comprehensive CI testing
+- **E2E Tests Full**: Duplicate all-browser testing on main branch pushes only
 
 **Key Features**:
 - TypeScript test files (`.ts`) automatically handled
