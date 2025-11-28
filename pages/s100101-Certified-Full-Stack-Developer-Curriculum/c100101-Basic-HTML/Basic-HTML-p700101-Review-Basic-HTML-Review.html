@@ -470,15 +470,15 @@ You can set these properties through a collection of <code>meta</code> elements 
 
 <script type="module">
   // Combined module script to reduce bfcache blocking
-  import { paths, ariaLabels } from '/src/scripts/shared-constants__main.js';
-  import { p100901, pHome_Basic_HTML } from '/src/scripts/basic-html-helper.js';
+  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
+  import { p100901, pHome_Basic_HTML } from '/src/scripts/sharedConstants-CFSD-basic-html-helper.js';
   
   window.addEventListener('DOMContentLoaded', function() {
     // Set home links
     document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-    document.querySelector('.home-link-header')?.setAttribute('href', paths.page_home);
+    document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
     document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-    document.querySelector('.home-link-footer')?.setAttribute('href', paths.page_home);
+    document.querySelector('.home-link-footer')?.setAttribute('href', paths.path_home);
     
     // Set navigation links
     document.querySelectorAll('.prev-link').forEach(el => el.href = p100901);

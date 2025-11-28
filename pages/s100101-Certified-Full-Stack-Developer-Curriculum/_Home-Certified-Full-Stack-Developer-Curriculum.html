@@ -38,7 +38,9 @@
     <p></p>
     <nav>
       <ul>
-        <li><a href="./c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML</a></li>
+        <li><a aria-label="Link to my Basic HTML learning page for freeCodeCamp's Certified Full Stack Developer Curriculum course"
+               href="./c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML</a>
+        </li>
       </ul>
     </nav>
 </section>
@@ -69,24 +71,24 @@
    I may revisit this in the future, especially if I refactor to implement a modern framework like React -->
 
 <script type="module">
-  import { paths, ariaLabels } from '/src/scripts/shared-constants__main.js';
+  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
   
   window.addEventListener('DOMContentLoaded', function() {
     // Enhanced selectors using same pattern as Playwright tests
-    // More specific targeting like: curriculumPage.locator('header').getByRole('link', { name: 'Home' })
+    // More specific targeting like: fixture_startFrom_CFSD_Home.locator('header').getByRole('link', { name: 'Home' })
     
     // Header Home link - same targeting as your Playwright test
     const headerHomeLink = document.querySelector('header')?.querySelector('a.home-link-header');
     if (headerHomeLink) {
       headerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-      headerHomeLink.setAttribute('href', paths.page_home);
+      headerHomeLink.setAttribute('href', paths.path_home);
     }
     
     // Footer Home link - same targeting as your Playwright test  
     const footerHomeLink = document.querySelector('footer')?.querySelector('a.home-link-footer');
     if (footerHomeLink) {
       footerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_footer); // Fixed: should be footer label
-      footerHomeLink.setAttribute('href', paths.page_home);
+      footerHomeLink.setAttribute('href', paths.path_home);
     }
     
     // Debug logging (if you want consistency with your tests)
@@ -97,11 +99,11 @@
 
 <!-- Same thing as above, but I don't use window.addEventListener('DOMContentLoaded', function() { -->
 <!-- <script type="module">
-  import { paths, ariaLabels } from '/src/scripts/shared-constants__main.js';
+  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
   document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-  document.querySelector('.home-link-header')?.setAttribute('href', paths.page_home);
+  document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
   document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-  document.querySelector('.home-link-footer')?.setAttribute('href', paths.page_home);
+  document.querySelector('.home-link-footer')?.setAttribute('href', paths.path_home);
 </script> -->
 
 <!----- End scripts ------------------------------------------------------------------------------->

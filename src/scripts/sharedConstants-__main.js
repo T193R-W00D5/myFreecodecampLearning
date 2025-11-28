@@ -1,14 +1,30 @@
 
 /**
  * @typedef {Object} Paths
- *   @property {string} page_home
+ *   @property {string} path_home
+ *   @property {string} path_CFSD_Home
  */
 
 /**
  * @type {Paths}
  */
 export const paths = {
-  page_home: "/index.html",
+  path_home: "/index.html",
+  path_CFSD_Home: '/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html',
+};
+
+/**
+ * @typedef {Object} Hrefs
+ *   @property {string} href_home
+ *   @property {string} href_CFSD_Home
+ */
+
+/**
+ * @type {Hrefs}
+ */
+export const hrefs = {
+  href_home: "http://localhost:3010/index.html",
+  href_CFSD_Home: "http://localhost:3010/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html",
 };
 
 /**
@@ -40,14 +56,14 @@ export const roles = {
 };
 
 /**
- * @typedef {Object} LinkText
+ * @typedef {Object} linkVisibleNames
  * @property {string} home
  * @property {string} curriculum
  * @property {string} interactive
  */
 
-/** @type {LinkText} */
-export const linkText = {
+/** @type {linkVisibleNames} */
+export const linkVisibleNames = {
   home: "Home",
   curriculum: "Certified Full Stack Developer Curriculum",
   interactive: "Try Interactive Demo",

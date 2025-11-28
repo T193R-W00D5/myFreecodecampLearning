@@ -1,45 +1,66 @@
-//import { test as base, Page } from '@playwright/test';
 import { test as base } from '@playwright/test';
 import type { Page } from '@playwright/test';
-//import { p_index_html as alias_p_index_html } from '..//../src/scripts/_main-helper.js'   // '../../../src/scripts/_main-helper.js'
-import { paths, ariaLabels, roles, linkText } from '../../src/scripts/shared-constants__main.js';
 
-// Define custom fixtures interface
-interface CustomFixtures {
-  serverRunning: Page;
-  homePage: Page;
-  curriculumPage: Page;
-  interactivePage: Page;
-  //p_index_html: string;
-  paths: typeof paths;
-  ariaLabels: typeof ariaLabels;
-  roles: typeof roles;
-  linkText: typeof linkText;
-}
+import * as sharedConstants_main from '../../src/scripts/sharedConstants-__main.js';
+import * as sharedConstants_CFSDBasicHTML from '../../src/scripts/sharedConstants-CFSD-basic-html-helper.js';
 
-// Extend base test with custom fixtures
+export interface CustomFixtures {
+
+  // Custom page fixtures, i.e. browser tabs with specific starting URLs
+  // serverRunning: Page; // Page to verify server is responding before running tests
+  fixture_startFrom_Home: Page;
+  fixture_startFrom_CFSD_Home: Page;
+  fixture_startFrom_interactivePage: Page;
+
+  // // Constants fixtures from sharedConstants_main
+  // paths_main: typeof sharedConstants_main.paths;
+  // ariaLabels_main: typeof sharedConstants_main.ariaLabels;
+  // roles_main: typeof sharedConstants_main.roles;
+  // linkVisibleNames_main: typeof sharedConstants_main.linkVisibleNames;
+
+  // // Constants fixtures from sharedConstants_CFSDBasicHTML
+  // paths_CFSD_Basic_HTML: typeof sharedConstants_CFSDBasicHTML.paths_CFSD_Basic_HTML;
+  // ariaLabels_CFSD_Basic_HTML: typeof sharedConstants_CFSDBasicHTML.ariaLabels_CFSD_Basic_HTML;
+  // roles_CFSD_Basic_HTML: typeof sharedConstants_CFSDBasicHTML.roles_CFSD_Basic_HTML;
+  // linkVisibleNames_CFSD_Basic_HTML: typeof sharedConstants_CFSDBasicHTML.linkVisibleNames_CFSD_Basic_HTML;
+
+};
+
 export const test = base.extend<CustomFixtures>({
-
-/*   p_index_html: async ({}, use) => {
-    await use(alias_p_index_html);
-  }, */
   
-  paths: async ({}, use) => await use(paths),
-  ariaLabels: async ({}, use) => await use(ariaLabels),
-  roles: async ({}, use) => await use(roles),
+  // ****************************************************************************************************************************
+  // ****************************************************************************************************************************
+  // Shared constants to expose in tests via fixtures so we don't have to import them for each spec.ts file ***
+  //   This is really only necessary if we have more than one spec file that uses most of these constants because they can
+  //     just be imported directly where needed otherwise. There is no performance benefit to exposing them as fixtures.
+  //   The async ({}, use) => await use(...) pattern is implemented here to expose constants as fixtures.
+  
+  // //////sharedConstants_main: async ({}, use) => await use(sharedConstants_main),
+  // paths_main: async ({}, use) => await use(sharedConstants_main.paths),
+  // ariaLabels_main: async ({}, use) => await use(sharedConstants_main.ariaLabels),
+  // roles_main: async ({}, use) => await use(sharedConstants_main.roles),
+  // linkVisibleNames_main: async ({}, use) => await use(sharedConstants_main.linkVisibleNames),
 
+  // paths_CFSD_Basic_HTML: async ({}, use) => await use(sharedConstants_CFSDBasicHTML.paths_CFSD_Basic_HTML),
+  // ariaLabels_CFSD_Basic_HTML: async ({}, use) => await use(sharedConstants_CFSDBasicHTML.ariaLabels_CFSD_Basic_HTML),
+  // roles_CFSD_Basic_HTML: async ({}, use) => await use(sharedConstants_CFSDBasicHTML.roles_CFSD_Basic_HTML),
+  // linkVisibleNames_CFSD_Basic_HTML: async ({}, use) => await use(sharedConstants_CFSDBasicHTML.linkVisibleNames_CFSD_Basic_HTML),
+
+  // ****************************************************************************************************************************
+  // ****************************************************************************************************************************
+  
   // Custom fixture for testing with server running
-  serverRunning: async ({ page }, use) => {
-    // Verify server is responding before running tests
-    const response = await page.goto('/');
-    if (!response?.ok()) {
-      throw new Error('Server is not running or not responding properly');
-    }
-    await use(page);
-  },
+  // serverRunning: async ({ page }, use) => {
+  //   // Verify that the server is responding before running tests
+  //   const response = await page.goto('/');
+  //   if (!response?.ok()) {
+  //     throw new Error('Server is not running or not responding properly');
+  //   }
+  //   await use(page);  
+  // },
 
-  // Custom fixture for homepage testing
-  homePage: async ({ page }, use) => {
+  // Custom fixture for fixture_startFrom_Home testing
+  fixture_startFrom_Home: async ({ page }, use) => {
     await page.goto('/');
     // Wait for page to be fully loaded
     await page.waitForLoadState('networkidle');
@@ -47,15 +68,17 @@ export const test = base.extend<CustomFixtures>({
   },
 
   // Custom fixture for curriculum page testing
-  curriculumPage: async ({ page }, use) => {
-    await page.goto('/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html');
+  fixture_startFrom_CFSD_Home: async ({ page }, use) => {
+    // await page.goto('/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html');
+    // await page.goto(sharedConstants_main.paths.path_CFSD_Home);
+    await page.goto(sharedConstants_main.paths.path_CFSD_Home);
     // Wait for page to be fully loaded
     await page.waitForLoadState('networkidle');
     await use(page);
   },
 
   // Custom fixture for testing interactive elements
-  interactivePage: async ({ page }, use) => {
+  fixture_startFrom_interactivePage: async ({ page }, use) => {
     await page.goto('/pages/interactive-features.html');
     // Wait for any JavaScript to load
     await page.waitForLoadState('networkidle');

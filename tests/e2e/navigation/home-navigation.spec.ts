@@ -1,9 +1,9 @@
 import { test, expect } from '../../fixtures/test-fixtures.js';
 
 test.describe('Home Page Navigation Tests', () => {
-  test('should navigate to course curriculum page @critical', async ({ homePage }) => {
+  test('should navigate to course curriculum page @critical', async ({ fixture_startFrom_Home }) => {
     // Click on the course link
-    const courseLink = homePage.locator('a[href*="Certified-Full-Stack-Developer-Curriculum"]');
+    const courseLink = fixture_startFrom_Home.locator('a[href*="Certified-Full-Stack-Developer-Curriculum"]');
     
     // Get the href to understand the navigation
     const href = await courseLink.getAttribute('href');
@@ -11,7 +11,7 @@ test.describe('Home Page Navigation Tests', () => {
     
     // Click and wait for navigation or handle the response
     const [response] = await Promise.all([
-      homePage.waitForResponse(response => response.url().includes('Certified-Full-Stack-Developer-Curriculum') || response.status() === 404),
+      fixture_startFrom_Home.waitForResponse(response => response.url().includes('Certified-Full-Stack-Developer-Curriculum') || response.status() === 404),
       courseLink.click()
     ]);
     
@@ -23,22 +23,22 @@ test.describe('Home Page Navigation Tests', () => {
     expect(response.status()).toBeLessThanOrEqual(404);
   });
 
-  test('should handle static file serving @smoke', async ({ homePage }) => {
+  test('should handle static file serving @smoke', async ({ fixture_startFrom_Home }) => {
     // Test CSS file loads
-    const response = await homePage.goto('/css/styles-freecodecamp.css');
+    const response = await fixture_startFrom_Home.goto('/css/styles-freecodecamp.css');
     expect(response?.status()).toBe(200);
     expect(response?.headers()['content-type']).toContain('text/css');
   });
 
-  test('should handle favicon properly @smoke', async ({ homePage }) => {
+  test('should handle favicon properly @smoke', async ({ fixture_startFrom_Home }) => {
     // Test favicon loads
-    const response = await homePage.goto('/assets/favicon/Wizard.ico');
+    const response = await fixture_startFrom_Home.goto('/assets/favicon/Wizard.ico');
     expect(response?.status()).toBe(200);
   });
 
-  test('should handle 404 gracefully @regression', async ({ homePage }) => {
+  test('should handle 404 gracefully @regression', async ({ fixture_startFrom_Home }) => {
     // Test non-existent page
-    const response = await homePage.goto('/non-existent-page', { 
+    const response = await fixture_startFrom_Home.goto('/non-existent-page', { 
       waitUntil: 'networkidle' 
     });
     
