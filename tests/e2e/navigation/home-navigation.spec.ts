@@ -26,14 +26,25 @@ test.describe('Home Page Navigation Tests', () => {
   test('should handle static file serving @smoke', async ({ fixture_startFrom_Home }) => {
     // Test CSS file loads
     const response = await fixture_startFrom_Home.goto('/css/styles-freecodecamp.css');
-    expect(response?.status()).toBe(200);
-    expect(response?.headers()['content-type']).toContain('text/css');
+    expect([200, 304]).toContain(response?.status());
+    
+    // For 304 responses, content-type might not be included in headers
+    // since the browser already has the cached version with the correct type
+    if (response?.status() === 200) {
+      // Only check content-type for fresh responses
+      const headers = response?.headers() || {};
+      const contentType = headers['content-type'] || headers['Content-Type'] || headers['Content-type'];
+      expect(contentType).toBeTruthy();
+      expect(contentType).toContain('text/css');
+    } else {
+      console.log('304 response - content-type validation skipped (cached response)');
+    }
   });
 
   test('should handle favicon properly @smoke', async ({ fixture_startFrom_Home }) => {
     // Test favicon loads
     const response = await fixture_startFrom_Home.goto('/assets/favicon/Wizard.ico');
-    expect(response?.status()).toBe(200);
+    expect([200, 304]).toContain(response?.status());
   });
 
   test('should handle 404 gracefully @regression', async ({ fixture_startFrom_Home }) => {
