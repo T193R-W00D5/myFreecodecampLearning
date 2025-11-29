@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <base href="/myFreecodecampLearning/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="This page contains a list of links to my learning courses of freeCodeCamp's Certified Full Stack Developer Curriculum course.">
   <title>My freecodecamp learning - Certified Full Stack Developer Curriculum</title>
-  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
+  <link rel="icon" type="image/x-icon" href="assets/favicon/Wizard.ico">
 
-  <link rel="stylesheet" href="/css/styles-freecodecamp.css">
+  <link rel="stylesheet" href="css/styles-freecodecamp.css">
   
   <!-- Preload critical resources -->
   <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
@@ -74,7 +75,7 @@
    I may revisit this in the future, especially if I refactor to implement a modern framework like React -->
 
 <script type="module">
-  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
+  import { paths, ariaLabels } from 'src/scripts/sharedConstants-__main.js';
   
   window.addEventListener('DOMContentLoaded', function() {
     // Enhanced selectors using same pattern as Playwright tests
@@ -102,7 +103,7 @@
 
 <!-- Same thing as above, but I don't use window.addEventListener('DOMContentLoaded', function() { -->
 <!-- <script type="module">
-  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
+  import { paths, ariaLabels } from 'src/scripts/sharedConstants-__main.js';
   document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
   document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
   document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);

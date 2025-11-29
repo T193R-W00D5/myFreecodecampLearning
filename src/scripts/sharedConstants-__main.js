@@ -9,8 +9,8 @@
  * @type {Paths}
  */
 export const paths = {
-  path_home: "/index.html",
-  path_CFSD_Home: '/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html',
+  path_home: "index.html",
+  path_CFSD_Home: 'pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html',
 };
 
 /**
