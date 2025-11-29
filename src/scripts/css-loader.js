@@ -38,7 +38,8 @@
             z-index: 0;
             pointer-events: none;
             opacity: 0.18;
-            background-image: url("/assets/images/bg-techy-002.svg");
+            background-image: url("/assets/images/bg-techy-003.svg");
+            /* background-image: '../assets/images/bg-techy-003.svg'; */
             background-repeat: repeat;
             background-size: 240px 240px;
         }
