@@ -4,9 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My freecodecamp learning</title>
-  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico" id="favicon">
 
-  <link rel="stylesheet" href="/css/styles-freecodecamp.css">
+  <link rel="stylesheet" href="/css/styles-freecodecamp.css" id="stylesheet">
+  
+  <!-- Environment-aware path adjustment -->
+  <script>
+    // Adjust paths for GitHub Pages deployment
+    if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      // GitHub Pages - add base path
+      document.getElementById('favicon').href = '/myFreecodecampLearning/assets/favicon/Wizard.ico';
+      document.getElementById('stylesheet').href = '/myFreecodecampLearning/css/styles-freecodecamp.css';
+    }
+  </script>
   
   <!-- Preload critical resources -->
   <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->

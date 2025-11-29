@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
+  <!-- Environment-aware path adjustment for GitHub Pages -->
+  <script>
+    // Fix paths for GitHub Pages deployment
+    if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      // Update all absolute paths to include GitHub Pages base path
+      const links = document.querySelectorAll('link[href^="/"]');
+      links.forEach(link => {
+        if (link.href.startsWith(window.location.origin + '/')) {
+          link.href = link.href.replace(window.location.origin + '/', window.location.origin + '/myFreecodecampLearning/');
+        }
+      });
+    }
+  </script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="This page contains a list of links to my learning courses of freeCodeCamp's Certified Full Stack Developer Curriculum course.">
@@ -102,7 +117,7 @@
 
 <!-- Same thing as above, but I don't use window.addEventListener('DOMContentLoaded', function() { -->
 <!-- <script type="module">
-  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
+  import { paths, ariaLabels } from 'src/scripts/sharedConstants-__main.js';
   document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
   document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
   document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);

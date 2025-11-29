@@ -79,7 +79,8 @@ export const test = base.extend<CustomFixtures>({
 
   // Custom fixture for testing interactive elements
   fixture_startFrom_interactivePage: async ({ page }, use) => {
-    await page.goto('/pages/interactive-features.html');
+    // await page.goto('/pages/interactive-features.html');
+    await page.goto(sharedConstants_main.paths.path_InteractiveFeatures);
     // Wait for any JavaScript to load
     await page.waitForLoadState('networkidle');
     await use(page);
