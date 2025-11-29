@@ -105,8 +105,10 @@ app.use('/assets', express.static('assets', {
 app.use('/css', express.static('css', {
   // maxAge: '1d', // Cache CSS for 1 day (allows quicker updates)
   maxAge: 0,
+  etag: true,  // Set to false to Disable ETag generation
   setHeaders: (res, filePath) => {
     res.setHeader('Content-Type', 'text/css; charset=utf-8');
+    // res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate'); // Commented out to enable caching
   }
 }));
 
