@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/myFreecodecampLearning/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="This page contains a list of links to my learning courses of freeCodeCamp's Certified Full Stack Developer Curriculum course.">
   <title>My freecodecamp learning - Certified Full Stack Developer Curriculum</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon/Wizard.ico">
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
 
-  <link rel="stylesheet" href="css/styles-freecodecamp.css">
+  <link rel="stylesheet" href="/css/styles-freecodecamp.css">
+  
+  <!-- Environment-aware path adjustment for GitHub Pages -->
+  <script>
+    // Fix paths for GitHub Pages deployment
+    if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      // Update all absolute paths to include GitHub Pages base path
+      const links = document.querySelectorAll('link[href^="/"]');
+      links.forEach(link => {
+        if (link.href.startsWith(window.location.origin + '/')) {
+          link.href = link.href.replace(window.location.origin + '/', window.location.origin + '/myFreecodecampLearning/');
+        }
+      });
+    }
+  </script>
   
   <!-- Preload critical resources -->
   <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
@@ -75,7 +88,7 @@
    I may revisit this in the future, especially if I refactor to implement a modern framework like React -->
 
 <script type="module">
-  import { paths, ariaLabels } from 'src/scripts/sharedConstants-__main.js';
+  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
   
   window.addEventListener('DOMContentLoaded', function() {
     // Enhanced selectors using same pattern as Playwright tests
