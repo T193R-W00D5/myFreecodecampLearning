@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <!-- Environment-aware path adjustment for GitHub Pages -->
   <script>
-    // Fix paths for GitHub Pages deployment
-    if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-      // Update all absolute paths to include GitHub Pages base path
-      const links = document.querySelectorAll('link[href^="/"]');
-      links.forEach(link => {
-        if (link.href.startsWith(window.location.origin + '/')) {
-          link.href = link.href.replace(window.location.origin + '/', window.location.origin + '/myFreecodecampLearning/');
-        }
-      });
-    }
+    // Environment detection - set base path immediately
+    window.basePath = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+      ? '/' 
+      : '/myFreecodecampLearning/';
   </script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My freecodecamp learning - Basic HTML - Workshop - Build a Curriculum Outline</title>
-  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
-
-  <link rel="stylesheet" href="/css/styles-freecodecamp.css">
+  
+  <script>
+    document.write('<link rel="icon" type="image/x-icon" href="' + window.basePath + 'assets/favicon/Wizard.ico">');
+    document.write('<link rel="stylesheet" href="' + window.basePath + 'css/styles-freecodecamp.css">');
+  </script>
   
   <!-- Preload critical resources -->
   <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->

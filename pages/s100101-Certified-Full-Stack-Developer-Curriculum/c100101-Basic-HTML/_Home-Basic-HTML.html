@@ -1,27 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <!-- Environment-aware path adjustment for GitHub Pages -->
   <script>
-    // Fix paths for GitHub Pages deployment
-    if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-      // Update all absolute paths to include GitHub Pages base path
-      const links = document.querySelectorAll('link[href^="/"]');
-      links.forEach(link => {
-        if (link.href.startsWith(window.location.origin + '/')) {
-          link.href = link.href.replace(window.location.origin + '/', window.location.origin + '/myFreecodecampLearning/');
-        }
-      });
-    }
+    // Environment detection - set base path immediately
+    window.basePath = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+      ? '/' 
+      : '/myFreecodecampLearning/';
   </script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My freecodecamp learning - Basic HTML Home</title>
-  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
-
-  <link rel="stylesheet" href="/css/styles-freecodecamp.css">
+  
+  <script>
+    document.write('<link rel="icon" type="image/x-icon" href="' + window.basePath + 'assets/favicon/Wizard.ico">');
+    document.write('<link rel="stylesheet" href="' + window.basePath + 'css/styles-freecodecamp.css">');
+  </script>
   
   <!-- Preload critical resources -->
   <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
@@ -135,21 +129,39 @@
 
 <!----- Start scripts ----------------------------------------------------------------------------->
 
-<script type="module">
-  // Combined module script to reduce bfcache blocking
-  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
-  import { pHome_CFSDC, p100101 } from '/src/scripts/sharedConstants-CFSD-basic-html-helper.js';
-  
-  window.addEventListener('DOMContentLoaded', function() {
-    // Set home links
-    document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-    document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
-    document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-    document.querySelector('.home-link-footer')?.setAttribute('href', paths.path_home);
+<script>
+  // Environment-aware module imports
+  const basePath = window.basePath || '/';
+  const sharedConstantsPath = basePath + 'src/scripts/sharedConstants-__main.js';
+  const basicHtmlHelperPath = basePath + 'src/scripts/sharedConstants-CFSD-basic-html-helper.js';
+
+  Promise.all([
+    import(sharedConstantsPath),
+    import(basicHtmlHelperPath)
+  ]).then(([mainModule, helperModule]) => {
+    const { paths, ariaLabels } = mainModule;
+    const { pHome_CFSDC, p100101 } = helperModule;
     
-    // Set navigation links
-    document.querySelectorAll('.prev-link').forEach(el => el.href = pHome_CFSDC);
-    document.querySelectorAll('.next-link').forEach(el => el.href = p100101);
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupNavigation);
+    } else {
+      setupNavigation();
+    }
+    
+    function setupNavigation() {
+      // Set home links
+      document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
+      document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
+      document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
+      document.querySelector('.home-link-footer')?.setAttribute('href', paths.path_home);
+      
+      // Set navigation links
+      document.querySelectorAll('.prev-link').forEach(el => el.href = pHome_CFSDC);
+      document.querySelectorAll('.next-link').forEach(el => el.href = p100101);
+    }
+  }).catch(error => {
+    console.error('Failed to load navigation modules:', error);
   });
 </script>
 

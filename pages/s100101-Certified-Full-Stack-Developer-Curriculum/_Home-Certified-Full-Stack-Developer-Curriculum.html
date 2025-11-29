@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-  <!-- Environment-aware path adjustment for GitHub Pages -->
   <script>
-    // Fix paths for GitHub Pages deployment
-    if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
-      // Update all absolute paths to include GitHub Pages base path
-      const links = document.querySelectorAll('link[href^="/"]');
-      links.forEach(link => {
-        if (link.href.startsWith(window.location.origin + '/')) {
-          link.href = link.href.replace(window.location.origin + '/', window.location.origin + '/myFreecodecampLearning/');
-        }
-      });
-    }
+    // Environment detection - set base path immediately
+    window.basePath = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+      ? '/' 
+      : '/myFreecodecampLearning/';
   </script>
   
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="This page contains a list of links to my learning courses of freeCodeCamp's Certified Full Stack Developer Curriculum course.">
   <title>My freecodecamp learning - Certified Full Stack Developer Curriculum</title>
-  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
-
-  <link rel="stylesheet" href="/css/styles-freecodecamp.css">
+  
+  <script>
+    document.write('<link rel="icon" type="image/x-icon" href="' + window.basePath + 'assets/favicon/Wizard.ico">');
+    document.write('<link rel="stylesheet" href="' + window.basePath + 'css/styles-freecodecamp.css">');
+  </script>
   
   <!-- Preload critical resources -->
   <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
@@ -88,30 +82,43 @@
    I do really like this approach to keep things DRY and modularized.
    I may revisit this in the future, especially if I refactor to implement a modern framework like React -->
 
-<script type="module">
-  import { paths, ariaLabels } from '/src/scripts/sharedConstants-__main.js';
-  
-  window.addEventListener('DOMContentLoaded', function() {
-    // Enhanced selectors using same pattern as Playwright tests
-    // More specific targeting like: fixture_startFrom_CFSD_Home.locator('header').getByRole('link', { name: 'Home' })
-    
-    // Header Home link - same targeting as your Playwright test
-    const headerHomeLink = document.querySelector('header')?.querySelector('a.home-link-header');
-    if (headerHomeLink) {
-      headerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-      headerHomeLink.setAttribute('href', paths.path_home);
+<script>
+  // Environment-aware module import
+  const basePath = window.basePath || '/';
+  const sharedConstantsPath = basePath + 'src/scripts/sharedConstants-__main.js';
+
+  import(sharedConstantsPath).then(({ paths, ariaLabels }) => {
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupNavigation);
+    } else {
+      setupNavigation();
     }
     
-    // Footer Home link - same targeting as your Playwright test  
-    const footerHomeLink = document.querySelector('footer')?.querySelector('a.home-link-footer');
-    if (footerHomeLink) {
-      footerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_footer); // Fixed: should be footer label
-      footerHomeLink.setAttribute('href', paths.path_home);
+    function setupNavigation() {
+      // Enhanced selectors using same pattern as Playwright tests
+      // More specific targeting like: fixture_startFrom_CFSD_Home.locator('header').getByRole('link', { name: 'Home' })
+      
+      // Header Home link - same targeting as your Playwright test
+      const headerHomeLink = document.querySelector('header')?.querySelector('a.home-link-header');
+      if (headerHomeLink) {
+        headerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
+        headerHomeLink.setAttribute('href', paths.path_home);
+      }
+      
+      // Footer Home link - same targeting as your Playwright test  
+      const footerHomeLink = document.querySelector('footer')?.querySelector('a.home-link-footer');
+      if (footerHomeLink) {
+        footerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_footer); // Fixed: should be footer label
+        footerHomeLink.setAttribute('href', paths.path_home);
+      }
+      
+      // Debug logging (if you want consistency with your tests)
+      // console.log('Header Home link configured:', headerHomeLink?.getAttribute('href'));
+      // console.log('Footer Home link configured:', footerHomeLink?.getAttribute('href'));
     }
-    
-    // Debug logging (if you want consistency with your tests)
-    // console.log('Header Home link configured:', headerHomeLink?.getAttribute('href'));
-    // console.log('Footer Home link configured:', footerHomeLink?.getAttribute('href'));
+  }).catch(error => {
+    console.error('Failed to load shared constants:', error);
   });
 </script>
 
