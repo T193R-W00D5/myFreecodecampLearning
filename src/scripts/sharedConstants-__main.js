@@ -2,7 +2,8 @@
 /**
  * @typedef {Object} Paths
  *   @property {string} path_home
- *   @property {string} path_CFSD_Home
+ *   @property {string} path_CFSD_Home  
+ *   @property {string} path_InteractiveFeatures
  */
 
 /**
@@ -11,6 +12,7 @@
 export const paths = {
   path_home: "/index.html",
   path_CFSD_Home: '/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html',
+  path_InteractiveFeatures: '/pages/interactive-features.html',
 };
 
 /**

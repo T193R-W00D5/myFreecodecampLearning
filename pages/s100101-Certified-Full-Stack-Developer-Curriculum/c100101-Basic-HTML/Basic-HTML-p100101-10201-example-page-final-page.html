@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  
+  <!-- Environment-aware path adjustment for GitHub Pages -->
+  <script>
+    // Fix paths for GitHub Pages deployment
+    if (!(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+      // Update all absolute paths to include GitHub Pages base path
+      const links = document.querySelectorAll('link[href^="/"]');
+      links.forEach(link => {
+        if (link.href.startsWith(window.location.origin + '/')) {
+          link.href = link.href.replace(window.location.origin + '/', window.location.origin + '/myFreecodecampLearning/');
+        }
+      });
+    }
+  </script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My freecodecamp learning - Basic HTML - Build a Curriculum Outline - Example Page - Final page</title>

@@ -2,7 +2,7 @@ import { test, expect } from '../fixtures/test-fixtures.js';
 
 test.describe('Interactive Features Tests', () => {
   test('should load interactive features page @critical @smoke', async ({ fixture_startFrom_interactivePage }) => {
-    await expect(fixture_startFrom_interactivePage).toHaveTitle('Cafe Menu');
+    await expect(fixture_startFrom_interactivePage).toHaveTitle('Interactive Features');
     await expect(fixture_startFrom_interactivePage.locator('h1')).toHaveText('Interactive Features');
   });
 
