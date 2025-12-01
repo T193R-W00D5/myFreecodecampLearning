@@ -1,47 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script>
-    // Environment detection - set base path immediately
-    window.basePath = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
-      ? '/' 
-      : '/myFreecodecampLearning/';
-  </script>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="This page contains a list of links to my learning courses of freeCodeCamp's Certified Full Stack Developer Curriculum course.">
-  <title>My freecodecamp learning - Certified Full Stack Developer Curriculum</title>
-  
-  <script>
-    document.write('<link rel="icon" type="image/x-icon" href="' + window.basePath + 'assets/favicon/Wizard.ico">');
-    document.write('<link rel="stylesheet" href="' + window.basePath + 'css/styles-freecodecamp.css">');
-  </script>
-  
-  <!-- Preload critical resources -->
-  <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
-  
-  <!-- Load CSS asynchronously to prevent render blocking -->
-  <!-- <link rel="preload" href="/css/styles-freecodecamp.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/css/styles-freecodecamp.css"></noscript> -->
-  
-</head>
-<body>
-
-<!----- Start <header> ---------------------------------------------------------------------------->
-<header id="idHeader">
-  <section>
-    <a href="#idFooter">Bottom of page</a> |
-    <a class="home-link-header">Home</a>
-    <!-- <a class="home-link-header">Home</a> -->
-  </section>
-</header>
-<hr><br>
-<!----- End <header> ------------------------------------------------------------------------------>
-
-
-<!----- Start <main> ------------------------------------------------------------------------------>
-<main>
+---
+layout: default
+title: "My freeCodeCamp Learning - Certified Full Stack Developer Curriculum"
+description: "This page contains a list of links to my learning courses of freeCodeCamp's Certified Full Stack Developer Curriculum course."
+---
 
 <h1>My freecodecamp learning</h1>
 
@@ -51,88 +12,10 @@
     <nav>
       <ul>
         <li><a aria-label="Link to my Basic HTML learning page for freeCodeCamp's Certified Full Stack Developer Curriculum course"
-               href="./c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML</a>
+               href="{{ '/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html' | relative_url }}">Basic HTML</a>
         </li>
       </ul>
     </nav>
 </section>
 
-</main>
-<!----- End <main> -------------------------------------------------------------------------------->
-
-
-<!----- Start <footer> ---------------------------------------------------------------------------->
-<br><hr><br>
-<footer id="idFooter">
-  <section>
-    <a href="#idHeader">Top of page</a> |
-    <a class="home-link-footer">Home</a>
-    <!-- <a class="home-link-footer">Home</a> -->
-  </section>
-</footer>
-<!----- End <footer> ------------------------------------------------------------------------------>
-
-
-<!----- Start scripts ----------------------------------------------------------------------------->
-
-<!-- The script below is an example of how to use shared constants to set attributes like href and aria-label -->
- <!-- I may not  use this functionality for now because:
-   1) The page may not meet WCAG standards
-   2) I am not sure this is the best approach if my page had many objects to manage
-   I do really like this approach to keep things DRY and modularized.
-   I may revisit this in the future, especially if I refactor to implement a modern framework like React -->
-
-<script>
-  // Environment-aware module import
-  const basePath = window.basePath || '/';
-  const sharedConstantsPath = basePath + 'src/scripts/sharedConstants-__main.js';
-
-  import(sharedConstantsPath).then(({ paths, ariaLabels }) => {
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupNavigation);
-    } else {
-      setupNavigation();
-    }
-    
-    function setupNavigation() {
-      // Enhanced selectors using same pattern as Playwright tests
-      // More specific targeting like: fixture_startFrom_CFSD_Home.locator('header').getByRole('link', { name: 'Home' })
-      
-      // Header Home link - same targeting as your Playwright test
-      const headerHomeLink = document.querySelector('header')?.querySelector('a.home-link-header');
-      if (headerHomeLink) {
-        headerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-        headerHomeLink.setAttribute('href', paths.path_home);
-      }
-      
-      // Footer Home link - same targeting as your Playwright test  
-      const footerHomeLink = document.querySelector('footer')?.querySelector('a.home-link-footer');
-      if (footerHomeLink) {
-        footerHomeLink.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_footer); // Fixed: should be footer label
-        footerHomeLink.setAttribute('href', paths.path_home);
-      }
-      
-      // Debug logging (if you want consistency with your tests)
-      // console.log('Header Home link configured:', headerHomeLink?.getAttribute('href'));
-      // console.log('Footer Home link configured:', footerHomeLink?.getAttribute('href'));
-    }
-  }).catch(error => {
-    console.error('Failed to load shared constants:', error);
-  });
-</script>
-
-<!-- Same thing as above, but I don't use window.addEventListener('DOMContentLoaded', function() { -->
-<!-- <script type="module">
-  import { paths, ariaLabels } from 'src/scripts/sharedConstants-__main.js';
-  document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-  document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
-  document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-  document.querySelector('.home-link-footer')?.setAttribute('href', paths.path_home);
-</script> -->
-
-<!----- End scripts ------------------------------------------------------------------------------->
-
-
-</body>
-</html>
+<!-- NOTE: All navigation, scripts, and layout are now handled by Jekyll's default layout -->

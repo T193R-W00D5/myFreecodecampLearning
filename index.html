@@ -1,44 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script>
-    // Environment detection - set base path immediately
-    window.basePath = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
-      ? '/' 
-      : '/myFreecodecampLearning/';
-  </script>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My freecodecamp learning</title>
-  
-  <script>
-    document.write('<link rel="icon" type="image/x-icon" href="' + window.basePath + 'assets/favicon/Wizard.ico">');
-    document.write('<link rel="stylesheet" href="' + window.basePath + 'css/styles-freecodecamp.css">');
-  </script>
-  
-  <!-- Preload critical resources -->
-  <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
-  
-  <!-- Load CSS asynchronously to prevent render blocking -->
-  <!-- <link rel="preload" href="/css/styles-freecodecamp.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/css/styles-freecodecamp.css"></noscript> -->
-  
-</head>
-<body>
-
-<!----- Start <header> ---------------------------------------------------------------------------->
-<header id="idHeader">
-  <section>
-    <a href="#idFooter">Bottom of page</a>
-  </section>
-</header>
-<hr><br>
-<!----- End <header> ------------------------------------------------------------------------------>
-
-
-<!----- Start <main> ------------------------------------------------------------------------------>
-<main>
+---
+layout: default
+title: "My freeCodeCamp Learning"
+---
 
 <h1>My freecodecamp learning</h1>
 
@@ -53,24 +16,8 @@
   <h1>Courses</h1>
   <nav>
     <ul>
-      <li><a href="./pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html">Certified Full Stack Developer Curriculum</a></li>
+      <li><a href="{{ '/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html' | relative_url }}">Certified Full Stack Developer Curriculum</a></li>
     </ul>
   </nav>
 </section>
 
-</main>
-<!----- End <main> -------------------------------------------------------------------------------->
-
-
-<!----- Start <footer> ---------------------------------------------------------------------------->
-<br><hr><br>
-<footer id="idFooter">
-  <section>
-    <a href="#idHeader">Top of page</a>
-  </section>
-</footer>
-<!----- End <footer> ------------------------------------------------------------------------------>
-
-
-</body>
-</html>

@@ -1,0 +1,135 @@
+import { test, expect } from '../../fixtures/test-fixtures.js';
+import { debugConsole } from '../../../src/scripts/debug-console.js';
+
+import  * as sharedConstants_main from          '../../../src/scripts/sharedConstants-__main.js';
+import  * as sharedConstants_CFSDBasicHTML from '../../../src/scripts/sharedConstants-CFSD-basic-html-helper.js';
+
+test.describe('Curriculum Page Navigation Tests', () => {
+
+  // Enable parallel execution to locally run independent navigation tests
+  test.describe.configure({ mode: 'parallel' });
+
+  // test('should navigate to Basic HTML from curriculum page @critical', async ({ fixture_startFrom_CFSD_Home }) => {
+  //   // Click on the Basic HTML link
+  //   const basicHtmlLink = fixture_startFrom_CFSD_Home.locator('a[href*="Basic-HTML"]');
+    
+  //   // Get the href to understand the navigation
+  //   const href = await basicHtmlLink.getAttribute('href');
+  //   debugConsole.log('Basic HTML link href:', href);
+    
+  //   // Click and wait for navigation or handle the response
+  //   const [response] = await Promise.all([
+  //     fixture_startFrom_CFSD_Home.waitForResponse(response => response.url().includes('Basic-HTML') || response.status() === 404),
+  //     basicHtmlLink.click()
+  //   ]);
+    
+  //   // Check that we got some response (even if 404)
+  //   debugConsole.log('Navigation response status:', response.status());
+  //   debugConsole.log('Navigation URL:', response.url());
+    
+  //   // Verify the click was registered
+  //   expect(response.status()).toBeLessThanOrEqual(404);
+  // });
+
+  test('should navigate to website Home page from CFSD curriculum page header Home link @smoke', async ({ fixture_startFrom_CFSD_Home }) => {  //({ fixture_startFrom_CFSD_Home, paths, ariaLabels, roles }) => {
+
+    // *** For Debugging *** Log the expected aria-label to the console
+    debugConsole.log('Header Home link aria-label should be:', sharedConstants_main.ariaLabels.ariaLabel_homeLink_header);
+
+    // Locate the header link
+    const homeLink_header = fixture_startFrom_CFSD_Home.locator('header').getByRole('link', { name: 'Home' });
+
+    // Assert that the header Home link is visible
+    await expect(homeLink_header).toBeVisible();
+
+    // *** For Debugging *** Log the expected path to the console
+    debugConsole.log('Header Home link path should be:', sharedConstants_main.paths.path_home);
+    
+    // Get the actual href attribute of the header Home link
+    const actualHref_homeLink_header = await homeLink_header.getAttribute('href');
+    // *** For Debugging *** Log the href to the console
+    debugConsole.log('Header Home link href:', actualHref_homeLink_header);
+
+    // Assert that the header Home link's href matches the expected path
+    await expect(homeLink_header).toHaveAttribute('href', sharedConstants_main.paths.path_home);
+    
+    // Click the link and wait for navigation
+    await homeLink_header.click();
+    //await expect(fixture_startFrom_CFSD_Home).toHaveURL(new RegExp(`${p_index_html.replace('.', '\\.')}$`));
+    
+    // Assert that the URL matches the expected home page path
+    await expect(fixture_startFrom_CFSD_Home).toHaveURL(new RegExp(`${sharedConstants_main.paths.path_home.replace('.', '\\.')}$`));
+    
+  });
+  
+  test('should navigate to website Home page from CFSD curriculum page footer Home link @smoke', async ({ fixture_startFrom_CFSD_Home }) => {
+    // *** For Debugging *** Log the expected aria-label to the console
+    debugConsole.log('Footer Home link aria-label should be:', sharedConstants_main.ariaLabels.ariaLabel_homeLink_footer);
+
+    // Locate the footer link
+    const homeLink_footer = fixture_startFrom_CFSD_Home.locator('footer').getByRole('link', { name: 'Home' });
+
+    // Assert that the footer Home link is visible
+    await expect(homeLink_footer).toBeVisible();
+
+    // *** For Debugging *** Log the expected path to the console
+    debugConsole.log('Footer Home link path should be:', sharedConstants_main.paths.path_home);
+
+    // Get the actual href attribute of the footer Home link
+    const actualHref_homeLink_footer = await homeLink_footer.getAttribute('href');
+    // *** For Debugging *** Log the href to the console
+    debugConsole.log('Footer Home link href:', actualHref_homeLink_footer);
+
+    // Assert that the footer Home link's href matches the expected path
+    await expect(homeLink_footer).toHaveAttribute('href', sharedConstants_main.paths.path_home);
+    
+    // Click the link and wait for navigation
+    await homeLink_footer.click();
+    //await expect(fixture_startFrom_CFSD_Home).toHaveURL(new RegExp(`${p_index_html.replace('.', '\\.')}$`));
+    
+    // Assert that the URL matches the expected home page path
+    await expect(fixture_startFrom_CFSD_Home).toHaveURL(new RegExp(`${sharedConstants_main.paths.path_home.replace('.', '\\.')}$`));
+
+  });
+
+  test('should navigate to CFSD Basic HTML home page from CFSD curriculum page using link by name from the link list @smoke',
+       async ({ fixture_startFrom_CFSD_Home }) => {
+
+    // *** To future self: change to use locate the link in the link list ***
+
+    // Locate the link using getByRole to find the link by its name
+    const locator_getByRole_link_name = fixture_startFrom_CFSD_Home.getByRole('link', { name: sharedConstants_CFSDBasicHTML.linkVisibleNames_CFSD_Basic_HTML.linkVisibleName_CFSD_Basic_HTML });
+
+    // Assert that that link is visible to the user
+    await expect(locator_getByRole_link_name).toBeVisible();
+    
+    // Locate the link using getByLabel to find the link by its aria-label
+    //const link_ariaLabel = fixture_startFrom_CFSD_Home.getByLabel(ariaLabels_CFSD_Basic_HTML.ariaLabel_link_CFSD_Basic_HTML);
+
+    
+    // Get the actual href attribute of the footer Home link
+    const actual_link_Href = await locator_getByRole_link_name.getAttribute('href');
+    debugConsole.log('Actual <Basic HTM> link href:', actual_link_Href);
+    
+    // Assert that the link's actual href matches the expected path
+    const expected_link_href = sharedConstants_CFSDBasicHTML.paths_CFSD_Basic_HTML.path_CFSD_Basic_HTML_Home;
+    // const expected_link_href = "http://localhost:3010/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html";
+    debugConsole.log('Expected <Basic HTM> link href:', expected_link_href);
+    await expect(locator_getByRole_link_name).toHaveAttribute('href', expected_link_href);
+
+    // Assert that the link's actual arial-label matches the expected aria-label
+    const expected_link_ariaLabel = sharedConstants_CFSDBasicHTML.ariaLabels_CFSD_Basic_HTML.ariaLabel_link_CFSD_Basic_HTML;
+    await expect(locator_getByRole_link_name).toHaveAttribute('aria-label', expected_link_ariaLabel);
+    
+    // Click the link and wait for navigation
+    await locator_getByRole_link_name.click();
+    //await expect(fixture_startFrom_CFSD_Home).toHaveURL(new RegExp(`${p_index_html.replace('.', '\\.')}$`));
+    
+    // Assert that the URL matches the expected home page path
+    // await expect(fixture_startFrom_CFSD_Home).toHaveURL(new RegExp(`${expected_href.replace('.', '\\.')}$`));
+    const expected_page_url = "http://localhost:3010/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html"
+    const actual_page_url =  await expect(fixture_startFrom_CFSD_Home).toHaveURL(new RegExp(`${expected_page_url.replace('.', '\\.')}$`));
+    
+  });
+
+});

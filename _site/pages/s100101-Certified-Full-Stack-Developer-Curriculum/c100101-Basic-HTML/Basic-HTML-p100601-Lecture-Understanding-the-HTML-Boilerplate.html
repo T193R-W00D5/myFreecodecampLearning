@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    // Environment detection - set base path immediately
+    window.basePath = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
+      ? '/' 
+      : '/myFreecodecampLearning/';
+  </script>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My freecodecamp learning - Basic HTML - Lecture - Understanding the HTML Boilerplate</title>
+  
+  <script>
+    document.write('<link rel="icon" type="image/x-icon" href="' + window.basePath + 'assets/favicon/Wizard.ico">');
+    document.write('<link rel="stylesheet" href="' + window.basePath + 'css/styles-freecodecamp.css">');
+  </script>
+  
+  <!-- Preload critical resources -->
+  <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
+  
+  <!-- Load CSS asynchronously to prevent render blocking -->
+  <!-- <link rel="preload" href="/css/styles-freecodecamp.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/styles-freecodecamp.css"></noscript> -->
+  
+</head>
+<body>
+
+<!----- Start <header> ---------------------------------------------------------------------------->
+<header id="idheader">
+  <section class="header-nav">
+    <div class="header-left">
+      <a class="prev-link">
+        <button type="button" aria-label="Go to previous page">Previous</button>
+      </a>
+    </div>
+    <div class="header-center">
+      <a href="#idFooter">Bottom of page</a> |
+      <a class="home-link-header">Home</a> |
+      <a href="/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML Home</a>
+    </div>
+    <div class="header-right">
+      <a class="next-link">
+        <button type="button" aria-label="Go to next page">Next</button>
+      </a>
+    </div>
+  </section>
+</header>
+<br><hr><br>
+<!----- End <header> ------------------------------------------------------------------------------>
+
+
+<!----- Start <main> ------------------------------------------------------------------------------>
+<main>
+<!---------- Start mainContent -------------------------------------------------------------------->
+<section id="mainContent">
+
+<h1 tabindex="0">Basic HTML &#9655; Lecture &#9655; Understanding the HTML Boilerplate</h1>
+<br>
+
+
+<!---------- Start intro -------------------------------------------------------------------------->
+<section id="intro">
+<h2 tabindex="0">Introduction</h2>
+<p  tabindex="0">
+  In these lectures, you will learn about the HTML boilerplate,
+  which is a ready-made template for your webpages.
+<br><br>
+  You will learn how to work with the <code>link</code> element, <code>meta</code> element and more.
+</p>
+<p  tabindex="0">
+  <strong>Note:</strong> This is a stale and static copy of freeCodeCamp.org content from the
+  <a href="https://www.freecodecamp.org/learn/full-stack-developer/#lecture-understanding-the-html-boilerplate" 
+   rel="noopener noreferrer" class="external-link" target="_blank">live site</a>.
+</p>
+<br>
+</section>
+<!---------- End intro ---------------------------------------------------------------------------->
+
+
+<!---------- Start lectureTopic ------------------------------------------------------------------->
+<section id= "lectureTopic">
+
+<h2 tabindex="0">What Is the Role of the Link Element in HTML, and How Can It Be Used to Link to External Stylesheets?</h2>
+
+<p tabindex="0">
+  Let's learn about the <code>link</code> element, and how to use it to link to external stylesheets.
+</p>
+<p tabindex="0">
+  The <code>link</code> element is used to link to external resources like stylesheets and site icons.
+  Here is the basic syntax for using the <code>link</code> element for an external CSS file:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;link rel="stylesheet" href="./styles.css" /&gt;</code>
+</pre>
+<p tabindex="0">
+  The <code>rel</code> attribute is used to specify the relationship between
+  the linked resource and the HTML document. In this situation, we need to specify that this
+  linked resource is a <code>stylesheet</code>.
+</p>
+<p tabindex="0">
+  It is considered best practice to separate your HTML and CSS in different files.
+  Developers will use the <code>link</code> element for their external CSS file instead of
+  writing everything in the HTML document.
+</p>
+<p tabindex="0">
+  The <code>href</code> attribute is used to specify the location of the URL for
+  the external resource.
+</p>
+<p tabindex="0">
+  The <code>dot</code> followed by a forward slash in the example tells the computer
+  to look in the current folder, or directory, for the <code>styles.css</code> file.
+</p>
+<p tabindex="0">
+  The <code>link</code> element should be placed inside the <code>head</code>
+  element as seen in the following example:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;head&gt;</code>
+    <code>&lt;meta charset="UTF-8" /&gt;</code>
+    <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</code>
+    <code>&lt;title&gt;Examples of the link element&lt;title&gt;</code>
+    <code>&lt;link rel="stylesheet" href="./styles.css" /&gt;</code>
+  <code>&lt;/head&gt;</code>
+</pre>
+<p tabindex="0">
+  Often times you will see multiple <code>link</code> elements inside a professional codebase
+  that link to different stylesheets, fonts, and icons. Here is an example of using the
+  <code>link</code> element to link to an external Google Font called <em>Playwright Cuba</em>:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;link rel="preconnect" href="https://fonts.googleapis.com" /&gt;</code>
+  <code>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /&gt;</code>
+  <code>&lt;link
+    href="https://fonts.googleapis.com/css2?family=Playwrite+CU:wght@100..400&display=swap"
+    rel="stylesheet"
+  /&gt;</code>
+</pre>
+<p tabindex="0">
+  Google Fonts are a set of free and open source custom fonts that you can use inside any
+  project. You can choose which fonts you would like to use and Google will provide you with
+  the necessary HTML and CSS code. In this example, the <code>preconnect</code> value for the
+  <code>rel</code> attribute tells the browser to create an early connection to the value
+  specified in the <code>href</code> attribute. This is done to speed up loading times for
+  these external resources.
+</p>
+<p tabindex="0">
+  Another common use case for the <code>link</code> element is to link to icons. Here is an
+  example of linking to a favicon:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;link rel="icon" href="favicon.ico" /&gt;</code>
+</pre>
+<p tabindex="0">
+  A favicon, which is short for favorite icon, is a small icon typically displayed in the
+  browser tab next the site title. A lot of websites will use a favicon to display their brand icon.
+</p>
+<br>
+</section>
+<!---------- End lectureTopic --------------------------------------------------------------------->
+
+
+<!---------- Start lectureTopic ------------------------------------------------------------------->
+<section id= "lectureTopic">
+
+<h2 tabindex="0">What Is an HTML Boilerplate, and Why Is It Important?</h2>
+
+<p tabindex="0">
+  Let's learn about the HTML boilerplate.
+</p>
+<p tabindex="0">
+  What is the HTML boilerplate, you ask? It's like a ready-made template for your webpages.
+  Think of it as the foundations of a house. A boilerplate includes the basic structure and
+  essential elements every HTML document needs. It saves you time and helps ensure your pages
+  are set up properly. Here is an example:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;!DOCTYPE html&gt;</code>
+  <code>&lt;html lang="en"&gt;</code>
+    <code>&lt;head&gt;</code>
+      <code>&lt;meta charset="utf-8" /&gt;</code>
+      <code>&lt;meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0" /&gt;</code>
+      <code>&lt;title&gt;freeCodeCamp&lt;title&gt;</code>
+      <code>&lt;link rel="stylesheet" href="./styles.css" /&gt;</code>
+    <code>&lt;/head&gt;</code>
+  <code>&lt;body&gt;</code>
+  <code>&lt;/body&gt;</code>
+  <code>&lt;html&gt;</code>
+</pre>
+<p tabindex="0">
+  Let's break down the key parts of this boilerplate.
+  First, there is the <code>DOCTYPE</code> declaration:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;!DOCTYPE html&gt;</code>
+</pre>
+<p tabindex="0">
+  It tells browsers which version of HTML you're using. Next, comes the <code>html</code> tag:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;!DOCTYPE html&gt;</code>
+  <code>&lt;html lang="en"&gt;</code>
+    <code>&lt;!--All other elements go inside here--&gt;</code>
+  <code>&lt;html&gt;</code>
+</pre>
+<p tabindex="0">
+  This wraps around all your content, and can specify the language of your page.
+  Inside the <code>html</code> tag, you'll find two main sections - a <code>head</code>,
+  and a <code>body</code>:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;!DOCTYPE html&gt;</code>
+  <code>&lt;html lang="en"&gt;</code>
+    <code>&lt;head&gt;</code>
+      <code>&lt;!--Important metadata goes here--&gt;</code>
+    <code>&lt;/head&gt;</code>
+  <code>&lt;body&gt;</code>
+    <code>&lt;!--Headings, paragraphs, images, etc. go inside here--&gt;</code>
+  <code>&lt;/body&gt;</code>
+  <code>&lt;html&gt;</code>
+</pre>
+<p tabindex="0">
+  The <code>head</code> section contains important behind-the-scenes information:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+    <code>&lt;head&gt;</code>
+      <code>&lt;meta charset="utf-8" /&gt;</code>
+      <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</code>
+      <code>&lt;title&gt;Document Title Goes Here&lt;title&gt;</code>
+      <code>&lt;link rel="stylesheet" href="./styles.css" /&gt;</code>
+    <code>&lt;/head&gt;</code>
+</pre>
+<p tabindex="0">
+  Your site's metadata, contained in <code>meta</code> elements, has details about things
+  like character encoding, and how websites like Twitter should preview your page's link.
+  Your site's title, found in the <code>title</code> element, determines the text that appears
+  in the browser tab or window. Finally, you'll typically link your page's external stylesheets
+  in the <code>head</code> section using <code>link</code> elements.
+</p>
+<p tabindex="0">The <code>body</code> section is where all your content goes:</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;body&gt;</code>
+    <code>&lt;h1&gt;I am a main title&lt;h1&gt;</code>
+    <code>&lt;p&gt;Example paragraph text&lt;p&gt;</code>
+  <code>&lt;/body&gt;</code>
+</pre>
+<p tabindex="0">
+  Now, why is a boilerplate important? It ensures your pages are structured correctly and
+  work well across different browsers. Using a boilerplate helps you avoid common mistakes
+  and follow best practices. It's a great starting point for any web project. Remember,
+  you can customize your own boilerplate to fit your needs. As you gain experience,
+  you might add your own preferred elements or <code>meta</code> tags. As you continue to
+  improve your personal boilerplate, you'll find that it saves you time when starting new projects.
+</p>
+<p tabindex="0">
+  Next time you start a new HTML file, consider using a boilerplate. It will definitely give you
+  a solid foundation to build on.
+</p>
+</section>
+<!---------- End lectureTopic --------------------------------------------------------------------->
+
+
+<!---------- Start lectureTopic ------------------------------------------------------------------->
+<section id= "lectureTopic">
+  
+<h2 tabindex="0">What Is UTF-8 Character Encoding, and Why Is It Needed?</h2>
+
+<p tabindex="0">What is UTF-8 character encoding, and why is it needed?</p>
+<p tabindex="0">
+  UTF-8, or UCS Transformation Format 8, is a standardized character encoding widely used
+  on the web. Character encoding is the method computers use to store characters as data.
+  Essentially, all text on a web page is a sequence of characters stored as one or more bytes.
+  In computing, a byte is a unit of data consisting of 8 bits, or binary digits. UTF-8 supports
+  every character in the Unicode character set - and this includes characters and symbols from
+  all writing systems, languages, and technical symbols. Here is an example of using the
+  <code>meta</code> element with the <code>charset</code> attribute to set the character
+  encoding to <code>UTF-8</code>:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;meta charset="UTF-8" /&gt;</code>
+</pre>
+<p>
+  By setting the character encoding to UTF-8, it will ensure that the accented
+  <code>"e"</code> character (<code>é</code>) is displayed correctly on the page.
+  Here is an extended code example of using the UTF-8 character encoding:
+</p>
+<pre
+  class="language-html"
+  tabindex="0"
+  role="region"
+  aria-label="HTML code example">
+  <code>&lt;!DOCTYPE html&gt;</code>
+  <code>&lt;html lang="en"&gt;</code>
+    <code>&lt;head&gt;</code>
+      <code>&lt;meta charset="utf-8" /&gt;</code>
+      <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</code>
+      <code>&lt;title&gt;Examples of the UTF-8 encoding&lt;title&gt;</code>
+      <code>&lt;link rel="stylesheet" href="./styles.css" /&gt;</code>
+    <code>&lt;/head&gt;</code>
+  <code>&lt;body&gt;</code>
+    <code>&lt;p&gt;Café&lt;p&gt;</code>
+  <code>&lt;/body&gt;</code>
+  <code>&lt;html&gt;</code>
+</pre>
+<p>
+  For each new project you create, you should include this <code>meta</code> element
+  with the <code>charset</code> attribute set to <code>UTF-8</code>.
+</p>
+
+</section>
+<!---------- End lectureTopic --------------------------------------------------------------------->
+
+
+</section>
+<!---------- End mainContent ---------------------------------------------------------------------->
+</main>
+<!----- End <main> -------------------------------------------------------------------------------->
+
+
+<!----- Start <footer> ---------------------------------------------------------------------------->
+<br><hr><br>
+<footer id="idFooter">
+  <section class="footer-nav">
+    <div class="footer-left">
+      <a class="prev-link">
+        <button type="button" aria-label="Go to previous page">Previous</button>
+      </a>
+    </div>
+    <div class="footer-center">
+      <a href="#idHeader">Top of page</a> |
+      <a class="home-link-footer">Home</a> |
+      <a href="/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML Home</a>
+    </div>
+    <div class="footer-right">
+      <a class="next-link">
+        <button type="button" aria-label="Go to next page">Next</button>
+      </a>
+    </div>
+  </section>
+</footer>
+<!----- End <footer> ------------------------------------------------------------------------------>
+
+
+<!----- Start scripts ----------------------------------------------------------------------------->
+
+<script type="module" src="/src/scripts/prism.js"></script>
+
+<script>
+  // Environment-aware module imports
+  const basePath = window.basePath || '/';
+  const sharedConstantsPath = basePath + 'src/scripts/sharedConstants-__main.js';
+  const basicHtmlHelperPath = basePath + 'src/scripts/sharedConstants-CFSD-basic-html-helper.js';
+
+  Promise.all([
+    import(sharedConstantsPath),
+    import(basicHtmlHelperPath)
+  ]).then(([mainModule, helperModule]) => {
+    const { paths, ariaLabels } = mainModule;
+    const { p100401, p100901 } = helperModule;
+    
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setupNavigation);
+    } else {
+      setupNavigation();
+    }
+    
+    function setupNavigation() {
+      // Set home links
+      document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
+      document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
+      document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
+      document.querySelector('.home-link-footer')?.setAttribute('href', paths.path_home);
+      
+      // Set navigation links
+      document.querySelectorAll('.prev-link').forEach(el => el.href = p100401);
+      document.querySelectorAll('.next-link').forEach(el => el.href = p100901);
+    }
+  }).catch(error => {
+    console.error('Failed to load navigation modules:', error);
+  });
+</script>
+
+<!----- End scripts ------------------------------------------------------------------------------->
+
+
+</body>
+</html>
