@@ -61,7 +61,7 @@ export const test = base.extend<CustomFixtures>({
 
   // Custom fixture for fixture_startFrom_Home testing
   fixture_startFrom_Home: async ({ page }, use) => {
-    await page.goto('/');
+    await page.goto('/myFreecodecampLearning/');
     // Wait for page to be fully loaded
     await page.waitForLoadState('networkidle');
     await use(page);
@@ -69,7 +69,7 @@ export const test = base.extend<CustomFixtures>({
 
   // Custom fixture for curriculum page testing
   fixture_startFrom_CFSD_Home: async ({ page }, use) => {
-    // await page.goto('/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html');
+    // await page.goto('/pages/s100101-Certified-Full-Stack-Developer-Curriculum/Home-Certified-Full-Stack-Developer-Curriculum.html');
     // await page.goto(sharedConstants_main.paths.path_CFSD_Home);
     await page.goto(sharedConstants_main.paths.path_CFSD_Home);
     // Wait for page to be fully loaded

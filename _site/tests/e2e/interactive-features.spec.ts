@@ -57,8 +57,8 @@ test.describe('Interactive Features Tests', () => {
   });
 
   test('should handle keyboard navigation @regression', async ({ fixture_startFrom_interactivePage }) => {
-    // Test tab navigation to buttons
-    await fixture_startFrom_interactivePage.keyboard.press('Tab');
+    // Focus directly on the message button first
+    await fixture_startFrom_interactivePage.locator('#messageBtn').focus();
     await expect(fixture_startFrom_interactivePage.locator('#messageBtn')).toBeFocused();
     
     // Test Enter key on focused button

@@ -25,13 +25,9 @@ jobs:
       run: |
         # Check JavaScript syntax
         node --check src/script.js
-        node --check server.js
         
         # Check TypeScript compilation
         npx tsc --noEmit
-        
-        # Check if server starts without errors
-        timeout 10s npm start || [ $? -eq 124 ]
 
     - name: Validate package.json
       run: npm ls --depth=0

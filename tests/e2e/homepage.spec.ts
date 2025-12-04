@@ -40,10 +40,10 @@ test.describe('fixture_startFrom_Home Tests', () => {
     await expect(fixture_startFrom_Home.locator('footer#idFooter')).toBeVisible();
     
     // Check favicon is loaded
-    await expect(fixture_startFrom_Home.locator('link[rel="icon"]')).toHaveAttribute('href', '/assets/favicon/Wizard.ico');
+    await expect(fixture_startFrom_Home.locator('link[rel="icon"]')).toHaveAttribute('href', '/myFreecodecampLearning/assets/favicon/Wizard.ico');
     
     // Check CSS is loaded
-    await expect(fixture_startFrom_Home.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '/css/styles-freecodecamp.css');
+    await expect(fixture_startFrom_Home.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '/myFreecodecampLearning/css/styles-freecodecamp.css');
   });
 
   // test('should be responsive on mobile @regression', async ({ fixture_startFrom_Home }) => {

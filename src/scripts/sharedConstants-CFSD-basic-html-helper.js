@@ -1,6 +1,6 @@
 export const p_index_html = "/index.html";
-export const pHome_CFSDC = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/_Home-Certified-Full-Stack-Developer-Curriculum.html";
-export const pHome_Basic_HTML = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html";
+export const pHome_CFSDC = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/Home-Certified-Full-Stack-Developer-Curriculum.html";
+export const pHome_Basic_HTML = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/Home-Basic-HTML.html";
 export const p100101 = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/Basic-HTML-p100101-Workshop-Build-a-Curriculum-Outline.html";
 export const p100201 = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/Basic-HTML-p100201-Lecture-Welcome-Message-from-Quincy-Larson.html";
 export const p100401 = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/Basic-HTML-p100401-Lecture-Understanding-HTML-Attributes.html";
@@ -17,7 +17,7 @@ export const p700101 = "/pages/s100101-Certified-Full-Stack-Developer-Curriculum
  * @type {paths_CFSD_Basic_HTML}
  */
 export const paths_CFSD_Basic_HTML = {
-  path_CFSD_Basic_HTML_Home: "./c100101-Basic-HTML/_Home-Basic-HTML.html",
+  path_CFSD_Basic_HTML_Home: "./c100101-Basic-HTML/Home-Basic-HTML.html",
 };
 
 /**

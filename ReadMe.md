@@ -4,23 +4,42 @@
 [![E2E Tests](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/e2e-tests.yml)
 [![CI](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/ci.yml/badge.svg)](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/ci.yml)
 
-## Standard Local Server Startup: node
+## Local Development Server: Jekyll
+
+This project uses Jekyll as a static site generator for both development and deployment.
+
+### Prerequisites
+
+- Ruby installed with Jekyll and Bundler gems
+- All project dependencies installed via `bundle install`
+
+### Starting the Development Server
 
 1. Open a new terminal inside VS Code pointed to your project root folder location.
 
-1. Run from terminal:
+2. Run from terminal:
 
 ```bash
-node server.js
+bundle exec jekyll serve
 ```
 
-1. Open <http://localhost:3010> in your browser. You should see your webpage!
+3. Open <http://127.0.0.1:4000/myFreecodecampLearning/> in your browser. You should see your webpage!
 
-## Alternative Local Server Startup: nodemon
+The Jekyll server will automatically:
+- ✅ Process all Jekyll templating and layouts
+- ✅ Handle path resolution for GitHub Pages compatibility  
+- ✅ Auto-regenerate when you make changes to files
+- ✅ Serve the site at the correct baseurl
 
-From CoPilot in MS Edge: Setting up nodemon is quick, and once it’s running, it’ll feel like your server suddenly learned how to breathe. 😄 Every time you save changes, nodemon restarts your Node server automatically—so no more manual Ctrl+C and re-run. Here's how to get rolling:
+### Jekyll vs Node.js
 
-⚙️ Step-by-Step: Install and Use `nodemon`
+This project previously used a Node.js server but has migrated to Jekyll for:
+- 🎯 **Better GitHub Pages integration** - Native Jekyll support
+- 🔧 **Automatic path resolution** - No manual environment detection needed
+- 📝 **Templating system** - Reusable layouts and components
+- 🚀 **Optimized deployment** - Jekyll generates static files for faster loading
+
+## Testing
 
 🛒 1. Install nodemon (globally or locally)
 
