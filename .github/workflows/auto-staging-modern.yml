@@ -50,7 +50,7 @@ jobs:
         if: github.event.inputs.skip_tests != 'true'
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1'
+          ruby-version: '3.2'
           bundler-cache: true
 
       - name: Install dependencies (if running tests)
