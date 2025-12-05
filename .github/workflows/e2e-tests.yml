@@ -47,13 +47,14 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.2'
-        bundler-cache: true
 
     - name: Install dependencies
       run: npm ci
 
     - name: Install Jekyll dependencies
-      run: bundle install
+      run: |
+        bundle config set --local frozen false
+        bundle install
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps ${{ matrix.browser }}
@@ -98,13 +99,14 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.2'
-        bundler-cache: true
 
     - name: Install dependencies
       run: npm ci
 
     - name: Install Jekyll dependencies
-      run: bundle install
+      run: |
+        bundle config set --local frozen false
+        bundle install
 
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps

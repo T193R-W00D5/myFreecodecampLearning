@@ -14,13 +14,12 @@ group :jekyll_plugins do
 end
 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+# Performance-booster for watching directories on Windows
 platforms :windows, :jruby do
   gem "tzinfo", ">= 1", "< 3"
   gem "tzinfo-data"
+  gem 'wdm', '>= 0.1.0'
 end
-
-# Performance-booster for watching directories on Windows
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 # Lock HTTP parser to v0.6.x on JRuby builds since newer versions of the gem
 # do not have a Java counterpart
