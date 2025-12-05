@@ -51,7 +51,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
 
       - name: Install dependencies (if running tests)
         if: github.event.inputs.skip_tests != 'true'
@@ -59,7 +58,9 @@ jobs:
 
       - name: Install Jekyll dependencies (if running tests)
         if: github.event.inputs.skip_tests != 'true'
-        run: bundle install
+        run: |
+          bundle config set --local frozen false
+          bundle install
 
       - name: Run quick smoke tests
         if: github.event.inputs.skip_tests != 'true'
@@ -83,8 +84,21 @@ jobs:
           # Create deployment directory structure
           mkdir -p _site
           
-          # Copy all files to root (not staging subdirectory)
-          rsync -av --exclude='.github' --exclude='node_modules' --exclude='tests' --exclude='__tests__' --exclude='docs/Ai_chats' --exclude='*.config.js' --exclude='*.config.ts' --exclude='tsconfig.json' --exclude='package*.json' ./ _site/
+          # Copy files to _site with proper exclusions
+          rsync -av \
+            --exclude='.github/' \
+            --exclude='node_modules/' \
+            --exclude='tests/' \
+            --exclude='__tests__/' \
+            --exclude='docs/Ai_chats/' \
+            --exclude='vendor/' \
+            --exclude='*.config.js' \
+            --exclude='*.config.ts' \
+            --exclude='tsconfig.json' \
+            --exclude='package*.json' \
+            --exclude='Gemfile*' \
+            --exclude='_site/' \
+            ./ _site/
           
           # Fix absolute paths for GitHub Pages deployment
           # GitHub Pages serves from a subdirectory, so we need to handle absolute paths
