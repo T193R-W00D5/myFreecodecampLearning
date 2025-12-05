@@ -1,5 +1,10 @@
 name: Emergency Rollback
 
+env:
+  # Set to false for fastest emergency rollback (skips Jekyll build and tests)
+  # Set to true for validated rollback with full Jekyll build and critical tests
+  ENABLE_JEKYLL_AND_TESTS: true
+
 on:
   workflow_dispatch:
     inputs:
@@ -44,16 +49,51 @@ jobs:
           echo "**Initiated by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "**Timestamp:** $(date)" >> $GITHUB_STEP_SUMMARY
 
-      - name: Run critical tests (unless skipped)
-        if: github.event.inputs.skip_tests == 'false'
+      - name: Setup Node.js (if Jekyll/tests enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup Ruby for Jekyll (if Jekyll/tests enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install dependencies (if Jekyll/tests enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+        run: npm ci
+
+      - name: Install Jekyll dependencies (if Jekyll/tests enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
         run: |
-          npm ci
+          bundle config set --local frozen false
+          bundle install
+
+      - name: Build Jekyll site (if Jekyll/tests enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+        run: bundle exec jekyll build
+
+      - name: Run critical tests (if enabled and not skipped)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true' && github.event.inputs.skip_tests == 'false'
+        run: |
           npx playwright install --with-deps
+          bundle exec jekyll serve --detach --port 4000
           npx playwright test --grep "@critical" --reporter=line
         continue-on-error: true
 
-      - name: Deploy rollback to staging
-        if: github.event.inputs.environment == 'staging'
+      - name: Deploy rollback to staging (Jekyll build)
+        if: github.event.inputs.environment == 'staging' && env.ENABLE_JEKYLL_AND_TESTS == 'true'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          destination_dir: staging
+
+      - name: Deploy rollback to staging (raw files)
+        if: github.event.inputs.environment == 'staging' && env.ENABLE_JEKYLL_AND_TESTS == 'false'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -70,8 +110,15 @@ jobs:
             tsconfig.json
             package*.json
 
-      - name: Deploy rollback to production
-        if: github.event.inputs.environment == 'production'
+      - name: Deploy rollback to production (Jekyll build)
+        if: github.event.inputs.environment == 'production' && env.ENABLE_JEKYLL_AND_TESTS == 'true'
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+
+      - name: Deploy rollback to production (raw files)
+        if: github.event.inputs.environment == 'production' && env.ENABLE_JEKYLL_AND_TESTS == 'false'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
