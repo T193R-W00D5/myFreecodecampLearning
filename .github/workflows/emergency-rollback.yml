@@ -105,10 +105,13 @@ jobs:
             tests
             __tests__
             docs/Ai_chats
+            vendor
             *.config.js
             *.config.ts
             tsconfig.json
             package*.json
+            Gemfile*
+            _site
 
       - name: Deploy rollback to production (Jekyll build)
         if: github.event.inputs.environment == 'production' && env.ENABLE_JEKYLL_AND_TESTS == 'true'
@@ -129,10 +132,13 @@ jobs:
             tests
             __tests__
             docs/Ai_chats
+            vendor
             *.config.js
             *.config.ts
             tsconfig.json
             package*.json
+            Gemfile*
+            _site
 
       - name: Create rollback notification
         run: |

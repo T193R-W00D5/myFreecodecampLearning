@@ -51,10 +51,13 @@ jobs:
             tests
             __tests__
             docs/Ai_chats
+            vendor
             *.config.js
             *.config.ts
             tsconfig.json
             package*.json
+            Gemfile*
+            _site
 
       - name: Create sync summary
         run: |
