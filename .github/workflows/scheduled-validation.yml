@@ -38,8 +38,17 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Install Jekyll dependencies
+        run: bundle install
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
@@ -49,8 +58,8 @@ jobs:
 
       - name: Start application server
         run: |
-          npm start &
-          sleep 10
+          bundle exec jekyll serve &
+          sleep 15
         env:
           CI: true
 
@@ -177,16 +186,25 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Install Jekyll dependencies
+        run: bundle install
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
       - name: Start application server
         run: |
-          npm start &
-          sleep 10
+          bundle exec jekyll serve &
+          sleep 15
         env:
           CI: true
 
@@ -221,16 +239,25 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Install Jekyll dependencies
+        run: bundle install
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
       - name: Start application server
         run: |
-          npm start &
-          sleep 10
+          bundle exec jekyll serve &
+          sleep 15
         env:
           CI: true
 
