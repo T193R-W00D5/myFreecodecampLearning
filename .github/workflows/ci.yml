@@ -25,13 +25,9 @@ jobs:
       run: |
         # Check JavaScript syntax
         node --check src/script.js
-        node --check server.js
         
         # Check TypeScript compilation
         npx tsc --noEmit
-        
-        # Check if server starts without errors
-        timeout 10s npm start || [ $? -eq 124 ]
 
     - name: Validate package.json
       run: npm ls --depth=0
@@ -58,3 +54,35 @@ jobs:
 
     - name: Check for outdated packages
       run: npm outdated || true
+
+  test-e2e:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js with Volta
+      uses: volta-cli/action@v4
+
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2'
+        bundler-cache: true
+
+    - name: Install Node dependencies
+      run: npm ci
+
+    - name: Install Jekyll dependencies
+      run: bundle install
+
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+
+    - name: Run Jest unit tests
+      run: npm test
+
+    - name: Run Playwright E2E tests
+      run: npx playwright test

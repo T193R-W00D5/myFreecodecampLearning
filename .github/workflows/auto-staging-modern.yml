@@ -46,16 +46,27 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Setup Ruby (if running tests)
+        if: github.event.inputs.skip_tests != 'true'
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
       - name: Install dependencies (if running tests)
         if: github.event.inputs.skip_tests != 'true'
         run: npm ci
+
+      - name: Install Jekyll dependencies (if running tests)
+        if: github.event.inputs.skip_tests != 'true'
+        run: bundle install
 
       - name: Run quick smoke tests
         if: github.event.inputs.skip_tests != 'true'
         run: |
           npx playwright install chromium --with-deps
-          npm start &
-          sleep 5
+          bundle exec jekyll serve &
+          sleep 10
           npx playwright test --grep "@smoke" --project=chromium --reporter=line
         continue-on-error: true
         env:

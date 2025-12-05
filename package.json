@@ -1,7 +1,7 @@
 {
   "name": "freecodecamporg-website-copies",
   "version": "1.0.0",
-  "description": "This is a webiste to help me with my freecodecamp learning and to try out and learn new things 1) Open a new terminal inside VS Code pointed to your project root folder location. 2) Run from terminal: node server.js  3) Open <http://localhost:3010> in your browser. You should see the webpage!",
+  "description": "This website helps with freeCodeCamp learning using Jekyll for static site generation and GitHub Pages deployment.",
   "main": "./src/script.js",
   "type": "module",
   "scripts": {
@@ -15,8 +15,7 @@
     "test:e2e:chrome": "playwright test --project=chromium",
     "test:e2e:firefox": "playwright test --project=firefox",
     "test:e2e:webkit": "playwright test --project=webkit",
-    "test:all": "npm run test:unit && npm run test:e2e",
-    "start": "node server.js"
+    "test:all": "npm run test:unit && npm run test:e2e"
   },
   "keywords": [],
   "author": "",

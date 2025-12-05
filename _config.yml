@@ -1,0 +1,56 @@
+# Jekyll Configuration for GitHub Pages
+title: "My freeCodeCamp Learning"
+description: "Learning full-stack development through freeCodeCamp curriculum"
+author: "T193R-W00D5"
+
+# GitHub Pages settings
+baseurl: "/myFreecodecampLearning" # Automatically handles staging vs production
+url: "https://t193r-w00d5.github.io" # Your GitHub Pages domain
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+# theme: minima  # Using custom layouts instead
+
+# Plugins (GitHub Pages whitelist)
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections for organizing curriculum
+collections:
+  curriculum:
+    output: true
+    permalink: /:collection/:name/
+
+# Exclude files from processing
+exclude:
+  - node_modules/
+  - package*.json
+  - jest.config.js
+  - playwright.config.ts
+  - __tests__/
+  - test-results/
+  - playwright-report/
+
+# Include files that would normally be excluded
+include:
+  - _pages
+
+# Default values for pages
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "curriculum"
+    values:
+      layout: "curriculum"
+
+# Custom variables
+curriculum_version: "s100101"
+last_updated: "2024-12-01"

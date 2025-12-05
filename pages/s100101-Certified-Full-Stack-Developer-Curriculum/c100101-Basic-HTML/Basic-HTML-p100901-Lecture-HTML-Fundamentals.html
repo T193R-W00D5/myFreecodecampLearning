@@ -1,84 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <script>
-    // Environment detection - set base path immediately
-    window.basePath = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') 
-      ? '/' 
-      : '/myFreecodecampLearning/';
-  </script>
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My freecodecamp learning - Basic HTML - Lecture - HTML Fundamentals</title>
-  
-  <script>
-    document.write('<link rel="icon" type="image/x-icon" href="' + window.basePath + 'assets/favicon/Wizard.ico">');
-    document.write('<link rel="stylesheet" href="' + window.basePath + 'css/styles-freecodecamp.css">');
-  </script>
-  
-  <!-- Preload critical resources -->
-  <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
-  
-  <!-- Load CSS asynchronously to prevent render blocking -->
-  <!-- <link rel="preload" href="/css/styles-freecodecamp.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="/css/styles-freecodecamp.css"></noscript> -->
-  
-</head>
-<body>
-
-<!----- Start <header> ---------------------------------------------------------------------------->
-<header id="idheader">
-  <section class="header-nav">
-    <div class="header-left">
-      <a class="prev-link">
-        <button type="button" aria-label="Go to previous page">Previous</button>
-      </a>
-    </div>
-    <div class="header-center">
-      <a href="#idFooter">Bottom of page</a> |
-      <a class="home-link-header">Home</a> |
-      <a href="/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML Home</a>
-    </div>
-    <div class="header-right">
-      <a class="next-link">
-        <button type="button" aria-label="Go to next page">Next</button>
-      </a>
-    </div>
-  </section>
-</header>
-<br><hr><br>
-<!----- End <header> ------------------------------------------------------------------------------>
-
-
-<!----- Start <main> ------------------------------------------------------------------------------>
-<main>
-<!---------- Start mainContent -------------------------------------------------------------------->
-<section id="mainContent">
+---
+layout: default
+title: "Basic HTML - Lecture - HTML Fundamentals"
+description: "Learn about HTML fundamentals like div elements, id and class attributes, and semantic HTML"
+prism: true
+navigation:
+  show: true
+  prev_page: "p100601"
+  next_page: "p700101"
+  home_link: "Basic HTML Home"
+  home_path: "/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/Home-Basic-HTML"
+---
 
 <h1 tabindex="0">Basic HTML &#9655; Lecture &#9655; HTML Fundamentals</h1>
 <br>
 
-
-<!---------- Start intro -------------------------------------------------------------------------->
+<!----- Start intro --------------------------------------------------------------------------->
 <section id="intro">
 <h2 tabindex="0">Introduction</h2>
-<p  tabindex="0">
+<p tabindex="0">
   In these lectures, you will learn about HTML fundamentals like the <code>div</code> element,
   the <code>id</code> and <code>class</code> attributes, the HTML boilerplate, HTML entities, and more.
 </p>
-<p  tabindex="0">
+<p tabindex="0">
   <strong>Note:</strong> This is a stale and static copy of freeCodeCamp.org content from the
   <a href="https://www.freecodecamp.org/learn/full-stack-developer/#lecture-html-fundamentals" 
    rel="noopener noreferrer" class="external-link" target="_blank">live site</a>.
 </p>
 <br>
 </section>
-<!---------- End intro ---------------------------------------------------------------------------->
+<!----- End intro --------------------------------------------------------------------------->
 
-
-<!---------- Start lectureTopic ------------------------------------------------------------------->
-<section id= "lectureTopic">
+<!----- Start lectureTopic ------------------------------------------------------------------->
+<section id="lectureTopic">
 <h2 tabindex="0">What are Div Elements and When Should You Use Them?</h2>
 
 <p tabindex="0">
@@ -140,11 +93,10 @@
 </p>
 <br>
 </section>
-<!---------- End lectureTopic --------------------------------------------------------------------->
+<!----- End lectureTopic --------------------------------------------------------------------->
 
-
-<!---------- Start lectureTopic ------------------------------------------------------------------->
-<section id= "lectureTopic">
+<!----- Start lectureTopic ------------------------------------------------------------------->
+<section id="lectureTopic">
 <h2 tabindex="0">What Are IDs and Classes, and When Should You Use Them?</h2>
 
 <p tabindex="0">
@@ -173,116 +125,21 @@
   <code>}</code>
 </pre>
 
-
 <p tabindex="0">
-  xxx
+  The <code>class</code> attribute allows you to group multiple elements together and style them
+  similarly. Unlike <code>id</code> which should be unique, multiple elements can share the same
+  <code>class</code> name:
 </p>
 <pre
   class="language-html"
   tabindex="0"
   role="region"
   aria-label="HTML code example">
-  <code>&lt;xxx&gt;</code>
+  <code>&lt;p class="highlight"&gt;This paragraph is highlighted&lt;/p&gt;</code>
+  <code>&lt;p class="highlight"&gt;This paragraph is also highlighted&lt;/p&gt;</code>
 </pre>
-  <code>&lt;aaa&gt;xxx&lt;aaa&gt;</code>
-  <code>xxx</code>
 
 </section>
-<!---------- End lectureTopic --------------------------------------------------------------------->
+<!----- End lectureTopic --------------------------------------------------------------------->
 
-
-<!---------- Start lectureTopic ------------------------------------------------------------------->
-<section id= "lectureTopic">
-<h2 tabindex="0">xxx</h2>
-
-<p tabindex="0">
-  xxx
-</p>
-<pre
-  class="language-html"
-  tabindex="0"
-  role="region"
-  aria-label="HTML code example">
-  <code>&lt;xxx&gt;</code>
-</pre>
-  <code>&lt;aaa&gt;xxx&lt;aaa&gt;</code>
-
-</section>
-<!---------- End lectureTopic --------------------------------------------------------------------->
-
-
-</section>
-<!---------- End mainContent ---------------------------------------------------------------------->
-</main>
-<!----- End <main> -------------------------------------------------------------------------------->
-
-
-<!----- Start <footer> ---------------------------------------------------------------------------->
-<br><hr><br>
-<footer id="idFooter">
-  <section class="footer-nav">
-    <div class="footer-left">
-      <a class="prev-link">
-        <button type="button" aria-label="Go to previous page">Previous</button>
-      </a>
-    </div>
-    <div class="footer-center">
-      <a href="#idHeader">Top of page</a> |
-      <a class="home-link-footer">Home</a> |
-      <a href="/pages/s100101-Certified-Full-Stack-Developer-Curriculum/c100101-Basic-HTML/_Home-Basic-HTML.html">Basic HTML Home</a>
-    </div>
-    <div class="footer-right">
-      <a class="next-link">
-        <button type="button" aria-label="Go to next page">Next</button>
-      </a>
-    </div>
-  </section>
-</footer>
-<!----- End <footer> ------------------------------------------------------------------------------>
-
-
-<!----- Start scripts ----------------------------------------------------------------------------->
-
-<script type="module" src="/src/scripts/prism.js"></script>
-
-<script>
-  // Environment-aware module imports
-  const basePath = window.basePath || '/';
-  const sharedConstantsPath = basePath + 'src/scripts/sharedConstants-__main.js';
-  const basicHtmlHelperPath = basePath + 'src/scripts/sharedConstants-CFSD-basic-html-helper.js';
-
-  Promise.all([
-    import(sharedConstantsPath),
-    import(basicHtmlHelperPath)
-  ]).then(([mainModule, helperModule]) => {
-    const { paths, ariaLabels } = mainModule;
-    const { p100601, p700101 } = helperModule;
-    
-    // Wait for DOM to be ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', setupNavigation);
-    } else {
-      setupNavigation();
-    }
-    
-    function setupNavigation() {
-      // Set home links
-      document.querySelector('.home-link-header')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-      document.querySelector('.home-link-header')?.setAttribute('href', paths.path_home);
-      document.querySelector('.home-link-footer')?.setAttribute('aria-label', ariaLabels.ariaLabel_homeLink_header);
-      document.querySelector('.home-link-footer')?.setAttribute('href', paths.path_home);
-      
-      // Set navigation links
-      document.querySelectorAll('.prev-link').forEach(el => el.href = p100601);
-      document.querySelectorAll('.next-link').forEach(el => el.href = p700101);
-    }
-  }).catch(error => {
-    console.error('Failed to load navigation modules:', error);
-  });
-</script>
-
-<!----- End scripts ------------------------------------------------------------------------------->
-
-
-</body>
-</html>
+<!-- NOTE: All navigation, scripts, and layout are now handled by Jekyll's default layout -->
