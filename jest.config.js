@@ -6,7 +6,8 @@ export default {
     '/node_modules/',
     '/tests/e2e/',
     '/test-results/',
-    '/playwright-report/'
+    '/playwright-report/',
+    '/_site/'
   ],
   // Only include __tests__ directory for Jest
   testMatch: [
