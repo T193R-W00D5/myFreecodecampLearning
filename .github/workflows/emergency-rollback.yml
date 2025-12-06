@@ -74,7 +74,12 @@ jobs:
 
       - name: Build Jekyll site (if Jekyll/tests enabled)
         if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
-        run: bundle exec jekyll build
+        run: |
+          if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
+            bundle exec jekyll build --baseurl "/myFreecodecampLearning/staging"
+          else
+            bundle exec jekyll build
+          fi
 
       - name: Run critical tests (if enabled and not skipped)
         if: env.ENABLE_JEKYLL_AND_TESTS == 'true' && github.event.inputs.skip_tests == 'false'

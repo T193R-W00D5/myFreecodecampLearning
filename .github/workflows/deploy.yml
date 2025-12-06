@@ -182,7 +182,7 @@ jobs:
         run: |
           bundle config set --local frozen false
           bundle install
-          bundle exec jekyll build
+          bundle exec jekyll build --baseurl "/myFreecodecampLearning/staging"
           echo "Jekyll staging build completed. Contents of _site:" >> $GITHUB_STEP_SUMMARY
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
 
