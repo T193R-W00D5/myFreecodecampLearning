@@ -135,6 +135,8 @@ jobs:
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
           echo "Sample of generated index.html:" >> $GITHUB_STEP_SUMMARY
           head -20 _site/index.html >> $GITHUB_STEP_SUMMARY
+          # Create .nojekyll file to prevent GitHub Pages from processing Jekyll again
+          touch _site/.nojekyll
 
       - name: Deploy to GitHub Pages (production)
         uses: peaceiris/actions-gh-pages@v3
@@ -142,6 +144,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           enable_jekyll: false
+          disable_nojekyll: false
           exclude_assets: |
             .github
             node_modules
@@ -191,6 +194,8 @@ jobs:
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
           echo "Sample of generated staging index.html:" >> $GITHUB_STEP_SUMMARY
           head -20 _site/index.html >> $GITHUB_STEP_SUMMARY
+          # Create .nojekyll file to prevent GitHub Pages from processing Jekyll again
+          touch _site/.nojekyll
 
       - name: Deploy to GitHub Pages (staging)
         uses: peaceiris/actions-gh-pages@v3
