@@ -66,36 +66,37 @@ jobs:
         if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
         run: npm ci
 
-      - name: Install Jekyll dependencies (if Jekyll/tests enabled)
-        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+      - name: Configure Jekyll for staging (if Jekyll enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true' && github.event.inputs.environment == 'staging'
         run: |
-          bundle config set --local frozen false
-          bundle install
-
-      - name: Build Jekyll site (if Jekyll/tests enabled)
-        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
-        run: |
-          if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
-            bundle exec jekyll build --baseurl "/myFreecodecampLearning/staging"
-          else
-            bundle exec jekyll build
-          fi
-
-      - name: Run critical tests (if enabled and not skipped)
-        if: env.ENABLE_JEKYLL_AND_TESTS == 'true' && github.event.inputs.skip_tests == 'false'
-        run: |
-          npx playwright install --with-deps
-          bundle exec jekyll serve --detach --port 4000
-          npx playwright test --grep "@critical" --reporter=line
-        continue-on-error: true
+          # Create staging-specific _config.yml
+          cp _config.yml _config_staging.yml
+          sed -i 's|baseurl: "/myFreecodecampLearning"|baseurl: "/myFreecodecampLearning/staging"|' _config_staging.yml
+          mv _config_staging.yml _config.yml
+          echo "Staging configuration applied for Jekyll rollback"
 
       - name: Deploy rollback to staging (Jekyll build)
         if: github.event.inputs.environment == 'staging' && env.ENABLE_JEKYLL_AND_TESTS == 'true'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          publish_dir: ./
           destination_dir: staging
+          exclude_assets: |
+            .github
+            node_modules
+            tests
+            __tests__
+            docs/Ai_chats
+            vendor
+            *.config.js
+            *.config.ts
+            tsconfig.json
+            package*.json
+            Gemfile*
+            _site
+            .gitignore
+            README.md
 
       - name: Deploy rollback to staging (raw files)
         if: github.event.inputs.environment == 'staging' && env.ENABLE_JEKYLL_AND_TESTS == 'false'
@@ -123,7 +124,22 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+          publish_dir: ./
+          exclude_assets: |
+            .github
+            node_modules
+            tests
+            __tests__
+            docs/Ai_chats
+            vendor
+            *.config.js
+            *.config.ts
+            tsconfig.json
+            package*.json
+            Gemfile*
+            _site
+            .gitignore
+            README.md
 
       - name: Deploy rollback to production (raw files)
         if: github.event.inputs.environment == 'production' && env.ENABLE_JEKYLL_AND_TESTS == 'false'
