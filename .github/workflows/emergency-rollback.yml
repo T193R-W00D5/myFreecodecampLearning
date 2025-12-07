@@ -96,6 +96,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           destination_dir: staging
+          enable_jekyll: false
 
       - name: Deploy rollback to staging (raw files)
         if: github.event.inputs.environment == 'staging' && env.ENABLE_JEKYLL_AND_TESTS == 'false'
@@ -124,6 +125,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+          enable_jekyll: false
 
       - name: Deploy rollback to production (raw files)
         if: github.event.inputs.environment == 'production' && env.ENABLE_JEKYLL_AND_TESTS == 'false'

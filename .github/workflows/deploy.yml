@@ -139,6 +139,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+          enable_jekyll: false
           exclude_assets: |
             .github
             node_modules
@@ -192,6 +193,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
           destination_dir: staging
+          enable_jekyll: false
           exclude_assets: |
             .github
             node_modules
