@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    // Set base URL dynamically based on environment
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      // Local development
+      document.write('<base href="/">');
+    } else {
+      // GitHub Pages
+      document.write('<base href="/myFreecodecampLearning/">');
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Heart Icon</title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<main>
+
+<!-- <h1>placeholder</h1>
+<p>placeholder.</p> -->
+
+<section>
+  <p>A heartfelt icon from the heart of freecodecamp.org</p>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="red">
+    <path d="M12 21s-6-4.35-9.33-8.22C-.5 7.39 3.24 1 8.4 4.28 10.08 5.32 12 7.5 12 7.5s1.92-2.18 3.6-3.22C20.76 1 24.5 7.39 21.33 12.78 18 16.65 12 21 12 21z"></path>
+  </svg>
+</section>
+</main>
+
+<br><hr><br>
+<footer id="idFooter">
+  <section>
+    <a href="#idHeader">Top of page</a> |
+    <a href="/index.html">Home</a> |
+  </section>
+</footer>
+
+<!-- <script type="module" src="/src/script.js"></script> -->
+
+</body>
+</html>
