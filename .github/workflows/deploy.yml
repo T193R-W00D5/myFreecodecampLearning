@@ -133,6 +133,8 @@ jobs:
           bundle exec jekyll build
           echo "Jekyll build completed. Contents of _site:" >> $GITHUB_STEP_SUMMARY
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
+          echo "Sample of generated index.html:" >> $GITHUB_STEP_SUMMARY
+          head -20 _site/index.html >> $GITHUB_STEP_SUMMARY
 
       - name: Deploy to GitHub Pages (production)
         uses: peaceiris/actions-gh-pages@v3
@@ -187,6 +189,8 @@ jobs:
           bundle exec jekyll build --baseurl "/myFreecodecampLearning/staging"
           echo "Jekyll staging build completed. Contents of _site:" >> $GITHUB_STEP_SUMMARY
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
+          echo "Sample of generated staging index.html:" >> $GITHUB_STEP_SUMMARY
+          head -20 _site/index.html >> $GITHUB_STEP_SUMMARY
 
       - name: Deploy to GitHub Pages (staging)
         uses: peaceiris/actions-gh-pages@v3
