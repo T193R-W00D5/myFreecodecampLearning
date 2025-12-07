@@ -112,25 +112,57 @@ jobs:
         with:
           ruby-version: '3.3'
 
+      - name: Clean any existing build artifacts
+        run: |
+          rm -rf _site
+          rm -rf .sass-cache
+          echo "Cleaned existing build artifacts" >> $GITHUB_STEP_SUMMARY
+
       - name: Build Jekyll site for production
         run: |
           bundle config set --local frozen false
           bundle install
-          # Build with production baseurl
-          bundle exec jekyll build --baseurl "/myFreecodecampLearning"
+          
+          # Debug Jekyll environment
+          echo "Jekyll version: $(bundle exec jekyll --version)" >> $GITHUB_STEP_SUMMARY
+          echo "Ruby version: $(ruby --version)" >> $GITHUB_STEP_SUMMARY
+          echo "Bundler version: $(bundle --version)" >> $GITHUB_STEP_SUMMARY
+          echo "Current directory: $(pwd)" >> $GITHUB_STEP_SUMMARY
+          echo "Config file exists: $(test -f _config.yml && echo 'YES' || echo 'NO')" >> $GITHUB_STEP_SUMMARY
+          
+          # Show config before build
+          echo "Jekyll config baseurl before build:" >> $GITHUB_STEP_SUMMARY
+          grep "baseurl:" _config.yml >> $GITHUB_STEP_SUMMARY || echo "No baseurl in config" >> $GITHUB_STEP_SUMMARY
+          
+          # Build with production baseurl and verbose output
+          echo "Starting Jekyll build with verbose output..." >> $GITHUB_STEP_SUMMARY
+          bundle exec jekyll build --baseurl "/myFreecodecampLearning" --verbose --trace
+          
           echo "Jekyll production build completed. Contents of _site:" >> $GITHUB_STEP_SUMMARY
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
-          echo "Sample of generated index.html:" >> $GITHUB_STEP_SUMMARY
-          head -20 _site/index.html >> $GITHUB_STEP_SUMMARY
+          
+          echo "Full generated index.html:" >> $GITHUB_STEP_SUMMARY
+          cat _site/index.html >> $GITHUB_STEP_SUMMARY
+          
           echo "Checking for Liquid syntax in generated files:" >> $GITHUB_STEP_SUMMARY
           grep -n "{{" _site/index.html || echo "✅ No unprocessed Liquid syntax found" >> $GITHUB_STEP_SUMMARY
-          echo "Checking CSS link paths:" >> $GITHUB_STEP_SUMMARY
-          grep -n "css" _site/index.html >> $GITHUB_STEP_SUMMARY || echo "No CSS links found" >> $GITHUB_STEP_SUMMARY
+          
+          echo "Checking navigation links:" >> $GITHUB_STEP_SUMMARY
+          grep -n "href.*pages" _site/index.html >> $GITHUB_STEP_SUMMARY || echo "No page links found" >> $GITHUB_STEP_SUMMARY
 
       - name: Add .nojekyll file
         run: |
           touch _site/.nojekyll
           echo "✅ Added .nojekyll file to prevent GitHub Pages Jekyll processing" >> $GITHUB_STEP_SUMMARY
+
+      - name: Verify deployment files before upload
+        run: |
+          echo "📋 DEPLOYMENT VERIFICATION" >> $GITHUB_STEP_SUMMARY
+          echo "Files to be deployed:" >> $GITHUB_STEP_SUMMARY
+          find _site -type f -name "*.html" | head -10 >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Final check of index.html navigation links:" >> $GITHUB_STEP_SUMMARY
+          grep -n "href.*Certified.*Full.*Stack" _site/index.html >> $GITHUB_STEP_SUMMARY || echo "No navigation links found" >> $GITHUB_STEP_SUMMARY
 
       - name: Deploy to GitHub Pages (production)
         uses: peaceiris/actions-gh-pages@v4
