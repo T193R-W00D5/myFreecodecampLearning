@@ -171,6 +171,7 @@ jobs:
           publish_dir: ./_site
           enable_jekyll: false
           force_orphan: true
+          disable_nojekyll: false  # Ensure .nojekyll file is created
 
   # Deployment success notification
   deployment-success:
