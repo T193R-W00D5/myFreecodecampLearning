@@ -78,7 +78,7 @@ jobs:
           if [ "${{ github.event.inputs.environment }}" == "staging" ]; then
             bundle exec jekyll build --baseurl "/myFreecodecampLearning/staging"
           else
-            bundle exec jekyll build --baseurl "/myFreecodecampLearning"
+            bundle exec jekyll build
           fi
 
       - name: Run critical tests (if enabled and not skipped)

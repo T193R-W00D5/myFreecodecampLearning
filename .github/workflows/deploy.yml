@@ -130,7 +130,7 @@ jobs:
         run: |
           bundle config set --local frozen false
           bundle install
-          bundle exec jekyll build --baseurl "/myFreecodecampLearning"
+          bundle exec jekyll build
           echo "Jekyll build completed. Contents of _site:" >> $GITHUB_STEP_SUMMARY
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
 
