@@ -1,23 +1,25 @@
-body {
-    /* font-family: var(--main-font-family);
-    color-scheme: dark light; */
-    background-color: grey;
-    color: var(--main-text-color);
-    /* text-align: left;
-    margin: 50px;
-    padding: 20px; */
-    /* border: 2px solid blue; */
-    /* box-sizing: border-box; */
-    margin-bottom: 40px;
-    /* padding-bottom: 40px; */
+/* CSS Variables for iframe isolation */
+:root {
+    --main-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --main-text-color: black;
 }
-.body:focus {
+
+body {
+    font-family: var(--main-font-family);
+    background-color: rgb(219, 219, 219);
+    color: var(--main-text-color);
+    /* margin-bottom: 5px; */
+    margin: 5px;
+    padding: 1px;
+}
+
+body:focus {
     outline: 1px solid white; 
     outline-offset: 2px;
 }
 
-/* h1, h2, p {
-  font-family: var(--main-font-family);
-  color: var(--main-text-color);
-  margin-top: 0;
-} */
+h1, h2, p {
+    font-family: var(--main-font-family);
+    color: var(--main-text-color);
+    margin-top: 0;
+}
