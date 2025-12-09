@@ -19,7 +19,7 @@ on:
       target_branch:
         description: 'Branch to deploy from'
         required: true
-        default: 'develop'
+        default: 'main'
         type: choice
         options:
           - main
@@ -35,13 +35,13 @@ jobs:
       - name: Checkout specific commit or latest
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.target_commit || github.event.inputs.target_branch || 'develop' }}
+          ref: ${{ github.event.inputs.target_commit || github.event.inputs.target_branch || 'main' }}
           
       - name: Display deployment info
         run: |
           echo "🧪 STAGING DEPLOYMENT INFORMATION" >> $GITHUB_STEP_SUMMARY
           echo "**Environment:** Staging" >> $GITHUB_STEP_SUMMARY
-          echo "**Branch:** ${{ github.event.inputs.target_branch || 'develop' }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.event.inputs.target_branch || 'main' }}" >> $GITHUB_STEP_SUMMARY
           echo "**Commit:** $(git rev-parse HEAD)" >> $GITHUB_STEP_SUMMARY
           echo "**Commit Message:** $(git log --oneline -n 1)" >> $GITHUB_STEP_SUMMARY
           echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
@@ -101,7 +101,7 @@ jobs:
       - name: Checkout specific commit for staging
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.inputs.target_commit || github.event.inputs.target_branch || 'develop' }}
+          ref: ${{ github.event.inputs.target_commit || github.event.inputs.target_branch || 'main' }}
 
       - name: Log staging deployment details
         run: |
