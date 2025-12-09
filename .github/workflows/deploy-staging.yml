@@ -94,9 +94,14 @@ jobs:
       needs.pre-deployment-tests.result == 'success'
     needs: pre-deployment-tests
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment: 
       name: staging
-      url: https://t193r-w00d5.github.io/myFreecodecampLearning/staging
+      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout specific commit for staging
         uses: actions/checkout@v4
@@ -141,20 +146,27 @@ jobs:
           echo "Checking CSS link paths:" >> $GITHUB_STEP_SUMMARY
           grep -n "css" _site/index.html >> $GITHUB_STEP_SUMMARY || echo "No CSS links found" >> $GITHUB_STEP_SUMMARY
 
-      - name: Add .nojekyll file
+      - name: Create staging subdirectory structure
         run: |
-          touch _site/.nojekyll
-          echo "✅ Added .nojekyll file to prevent GitHub Pages Jekyll processing" >> $GITHUB_STEP_SUMMARY
+          mkdir -p _site_staging/myFreecodecampLearning/staging
+          cp -r _site/* _site_staging/myFreecodecampLearning/staging/
+          echo "Created staging directory structure" >> $GITHUB_STEP_SUMMARY
+          echo "Contents of staging directory:" >> $GITHUB_STEP_SUMMARY
+          ls -la _site_staging/myFreecodecampLearning/staging/ >> $GITHUB_STEP_SUMMARY
+
+      - name: Add .nojekyll file to staging
+        run: |
+          touch _site_staging/.nojekyll
+          echo "✅ Added .nojekyll file to staging deployment" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload staging site artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site_staging
 
       - name: Deploy to GitHub Pages (staging)
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          destination_dir: staging
-          enable_jekyll: false
-          force_orphan: false  # Don't orphan staging, append to gh-pages
-          disable_nojekyll: false  # Ensure .nojekyll file is created
+        id: deployment
+        uses: actions/deploy-pages@v4
 
   # Deployment success notification
   deployment-success:
@@ -170,6 +182,6 @@ jobs:
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "**Deployed by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Staging URL:** https://t193r-w00d5.github.io/myFreecodecampLearning/staging" >> $GITHUB_STEP_SUMMARY
+          echo "**Staging URL:** ${{ needs.deploy-staging.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Please allow 5-10 minutes for GitHub Pages to update." >> $GITHUB_STEP_SUMMARY
