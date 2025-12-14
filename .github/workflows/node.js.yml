@@ -8,7 +8,7 @@ name: Node.js CI
 # Example: keep majors and also add an exact pinned version:
 #   MATRIX_NODE_VERSIONS: '["18.x","20.x","22.x","22.21.0"]'
 env:
-  MATRIX_NODE_VERSIONS: '["18.x", "20.x", "22.x"]'
+  MATRIX_NODE_VERSIONS: '["18.x", "20.x", "22.x", "24.x"]'
 
 on:
   push:
@@ -74,6 +74,7 @@ jobs:
           - '18.x'
           - '20.x'
           - '22.x'
+          - '24.x'
     steps:
       - uses: actions/checkout@v4
 
