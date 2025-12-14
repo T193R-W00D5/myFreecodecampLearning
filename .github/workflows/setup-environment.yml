@@ -1,0 +1,52 @@
+name: Setup Environment
+
+# Reusable workflow for common environment setup
+on:
+  workflow_call:
+    inputs:
+      install-playwright:
+        description: 'Install Playwright browsers'
+        required: false
+        default: false
+        type: boolean
+      playwright-browsers:
+        description: 'Specific browsers to install (e.g., "chromium firefox")'
+        required: false
+        default: '--with-deps'
+        type: string
+      enable-bundler-cache:
+        description: 'Enable Ruby bundler cache'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js from package.json
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'  # Reads from volta.node field
+          cache: 'npm'
+
+      - name: Setup Ruby from Gemfile
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.10'
+          bundler-cache: ${{ inputs.enable-bundler-cache }}
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Install Jekyll dependencies
+        run: |
+          bundle config set --local frozen false
+          bundle install
+
+      - name: Install Playwright browsers
+        if: ${{ inputs.install-playwright }}
+        run: npx playwright install ${{ inputs.playwright-browsers }}

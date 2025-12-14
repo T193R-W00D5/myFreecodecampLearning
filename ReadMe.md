@@ -195,7 +195,7 @@ Notes & tips
 - To help CI and other tools, consider adding an `engines` field to `package.json`:
 ```json
 "engines": {
-  "node": ">=18 <=22.21.0"
+  "node": ">=18 24.12.0"
 }
 ```
 
@@ -212,7 +212,7 @@ If you want, I can add a `.nvmrc`, `CONTRIBUTING.md`, or an `engines` entry for 
 - To help CI and other tools, consider adding an `engines` field to `package.json`:
 ```json
 "engines": {
-  "node": ">=18 <=22.21.0"
+  "node": ">=18 24.12.0"
 }
 ```
 
