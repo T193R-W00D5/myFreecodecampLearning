@@ -25,14 +25,14 @@ jobs:
       run: npm run test:unit
 
   e2e-tests:
-    name: E2E Tests (All Browsers - Comprehensive CI)
+    name: E2E Tests (All Browsers)
     runs-on: ubuntu-latest
     needs: unit-tests
 
     strategy:
       fail-fast: false
       matrix:
-        # Run all desktop browsers for comprehensive CI testing
+        # Run all desktop browsers in parallel
         browser: [chromium, firefox, webkit, msedge]
         # browser: [chromium]  # <-- Use this line for faster CI when needed
 
@@ -43,10 +43,8 @@ jobs:
     - name: Setup Node.js with Volta
       uses: volta-cli/action@v4
 
-    - name: Setup Ruby
+    - name: Setup Ruby from Gemfile
       uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.2'
 
     - name: Install dependencies
       run: npm ci
@@ -81,51 +79,3 @@ jobs:
         name: playwright-report-${{ matrix.browser }}
         path: playwright-report/
         retention-days: 30
-
-  e2e-tests-full:
-    name: E2E Tests (All Browsers - Main Branch Only)
-    runs-on: ubuntu-latest
-    needs: unit-tests
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Setup Node.js with Volta
-      uses: volta-cli/action@v4
-
-    - name: Setup Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.2'
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Install Jekyll dependencies
-      run: |
-        bundle config set --local frozen false
-        bundle install
-
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-
-    - name: Run all Playwright tests
-      run: npm run test:e2e
-      env:
-        CI: true
-
-    - name: Generate test report
-      if: always()
-      run: npx playwright show-report --host=0.0.0.0 --port=9323 &
-
-    - name: Upload comprehensive test results
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: playwright-comprehensive-results
-        path: |
-          test-results/
-          playwright-report/
-        retention-days: 90

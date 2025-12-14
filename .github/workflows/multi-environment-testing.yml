@@ -1,5 +1,8 @@
 name: Multi-Locale Testing
 
+# This workflow has is UNTESTED and should be used with caution.
+# It allows for testing across multiple locales and environments.
+
 on:
   workflow_dispatch:
     inputs:
@@ -40,16 +43,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: 'package.json'
           cache: 'npm'
 
-      - name: Setup Ruby
+      - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
 
       - name: Install dependencies
         run: npm ci
@@ -93,16 +94,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: 'package.json'
           cache: 'npm'
 
-      - name: Setup Ruby
+      - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
 
       - name: Install dependencies
         run: npm ci
@@ -127,16 +126,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: 'package.json'
           cache: 'npm'
 
-      - name: Setup Ruby
+      - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
 
       - name: Install dependencies
         run: npm ci

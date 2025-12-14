@@ -2,6 +2,10 @@
 
 source "https://rubygems.org"
 
+# Specify Ruby version for consistency across environments
+# ruby "3.3.0"
+ruby "3.3.10"
+
 # Jekyll and GitHub Pages compatibility
 gem "jekyll", "~> 4.4"
 gem "webrick" # Required for Ruby 3.0+

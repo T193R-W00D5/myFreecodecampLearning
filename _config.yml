@@ -4,7 +4,7 @@ description: "Learning full-stack development through freeCodeCamp curriculum"
 author: "T193R-W00D5"
 
 # GitHub Pages settings
-baseurl: "/myFreecodecampLearning" # Automatically handles staging vs production
+baseurl: "/myFreecodecampLearning"
 url: "https://t193r-w00d5.github.io" # Your GitHub Pages domain
 
 # Build settings

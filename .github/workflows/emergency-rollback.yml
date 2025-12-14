@@ -1,20 +1,16 @@
 name: Emergency Rollback
 
+# This workflow has is UNTESTED and should be used with caution.
+# It allows for an emergency rollback to a specified commit SHA in production.
+
 env:
-  # Set to false for fastest emergency rollback (skips Jekyll build and tests)
+  # Set to false for fastest emergency rollback (skips Jekyll build and tests)  
   # Set to true for validated rollback with full Jekyll build and critical tests
   ENABLE_JEKYLL_AND_TESTS: true
 
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Environment to rollback'
-        required: true
-        type: choice
-        options:
-          - staging
-          - production
       rollback_to_commit:
         description: 'Commit SHA to rollback to'
         required: true
@@ -31,8 +27,12 @@ on:
 jobs:
   emergency-rollback:
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
-      name: ${{ github.event.inputs.environment }}
+      name: production
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout rollback commit
         uses: actions/checkout@v4
@@ -42,137 +42,78 @@ jobs:
       - name: Verify rollback commit
         run: |
           echo "🚨 EMERGENCY ROLLBACK INITIATED" >> $GITHUB_STEP_SUMMARY
-          echo "**Environment:** ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** production" >> $GITHUB_STEP_SUMMARY
           echo "**Rolling back to:** $(git rev-parse HEAD)" >> $GITHUB_STEP_SUMMARY
           echo "**Commit details:** $(git log --oneline -n 1)" >> $GITHUB_STEP_SUMMARY
           echo "**Reason:** ${{ github.event.inputs.reason }}" >> $GITHUB_STEP_SUMMARY
           echo "**Initiated by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "**Timestamp:** $(date)" >> $GITHUB_STEP_SUMMARY
 
-      - name: Setup Node.js (if Jekyll/tests enabled)
-        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+      - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version-file: 'package.json'
           cache: 'npm'
 
-      - name: Setup Ruby for Jekyll (if Jekyll/tests enabled)
-        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+      - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
 
       - name: Install dependencies (if Jekyll/tests enabled)
         if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
         run: npm ci
 
-      - name: Configure Jekyll for staging (if Jekyll enabled)
-        if: env.ENABLE_JEKYLL_AND_TESTS == 'true' && github.event.inputs.environment == 'staging'
+      - name: Install Jekyll dependencies (if Jekyll enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
         run: |
-          # Create staging-specific _config.yml
-          cp _config.yml _config_staging.yml
-          sed -i 's|baseurl: "/myFreecodecampLearning"|baseurl: "/myFreecodecampLearning/staging"|' _config_staging.yml
-          mv _config_staging.yml _config.yml
-          echo "Staging configuration applied for Jekyll rollback"
+          bundle config set --local frozen false
+          bundle install
 
-      - name: Deploy rollback to staging (Jekyll build)
-        if: github.event.inputs.environment == 'staging' && env.ENABLE_JEKYLL_AND_TESTS == 'true'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          destination_dir: staging
-          exclude_assets: |
-            .github
-            node_modules
-            tests
-            __tests__
-            docs/Ai_chats
-            vendor
-            *.config.js
-            *.config.ts
-            tsconfig.json
-            package*.json
-            Gemfile*
-            _site
-            .gitignore
-            README.md
+      - name: Build Jekyll site for rollback (if Jekyll enabled)
+        if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
+        run: |
+          echo "Building Jekyll site for emergency rollback..." >> $GITHUB_STEP_SUMMARY
+          bundle exec jekyll build --baseurl "/myFreecodecampLearning"
+          echo "Jekyll rollback build completed" >> $GITHUB_STEP_SUMMARY
 
-      - name: Deploy rollback to staging (raw files)
-        if: github.event.inputs.environment == 'staging' && env.ENABLE_JEKYLL_AND_TESTS == 'false'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          destination_dir: staging
-          exclude_assets: |
-            .github
-            node_modules
-            tests
-            __tests__
-            docs/Ai_chats
-            vendor
-            *.config.js
-            *.config.ts
-            tsconfig.json
-            package*.json
-            Gemfile*
-            _site
+      - name: Prepare deployment files
+        run: |
+          if [ "${{ env.ENABLE_JEKYLL_AND_TESTS }}" == "true" ]; then
+            echo "Using Jekyll build output for rollback" >> $GITHUB_STEP_SUMMARY
+            # Jekyll build creates _site directory
+            ls -la _site/ >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Using raw files for emergency rollback" >> $GITHUB_STEP_SUMMARY
+            # For raw files, create _site directory with current files
+            mkdir -p _site
+            cp -r * _site/ 2>/dev/null || true
+            # Remove unwanted files from _site
+            rm -rf _site/.github _site/node_modules _site/tests _site/__tests__ 
+            rm -rf _site/docs/Ai_chats _site/vendor _site/*.config.js _site/*.config.ts
+            rm -rf _site/tsconfig.json _site/package*.json _site/Gemfile* 
+            rm -rf _site/.gitignore _site/README.md
+            ls -la _site/ >> $GITHUB_STEP_SUMMARY
+          fi
 
-      - name: Deploy rollback to production (Jekyll build)
-        if: github.event.inputs.environment == 'production' && env.ENABLE_JEKYLL_AND_TESTS == 'true'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          exclude_assets: |
-            .github
-            node_modules
-            tests
-            __tests__
-            docs/Ai_chats
-            vendor
-            *.config.js
-            *.config.ts
-            tsconfig.json
-            package*.json
-            Gemfile*
-            _site
-            .gitignore
-            README.md
+      - name: Add .nojekyll file
+        run: |
+          touch _site/.nojekyll
+          echo "✅ Added .nojekyll file for rollback deployment" >> $GITHUB_STEP_SUMMARY
 
-      - name: Deploy rollback to production (raw files)
-        if: github.event.inputs.environment == 'production' && env.ENABLE_JEKYLL_AND_TESTS == 'false'
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload rollback site artifacts
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          exclude_assets: |
-            .github
-            node_modules
-            tests
-            __tests__
-            docs/Ai_chats
-            vendor
-            *.config.js
-            *.config.ts
-            tsconfig.json
-            package*.json
-            Gemfile*
-            _site
+          path: ./_site
+
+      - name: Deploy rollback to production
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Create rollback notification
         run: |
           echo "## ✅ Emergency Rollback Complete" >> $GITHUB_STEP_SUMMARY
-          echo "**Environment:** ${{ github.event.inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Environment:** production" >> $GITHUB_STEP_SUMMARY
           echo "**Rollback successful:** $(date)" >> $GITHUB_STEP_SUMMARY
-          
-          if [ "${{ github.event.inputs.environment }}" == "production" ]; then
-            echo "**Live URL:** https://t193r-w00d5.github.io/myFreecodecampLearning" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "**Staging URL:** https://t193r-w00d5.github.io/myFreecodecampLearning/staging" >> $GITHUB_STEP_SUMMARY
-          fi
-          
+          echo "**Live URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**⚠️ Action Items:**" >> $GITHUB_STEP_SUMMARY
           echo "1. Verify rollback is working correctly" >> $GITHUB_STEP_SUMMARY

@@ -66,10 +66,9 @@ jobs:
     - name: Setup Node.js with Volta
       uses: volta-cli/action@v4
 
-    - name: Setup Ruby
+    - name: Setup Ruby from Gemfile
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: '3.2'
         bundler-cache: true
 
     - name: Install Node dependencies
