@@ -57,6 +57,9 @@ jobs:
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.10'
+          bundler-cache: true
 
       - name: Install dependencies (if Jekyll/tests enabled)
         if: env.ENABLE_JEKYLL_AND_TESTS == 'true'

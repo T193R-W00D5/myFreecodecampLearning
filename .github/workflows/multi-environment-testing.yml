@@ -51,6 +51,9 @@ jobs:
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.10'
+          bundler-cache: true
 
       - name: Install dependencies
         run: npm ci
@@ -102,6 +105,9 @@ jobs:
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.10'
+          bundler-cache: true
 
       - name: Install dependencies
         run: npm ci
@@ -134,6 +140,9 @@ jobs:
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3.10'
+          bundler-cache: true
 
       - name: Install dependencies
         run: npm ci
