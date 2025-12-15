@@ -3,10 +3,10 @@ import { test, expect } from '../fixtures/test-fixtures.js';
 test.describe('fixture_startFrom_Home Tests', () => {
   test('should load the home page successfully @critical @smoke', async ({ fixture_startFrom_Home }) => {
     // Check that the page loads and has the correct title
-    await expect(fixture_startFrom_Home).toHaveTitle('My freecodecamp learning');
+    await expect(fixture_startFrom_Home).toHaveTitle('My learning');
     
     // Check main heading is present
-    await expect(fixture_startFrom_Home.locator('h1').first()).toHaveText('My freecodecamp learning');
+    await expect(fixture_startFrom_Home.locator('h1').first()).toHaveText('My learning');
     
     // Check welcome section exists
     await expect(fixture_startFrom_Home.locator('h2')).toHaveText('Welcome!');
@@ -25,12 +25,12 @@ test.describe('fixture_startFrom_Home Tests', () => {
 
   test('should display course navigation @smoke', async ({ fixture_startFrom_Home }) => {
     // Check courses section exists
-    await expect(fixture_startFrom_Home.locator('main section').nth(1).locator('h1')).toHaveText('Courses');
+    await expect(fixture_startFrom_Home.locator('main section').nth(1).locator('h1')).toHaveText('My Learning Home Pages');
     
     // Check course link exists and is clickable
-    const courseLink = fixture_startFrom_Home.locator('a[href*="Certified-Full-Stack-Developer-Curriculum"]');
+    const courseLink = fixture_startFrom_Home.locator('a[href*="Home-my-free-code-camp-learning.html"]');
     await expect(courseLink).toBeVisible();
-    await expect(courseLink).toHaveText('Certified Full Stack Developer Curriculum');
+    await expect(courseLink).toHaveText('My Free Code Camp learning');
   });
 
   test('should have proper page structure @regression', async ({ fixture_startFrom_Home }) => {
@@ -40,10 +40,10 @@ test.describe('fixture_startFrom_Home Tests', () => {
     await expect(fixture_startFrom_Home.locator('footer#idFooter')).toBeVisible();
     
     // Check favicon is loaded
-    await expect(fixture_startFrom_Home.locator('link[rel="icon"]')).toHaveAttribute('href', '/myFreecodecampLearning/assets/favicon/Wizard.ico');
+    await expect(fixture_startFrom_Home.locator('link[rel="icon"]')).toHaveAttribute('href', '/tigercuriosity/assets/favicon/Wizard.ico');
     
     // Check CSS is loaded
-    await expect(fixture_startFrom_Home.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '/myFreecodecampLearning/css/styles-freecodecamp.css');
+    await expect(fixture_startFrom_Home.locator('link[rel="stylesheet"]')).toHaveAttribute('href', '/tigercuriosity/css/styles-tigercuriosity.css');
   });
 
   // test('should be responsive on mobile @regression', async ({ fixture_startFrom_Home }) => {

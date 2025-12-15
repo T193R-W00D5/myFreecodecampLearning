@@ -22,7 +22,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:4000/myFreecodecampLearning',
+    baseURL: 'http://localhost:4000/tigercuriosity',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -77,7 +77,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     command: 'bundle exec jekyll serve',
-    url: 'http://127.0.0.1:4000/myFreecodecampLearning/',
+    url: 'http://127.0.0.1:4000/tigercuriosity/',
     // 11/19/2025 T193R-W00D5: Using 'reuseExistingServer: !process.env.CI,' may have been causing issues in GitHub CI environments
     //  See project "/docs/Ai_chats/20251119a GitHub CoPilot - fix parallel worker tests using same port.md" for more details.
     // reuseExistingServer: !process.env.CI,   <- 11/19/2025 T193R-W00D5: commented out and changed to "true" to try to fix CI port-in-use issues

@@ -188,8 +188,6 @@ iframe {
   outline-offset: 2px;
 }
 
-/* Below are styles from freecodecamp.org which I have modified */
-
 /* T193R-W00D5: This is the main style for <code> but it gets altered when in a <pre> code block */
 code {
   background-color: var(--code-text-bg-color);

@@ -1,10 +1,10 @@
 # Jekyll Configuration for GitHub Pages
-title: "My freeCodeCamp Learning"
-description: "Learning full-stack development through freeCodeCamp curriculum"
+title: "My Learning"
+description: "My learning journey and resources"
 author: "T193R-W00D5"
 
 # GitHub Pages settings
-baseurl: "/myFreecodecampLearning"
+baseurl: "/tigercuriosity"
 url: "https://t193r-w00d5.github.io" # Your GitHub Pages domain
 
 # Build settings

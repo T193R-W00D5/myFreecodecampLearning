@@ -10,9 +10,9 @@
  * @type {Paths}
  */
 export const paths = {
-  path_home: "/myFreecodecampLearning/",
-  path_CFSD_Home: '/myFreecodecampLearning/pages/s100101-Certified-Full-Stack-Developer-Curriculum/Home-Certified-Full-Stack-Developer-Curriculum.html',
-  path_InteractiveFeatures: '/myFreecodecampLearning/pages/interactive-features.html',
+  path_home: "/tigercuriosity/",
+  path_CFSD_Home: '/tigercuriosity/pages/s100101-Certified-Full-Stack-Developer-Curriculum/Home-Certified-Full-Stack-Developer-Curriculum.html',
+  path_InteractiveFeatures: '/tigercuriosity/pages/interactive-features.html',
 };
 
 /**
@@ -25,8 +25,8 @@ export const paths = {
  * @type {Hrefs}
  */
 export const hrefs = {
-  href_home: "http://localhost:4000/myFreecodecampLearning/",
-  href_CFSD_Home: "http://localhost:4000/myFreecodecampLearning/pages/s100101-Certified-Full-Stack-Developer-Curriculum/Home-Certified-Full-Stack-Developer-Curriculum.html",
+  href_home: "http://localhost:4000/tigercuriosity/",
+  href_CFSD_Home: "http://localhost:4000/tigercuriosity/pages/s100101-Certified-Full-Stack-Developer-Curriculum/Home-Certified-Full-Stack-Developer-Curriculum.html",
 };
 
 /**
