@@ -61,7 +61,7 @@ export const test = base.extend<CustomFixtures>({
 
   // Custom fixture for fixture_startFrom_Home testing
   fixture_startFrom_Home: async ({ page }, use) => {
-    await page.goto('/myFreecodecampLearning/');
+    await page.goto('/tigercuriosity/');
     // Wait for page to be fully loaded
     await page.waitForLoadState('networkidle');
     await use(page);

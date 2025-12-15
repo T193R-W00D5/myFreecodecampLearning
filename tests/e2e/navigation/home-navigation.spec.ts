@@ -25,7 +25,7 @@ test.describe('Home Page Navigation Tests', () => {
 
   test('should handle static file serving @smoke', async ({ fixture_startFrom_Home }) => {
     // Test CSS file loads
-    const response = await fixture_startFrom_Home.goto('/myFreecodecampLearning/css/styles-freecodecamp.css');
+    const response = await fixture_startFrom_Home.goto('/tigercuriosity/css/styles-tigercuriosity.css');
     expect([200, 304]).toContain(response?.status());
     
     // For 304 responses, content-type might not be included in headers
@@ -43,13 +43,13 @@ test.describe('Home Page Navigation Tests', () => {
 
   test('should handle favicon properly @smoke', async ({ fixture_startFrom_Home }) => {
     // Test favicon loads
-    const response = await fixture_startFrom_Home.goto('/myFreecodecampLearning/assets/favicon/Wizard.ico');
+    const response = await fixture_startFrom_Home.goto('/tigercuriosity/assets/favicon/Wizard.ico');
     expect([200, 304]).toContain(response?.status());
   });
 
   test('should handle 404 gracefully @regression', async ({ fixture_startFrom_Home }) => {
     // Test non-existent page
-    const response = await fixture_startFrom_Home.goto('/myFreecodecampLearning/non-existent-page', { 
+    const response = await fixture_startFrom_Home.goto('/tigercuriosity/non-existent-page', { 
       waitUntil: 'networkidle' 
     });
     

@@ -75,7 +75,7 @@ jobs:
         if: env.ENABLE_JEKYLL_AND_TESTS == 'true'
         run: |
           echo "Building Jekyll site for emergency rollback..." >> $GITHUB_STEP_SUMMARY
-          bundle exec jekyll build --baseurl "/myFreecodecampLearning"
+          bundle exec jekyll build --baseurl "/tigercuriosity"
           echo "Jekyll rollback build completed" >> $GITHUB_STEP_SUMMARY
 
       - name: Prepare deployment files

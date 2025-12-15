@@ -1,7 +1,7 @@
 {
-  "name": "freecodecamporg-website-copies",
+  "name": "tigercuriosity",
   "version": "1.0.0",
-  "description": "This website helps with freeCodeCamp learning using Jekyll for static site generation and GitHub Pages deployment.",
+  "description": "My learning journey and resources",
   "main": "./src/script.js",
   "type": "module",
   "scripts": {

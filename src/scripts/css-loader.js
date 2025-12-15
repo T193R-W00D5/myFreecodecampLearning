@@ -114,7 +114,7 @@
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'style';
-    link.href = '/css/styles-freecodecamp.css';
+    link.href = '/css/styles-tigercuriosity.css';
     link.onload = function() {
         this.onload = null;
         this.rel = 'stylesheet';
@@ -125,7 +125,7 @@
     const noscript = document.createElement('noscript');
     const fallbackLink = document.createElement('link');
     fallbackLink.rel = 'stylesheet';
-    fallbackLink.href = '/css/styles-freecodecamp.css';
+    fallbackLink.href = '/css/styles-tigercuriosity.css';
     noscript.appendChild(fallbackLink);
     document.head.appendChild(noscript);
 })();

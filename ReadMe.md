@@ -1,8 +1,8 @@
 # Instructions
 
-[![Node.js CI](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/node.js.yml/badge.svg)](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/node.js.yml)
-[![E2E Tests](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/e2e-tests.yml)
-[![CI](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/ci.yml/badge.svg)](https://github.com/T193R-W00D5/freecodecampOrg/actions/workflows/ci.yml)
+[![Node.js CI](https://github.com/T193R-W00D5/tigercuriosity/actions/workflows/node.js.yml/badge.svg)](https://github.com/T193R-W00D5/tigercuriosity/actions/workflows/node.js.yml)
+[![E2E Tests](https://github.com/T193R-W00D5/tigercuriosity/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/T193R-W00D5/tigercuriosity/actions/workflows/e2e-tests.yml)
+[![CI](https://github.com/T193R-W00D5/tigercuriosity/actions/workflows/ci.yml/badge.svg)](https://github.com/T193R-W00D5/tigercuriosity/actions/workflows/ci.yml)
 
 ## Local Development Server: Jekyll
 
@@ -23,7 +23,7 @@ This project uses Jekyll as a static site generator for both development and dep
 bundle exec jekyll serve
 ```
 
-3. Open <http://127.0.0.1:4000/myFreecodecampLearning/> in your browser. You should see your webpage!
+3. Open <http://127.0.0.1:4000/tigercuriosity/> in your browser. You should see your webpage!
 
 The Jekyll server will automatically:
 - ✅ Process all Jekyll templating and layouts

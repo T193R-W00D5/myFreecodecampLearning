@@ -141,7 +141,7 @@ jobs:
           
           # Build with production baseurl and verbose output
           echo "Starting Jekyll build with verbose output..." >> $GITHUB_STEP_SUMMARY
-          bundle exec jekyll build --baseurl "/myFreecodecampLearning" --verbose --trace
+          bundle exec jekyll build --baseurl "/tigercuriosity" --verbose --trace
           
           echo "Jekyll production build completed. Contents of _site:" >> $GITHUB_STEP_SUMMARY
           ls -la _site/ >> $GITHUB_STEP_SUMMARY
@@ -192,6 +192,6 @@ jobs:
           echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
           echo "**Deployed by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Live URL:** https://t193r-w00d5.github.io/myFreecodecampLearning" >> $GITHUB_STEP_SUMMARY
+          echo "**Live URL:** https://t193r-w00d5.github.io/tigercuriosity" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "Please allow 5-10 minutes for GitHub Pages to update." >> $GITHUB_STEP_SUMMARY
