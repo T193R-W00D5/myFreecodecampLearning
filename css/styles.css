@@ -5,7 +5,7 @@
 /* Global styles */
 :root {
   /* Define CSS variables for consistent theming */
-  --main-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --main-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --main-bg-color: #03051f;
   --main-border-color: #7684cf; /* Main border color */
   --main-border-radius: 8px; /* Main border radius for rounded corners */
@@ -14,18 +14,20 @@
 }
 
 body {
-    font-family: var(--main-font-family);
-    color-scheme: dark light;
-    /* background-color: #000033; */
-    background-color: var(--main-bg-color);
-    color: #ffffff;
-    text-align: left;
-    margin: 50px;
-    padding: 20px;
-    border: 2px solid var(--main-border-color);
+  font-family: var(--main-font-family);
+  color-scheme: dark light;
+  /* background-color: #000033; */
+  background-color: var(--main-bg-color);
+  color: #ffffff;
+  text-align: left;
+  margin: 50px;
+  padding: 20px;
+  border: 2px solid var(--main-border-color);
 }
 
-h1, h2, p {
+h1,
+h2,
+p {
   font-family: var(--main-font-family);
   color: var(--main-text-color);
   margin-top: 0;
@@ -33,38 +35,48 @@ h1, h2, p {
 
 /* Button styles */
 button {
-    padding: 4px 20px;
-    height: 30px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 2px solid #e1e6ee;
-    background-color: #295c85;
-    color: #ffffff;
-    box-shadow: var(--main-box-shadow);
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease
+  padding: 4px 20px;
+  height: 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #e1e6ee;
+  background-color: #295c85;
+  color: #ffffff;
+  box-shadow: var(--main-box-shadow);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 @keyframes wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(5deg); }
-  75% { transform: rotate(-5deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
 }
 button:hover {
-    background-color: #3a7ab0;
-    transform: translateY(-1px);
-    animation: wiggle 0.3s ease-in-out;
+  background-color: #3a7ab0;
+  transform: translateY(-1px);
+  animation: wiggle 0.3s ease-in-out;
 }
 button:active {
-    background-color: #1f4a6b;
-    transform: translateY(0);
+  background-color: #1f4a6b;
+  transform: translateY(0);
 }
 button:focus-visible {
-    outline: 3px solid #001aff;
-    outline-offset: 2px;
+  outline: 3px solid #001aff;
+  outline-offset: 2px;
 }
 
 /* Snackbar styles */
-#snackbar_alert_test, #snackbar_console_log_test {
+#snackbar_alert_test,
+#snackbar_console_log_test {
   z-index: 1;
   visibility: hidden;
   min-width: 250px;
@@ -79,7 +91,9 @@ button:focus-visible {
   right: 5px;
   transform: translateX(-50%);
   opacity: 0;
-  transition: opacity 0.5s, visibility 0.5s;
+  transition:
+    opacity 0.5s,
+    visibility 0.5s;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -88,14 +102,14 @@ button:focus-visible {
   background-color: white;
   border: 4px solid red;
   color: red;
-  
 }
 #snackbar_console_log_test {
   background-color: white;
   border: 4px solid green;
   color: green;
 }
-#snackbar_alert_test.show, #snackbar_console_log_test.show {
+#snackbar_alert_test.show,
+#snackbar_console_log_test.show {
   visibility: visible;
   opacity: 1;
 }
@@ -136,7 +150,7 @@ button:focus-visible {
   justify-content: flex-start;
   margin: 5px 0; /* margin outside of the pane? */
   width: auto;
-  color:#000000;
+  color: #000000;
 }
 
 .pane_ex01 img {
@@ -154,13 +168,13 @@ button:focus-visible {
 
 /* Custom radio button styles */
 .radio-button {
-  appearance: none; /* Remove default styling */ 
+  appearance: none; /* Remove default styling */
   margin-right: 5px; /* Space between radio button and label */
   background-color: var(--main-bg-color);
   width: 20px; /* Width of the radio button */
   height: 20px; /* Height of the radio button */
   border: 2px solid #7684cf; /* Border color for the radio button */
-  border-radius: 50%; /* Make it circular */ 
+  border-radius: 50%; /* Make it circular */
   box-sizing: border-box; /* Ensure padding is included in width and height */
   vertical-align: text-bottom; /* Align with text */
 }
@@ -201,12 +215,13 @@ button:focus-visible {
 .console-output {
   width: 80%;
   height: 200px;
-  resize:vertical;
+  /* eslint-disable-next-line css/use-baseline */
+  resize: vertical;
   background-color: var(--main-bg-color);
   border: 1px solid var(--main-border-color);
   padding: 10px; /* Add padding for better readability */
   overflow-y: auto; /* Enable vertical scrolling when content overflows */
-                    /* For always show vertical scrollbar, use "scroll" */
+  /* For always show vertical scrollbar, use "scroll" */
   overflow-x: hidden; /* Hide horizontal scrollbar */
   white-space: pre-wrap; /* Preserve whitespace */
   word-wrap: break-word; /* Break long words */
@@ -217,19 +232,24 @@ button:focus-visible {
   box-shadow: var(--main-box-shadow);
   margin-top: 20px;
   margin-bottom: 20px;
-  font-family: 'Courier New', Courier, monospace; /* Monospace font for console output */
+  font-family:
+    "Courier New", Courier, monospace; /* Monospace font for console output */
   font-weight: normal; /* Normal font weight for console output */
   text-align: left; /* Align text to the left */
   /* Firefox only: Use a thin scrollbar (not supported in Chrome <121, Safari, iOS, Samsung Internet) */
+  /* eslint-disable-next-line css/use-baseline */
   scrollbar-width: thin;
   /* Firefox only: Scrollbar thumb color and track color */
+  /* eslint-disable-next-line css/use-baseline */
   scrollbar-color: #203079 var(--main-bg-color);
   /* Note: 'scrollbar-color' is not supported in Chrome <121, Safari, iOS, Samsung Internet.
      For those browsers, see the ::-webkit-scrollbar rules below. */
 }
 .console-output::-webkit-scrollbar {
   width: 16px;
-  background-color: var(--main-bg-color); /* Background color of the scrollbar */
+  background-color: var(
+    --main-bg-color
+  ); /* Background color of the scrollbar */
 }
 .console-output::-webkit-scrollbar-track {
   background: #3802fc;
@@ -289,7 +309,7 @@ button:focus-visible {
 }
 
 code {
-  font-family: Consolas,"courier new";
+  font-family: Consolas, "courier new", monospace;
   color: crimson;
   background-color: #f1f1f1;
   padding: 2px;

@@ -1,34 +1,40 @@
-function getLegendsData() {
-    const name = "Alan Turing";
-    const birthYear = 1912;
-    const accomplishments = [];
-    accomplishments.push("Cryptanalysis");
-    accomplishments.push("Computability and the Turing Test");
+/* function getLegendsData() {
+  const name = "Alan Turing";
+  const birthYear = 1912;
+  const accomplishments = [];
+  accomplishments.push("Cryptanalysis");
+  accomplishments.push("Computability and the Turing Test");
 
-    const aCSLegend = {
-        name: "Grace Hopper",
-        birthYear: 1906,
-        accomplishments: ["Compilers", "COBOL"]
-    };
+  const aCSLegend = {
+    name: "Grace Hopper",
+    birthYear: 1906,
+    accomplishments: ["Compilers", "COBOL"],
+  };
 
-    const legends = [aCSLegend, {name: name, birthYear: birthYear, accomplishments: accomplishments}];
+  const legends = [
+    aCSLegend,
+    { name: name, birthYear: birthYear, accomplishments: accomplishments },
+  ];
 
-    const aModernCSLegend = {
-        name: "Linus Torvalds",
-        birthYear: 1969,
-        accomplishments: ["Linux", "Git"]
-    };
-    legends.push(aModernCSLegend);
+  const aModernCSLegend = {
+    name: "Linus Torvalds",
+    birthYear: 1969,
+    accomplishments: ["Linux", "Git"],
+  };
+  legends.push(aModernCSLegend);
 
-    return legends;
-}
+  return legends;
+} */
 
 export function handleConsoleLogTest(showSnackbar) {
   const now = new Date().toLocaleString();
   // showSnackbar('snackbar_console_log_test', `Console Log Test button clicked at:<br>${now}`);
-  showSnackbar('snackbar_console_log_test', `Console Log Test button clicked at: ${now}`);
+  showSnackbar(
+    "snackbar_console_log_test",
+    `Console Log Test button clicked at: ${now}`,
+  );
   let output = `Console Log Test button clicked at: ${now}\n`;
-  
+
   /* console.log("Computer Science Legends:");
   const legends = getLegendsData();
   output += "Computer Science Legends:\n";
@@ -46,9 +52,9 @@ export function handleConsoleLogTest(showSnackbar) {
   }); */
 
   // Print to textarea and console
-  const outputBox = document.getElementById('consoleOutput');
+  const outputBox = document.getElementById("consoleOutput");
   if (outputBox) {
-    outputBox.value = output;
+    outputBox.value = outputBox.value + output;
     outputBox.scrollTop = outputBox.scrollHeight; // Scroll to bottom
   }
   console.log(output);

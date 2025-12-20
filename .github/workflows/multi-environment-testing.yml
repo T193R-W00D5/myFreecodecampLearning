@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       test_scope:
-        description: 'Testing scope'
+        description: "Testing scope"
         required: true
         type: choice
         options:
@@ -15,9 +15,9 @@ on:
           - full-multi-environment
           - locale-specific
       target_locale:
-        description: 'Specific locale (for locale-specific testing)'
+        description: "Specific locale (for locale-specific testing)"
         required: false
-        default: ''
+        default: ""
 
 jobs:
   # Test across multiple locales and browsers
@@ -32,7 +32,7 @@ jobs:
           # Special configurations for specific combinations
           - locale: ko-KR
             timezone: Asia/Seoul
-          - locale: de-DE  
+          - locale: de-DE
             timezone: Europe/Berlin
           - locale: ja-JP
             timezone: Asia/Tokyo
@@ -46,13 +46,13 @@ jobs:
       - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
-          cache: 'npm'
+          node-version-file: "package.json"
+          cache: "npm"
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.10'
+          ruby-version: "3.3.10"
           bundler-cache: true
 
       - name: Install dependencies
@@ -100,13 +100,13 @@ jobs:
       - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
-          cache: 'npm'
+          node-version-file: "package.json"
+          cache: "npm"
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.10'
+          ruby-version: "3.3.10"
           bundler-cache: true
 
       - name: Install dependencies
@@ -127,7 +127,7 @@ jobs:
 
   # macOS testing with Safari (limited availability)
   macos-safari-testing:
-    if: github.event.inputs.test_scope == 'full-multi-environment'  
+    if: github.event.inputs.test_scope == 'full-multi-environment'
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -135,13 +135,13 @@ jobs:
       - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
-          cache: 'npm'
+          node-version-file: "package.json"
+          cache: "npm"
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.10'
+          ruby-version: "3.3.10"
           bundler-cache: true
 
       - name: Install dependencies

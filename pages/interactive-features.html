@@ -1,95 +1,121 @@
 ---
 title: "Interactive Features"
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ page.title | default: site.title }}</title>
-  <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon/Wizard.ico' | relative_url }}">
-  <link rel="stylesheet" href="{{ '/css/styles-tigercuriosity.css' | relative_url }}">
-</head>
-<body>
-<main>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title | default: site.title }}</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ '/assets/favicon/Wizard.ico' | relative_url }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ '/css/styles-tigercuriosity.css' | relative_url }}"
+    />
+  </head>
+  <body>
+    <main>
+      <h1 aria-label="Interactive Features">Interactive Features</h1>
 
-<h1 aria-label="Interactive Features">Interactive Features</h1>
+      <section>
+        <p>Try out the interactive features below:</p>
 
-  <section>
-    
-    <p>Try out the interactive features below:</p>
+        <p>
+          Click the button to see a message:
+          <button
+            aria-label="message_test"
+            name="message_test"
+            tabindex="0"
+            title="Click the button to show a message to the right of the button"
+            id="messageBtn"
+          >
+            Click Me
+          </button>
+          <span
+            class="message-box"
+            id="textMessage"
+            aria-live="polite"
+            aria-relevant="additions text"
+            aria-atomic="true"
+          ></span>
+        </p>
 
-    <p>
-      Click the button to see a message:
-      <button
-        aria-label="message_test"
-        name="message_test"
-        tabindex="0"
-        title="Click the button to show a message to the right of the button"
-        id="messageBtn">Click Me</button>
-      <span
-        class="message-box"
-        id="textMessage"
-        aria-live="polite"
-        aria-relevant="additions text"
-        aria-atomic="true"></span>
-    </p>
-
-<!--     <div style="position:relative; background:#fff; padding:20px; border:2px solid #000;">
+        <!--     <div style="position:relative; background:#fff; padding:20px; border:2px solid #000;">
       <span>Test Snackbar</span>
       <button class="snackbar-close" style="position:absolute;top:8px;right:16px;font-size:24px;">&times;</button>
     </div> -->
-    
-    <button
-      class="button"
-      type="button"
-      aria-label="alert_test"
-      name="alert_test"
-      title="Click the button to perform an Alert Test"
-      id="alert_test">Alert Test</button>
-    <!-- <div id="snackbar_alert_test">alert test</div> -->
-     <div id="snackbar_alert_test">
-      <span>alert test</span>
-      <button class="snackbar-close" id="close-snackbar-alertTest" aria-label="close_alert">&times;</button>
-    </div>
 
-    <button
-      class="button"
-      type="button"
-      aria-label="console_log_test"
-      name="console_log_test"
-      title="Click the button to send a timestamped message to the browser dev tools console"
-      id="console_log_test">Console Log Test</button>
-    <!-- <div id="snackbar_console_log_test">console log test</div> -->
-      <div id="snackbar_console_log_test">
-        <span>console log test</span>
-        <button class="snackbar-close" id="snackbar-close-consoleLogTest" aria-label="close_console_log">&times;</button>
-      </div>
+        <button
+          class="button"
+          type="button"
+          aria-label="alert_test"
+          name="alert_test"
+          title="Click the button to perform an Alert Test"
+          id="alert_test"
+        >
+          Alert Test
+        </button>
+        <!-- <div id="snackbar_alert_test">alert test</div> -->
+        <div id="snackbar_alert_test">
+          <span>alert test</span>
+          <button
+            class="snackbar-close"
+            id="close-snackbar-alertTest"
+            aria-label="close_alert"
+          >
+            &times;
+          </button>
+        </div>
 
-    <p>
-      <!-- Text box for console_log_test -->
-      <textarea
-        class="console-output"
-        type="text"
-        name="console_output"
-        readonly
-        aria-live="polite"
-        aria-label="console_output"
-        id="consoleOutput"
-        rows="10"
-        title="Console output area"
-        placeholder="Console output will appear here"></textarea>
-    </p>
+        <button
+          class="button"
+          type="button"
+          aria-label="console_log_test"
+          name="console_log_test"
+          title="Click the button to send a timestamped message to the browser dev tools console"
+          id="console_log_test"
+        >
+          Console Log Test
+        </button>
+        <!-- <div id="snackbar_console_log_test">console log test</div> -->
+        <div id="snackbar_console_log_test">
+          <span>console log test</span>
+          <button
+            class="snackbar-close"
+            id="snackbar-close-consoleLogTest"
+            aria-label="close_console_log"
+          >
+            &times;
+          </button>
+        </div>
 
-  </section>
+        <p>
+          <!-- Text box for console_log_test -->
+          <textarea
+            class="console-output"
+            type="text"
+            name="console_output"
+            readonly
+            aria-live="polite"
+            aria-label="console_output"
+            id="consoleOutput"
+            rows="10"
+            title="Console output area"
+            placeholder="Console output will appear here"
+          ></textarea>
+        </p>
+      </section>
+    </main>
 
-</main>
+    <footer>
+      <p><span id="copyright"></span></p>
+    </footer>
 
-<footer>
-  <p><span id="copyright"></span></p>
-</footer>
-
-<script type="module" src="{{ '/src/script.js' | relative_url }}"></script>
-
-</body>
+    <script type="module" src="{{ '/src/script.js' | relative_url }}"></script>
+  </body>
 </html>

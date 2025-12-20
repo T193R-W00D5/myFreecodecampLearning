@@ -4,7 +4,7 @@ name: Emergency Rollback
 # It allows for an emergency rollback to a specified commit SHA in production.
 
 env:
-  # Set to false for fastest emergency rollback (skips Jekyll build and tests)  
+  # Set to false for fastest emergency rollback (skips Jekyll build and tests)
   # Set to true for validated rollback with full Jekyll build and critical tests
   ENABLE_JEKYLL_AND_TESTS: true
 
@@ -12,14 +12,14 @@ on:
   workflow_dispatch:
     inputs:
       rollback_to_commit:
-        description: 'Commit SHA to rollback to'
+        description: "Commit SHA to rollback to"
         required: true
       reason:
-        description: 'Reason for rollback'
+        description: "Reason for rollback"
         required: true
-        default: 'Emergency rollback due to production issue'
+        default: "Emergency rollback due to production issue"
       skip_tests:
-        description: 'Skip tests for emergency rollback'
+        description: "Skip tests for emergency rollback"
         required: true
         type: boolean
         default: false
@@ -52,13 +52,13 @@ jobs:
       - name: Setup Node.js from package.json
         uses: actions/setup-node@v4
         with:
-          node-version-file: 'package.json'
-          cache: 'npm'
+          node-version-file: "package.json"
+          cache: "npm"
 
       - name: Setup Ruby from Gemfile
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3.10'
+          ruby-version: "3.3.10"
           bundler-cache: true
 
       - name: Install dependencies (if Jekyll/tests enabled)

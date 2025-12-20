@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>
+    // Set base URL dynamically based on environment
+    if (
+      window.location.hostname === "localhost" ||
+      window.location.hostname === "127.0.0.1"
+    ) {
+      // Local development
+      document.write('<base href="/">');
+    } else {
+      // GitHub Pages
+      document.write('<base href="/tigercuriosity/">');
+    }
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Menu</title>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/Wizard.ico" />
+  <link rel="stylesheet" href="/css/styles-tigercuriosity.css" />
+</head>
+
+<body>
+
+<main>
+  <h1>CAMPER CAFE</h1>
+
+  <section>
+    <h2>Welcome ...</h2>
+    <p>placeholder text for the Camper Cafe menu page.</p>
+  </section>
+</main>
+
+<br />
+<hr />
+<br />
+<footer id="idFooter">
+  <section>
+    <a href="#idHeader">Top of page</a> | <a href="/index.html">Home</a> |
+  </section>
+</footer>
+
+<!-- <script type="module" src="/src/script.js"></script> -->
+</body>
+</html>

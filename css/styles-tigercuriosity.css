@@ -10,7 +10,7 @@
   --main-font-size: 1.05rem;
   --main-bg-color: #03051f;
   /* --main-bg-color: #091f03; */
-   /* #03051f; Main background color for textboxes, inputs, tables... */
+  /* #03051f; Main background color for textboxes, inputs, tables... */
   /* --main-border-color: #7684cf; */
   --main-border-color: #ededf133;
   --main-border-radius: 8px; /* Main border radius for rounded corners */
@@ -54,7 +54,7 @@ body::before {
   /* Original absolute path: "/assets/images/bg-techy-003.svg" */
   background-repeat: repeat;
   background-size: 240px 240px;
-}   
+}
 
 main {
   /* margin-top: 20px; */
@@ -67,13 +67,22 @@ main {
   padding: 20px;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   font-family: var(--main-font-family);
   color: var(--main-text-color);
   margin-top: 0;
 }
 
-main, header, footer, banner {
+main,
+header,
+footer,
+banner {
   /* From CoPilot: Make main, header, footer, and banner have 
   solid backgrounds to cover the techy pattern */
   position: relative;
@@ -92,12 +101,13 @@ main, header, footer, banner {
 } */
 
 p {
-    font-size: 1.15rem;
-    font-weight: 400;
-    line-height: 1.5;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
-header, footer {
+header,
+footer {
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
   padding: 20px;
@@ -108,24 +118,28 @@ header, footer {
   margin-right: var(--main-margin-left-right);
 }
 
-.footer-nav, .header-nav {
+.footer-nav,
+.header-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
 }
 
-.footer-left, .header-left {
+.footer-left,
+.header-left {
   flex: 1;
   text-align: left;
 }
 
-.footer-center, .header-center {
+.footer-center,
+.header-center {
   flex: 2;
   text-align: center;
 }
 
-.footer-right, .header-right {
+.footer-right,
+.header-right {
   flex: 1;
   text-align: right;
 }
@@ -137,16 +151,18 @@ img[src$="triangle-icon.svg"] {
 
 /* Button styles */
 button {
-    padding: 4px 20px;
-    height: 30px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 2px solid #e1e6ee;
-    background-color: #295c85;
-    color: #ffffff;
-    box-shadow: var(--main-box-shadow);
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease
+  padding: 4px 20px;
+  height: 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #e1e6ee;
+  background-color: #295c85;
+  color: #ffffff;
+  box-shadow: var(--main-box-shadow);
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
 }
 /* @keyframes wiggle {
   0%, 100% { transform: rotate(0deg); }
@@ -159,12 +175,12 @@ button:hover {
     animation: wiggle 0.3s ease-in-out;
 } */
 button:active {
-    background-color: #1f4a6b;
-    transform: translateY(0);
+  background-color: #1f4a6b;
+  transform: translateY(0);
 }
 button:focus-visible {
-    outline: 3px solid #001aff;
-    outline-offset: 2px;
+  outline: 3px solid #001aff;
+  outline-offset: 2px;
 }
 
 iframe {
@@ -194,7 +210,8 @@ code {
   /* 1px solid var(--gray-45); */
   border: #bbbcc0 solid 1px;
   border-radius: 1px;
-  color: var(--tertiary-color); /* T193R-W00D5: this is the text color of code in paragraphs */
+  /* T193R-W00D5: this is the text color of code in paragraphs */
+  /* color: var(--tertiary-color); */
   font-family: var(--font-family-monospace);
   font-size: 90%;
   overflow-wrap: anywhere;
@@ -202,7 +219,7 @@ code {
   padding: 0px 0px;
 }
 
-:not(pre)>code {
+:not(pre) > code {
   padding: 1px 4px;
 }
 
@@ -210,201 +227,251 @@ code .token.operator {
   background: none;
 }
 
-:not(pre)>code[class*=language-],pre[class*=language-] {
-  background: var(--primary-background);
-}
+:not(pre) > code[class*="language-"],
+/* pre[class*="language-"] {background: var(--primary-background);} */
 
-.default code[class*=language-] ::-moz-selection,.default code[class*=language-]::-moz-selection,.default pre[class*=language-] ::-moz-selection,.default pre[class*=language-]::-moz-selection {
-  background: var(--selection-color);
-}
+.default code[class*="language-"] ::-moz-selection,
+.default code[class*="language-"]::-moz-selection,
+.default pre[class*="language-"] ::-moz-selection,
+/* .default pre[class*="language-"]::-moz-selection {background: var(--selection-color);} */
 
-.default code[class*=language-] ::selection,.default code[class*=language-]::selection,.default pre[class*=language-] ::selection,.default pre[class*=language-]::selection {
-  background: var(--selection-color);
-}
+/* eslint-disable-next-line css/use-baseline */
+.default code[class*="language-"] ::selection,
+/* eslint-disable-next-line css/use-baseline */
+.default code[class*="language-"]::selection,
+/* eslint-disable-next-line css/use-baseline */
+.default pre[class*="language-"] ::selection,
+/* .default pre[class*="language-"]::selection {background: var(--selection-color);} */
 
-* {
-    text-shadow: none!important
-}
+/* * {text-shadow: none !important;} */
 
-code[class=language-markup] {
-    white-space: normal!important
-}
+/* code[class="language-markup"] {white-space: normal !important;} */
 
 /* ###################################################################################### */
 /* ###################################################################################### */
 
- :not(.dark-palette) .token.cdata,:not(.dark-palette) .token.comment,:not(.dark-palette) .token.doctype,:not(.dark-palette) .token.prolog {
-    color: #62707f
+:not(.dark-palette) .token.cdata,
+:not(.dark-palette) .token.comment,
+:not(.dark-palette) .token.doctype,
+:not(.dark-palette) .token.prolog {
+  color: #62707f;
 }
 
 :not(.dark-palette) .token.punctuation {
-    color: #38425c
+  color: #38425c;
 }
 
-:not(.dark-palette) .token.constant,:not(.dark-palette) .token.deleted,:not(.dark-palette) .token.property,:not(.dark-palette) .token.symbol,:not(.dark-palette) .token.tag {
-    color: #e00000
+:not(.dark-palette) .token.constant,
+:not(.dark-palette) .token.deleted,
+:not(.dark-palette) .token.property,
+:not(.dark-palette) .token.symbol,
+:not(.dark-palette) .token.tag {
+  color: #e00000;
 }
 
 :not(.dark-palette) .token.number {
-    color: #9932cc
+  color: #9932cc;
 }
 
 :not(.dark-palette) .token.boolean {
-    color: #1f3a93
+  color: #1f3a93;
 }
 
-:not(.dark-palette) .token.attr-name,:not(.dark-palette) .token.builtin,:not(.dark-palette) .token.char,:not(.dark-palette) .token.inserted,:not(.dark-palette) .token.selector,:not(.dark-palette) .token.string {
-    color: #008040
+:not(.dark-palette) .token.attr-name,
+:not(.dark-palette) .token.builtin,
+:not(.dark-palette) .token.char,
+:not(.dark-palette) .token.inserted,
+:not(.dark-palette) .token.selector,
+:not(.dark-palette) .token.string {
+  color: #008040;
 }
 
 /* T193R-W00D5: language-css stuff */
-:not(.dark-palette) .language-css .token.string,:not(.dark-palette) .style .token.string,:not(.dark-palette) .token.entity,:not(.dark-palette) .token.operator,:not(.dark-palette) .token.url {
-    color: #38425c
+:not(.dark-palette) .language-css .token.string,
+:not(.dark-palette) .style .token.string,
+:not(.dark-palette) .token.entity,
+:not(.dark-palette) .token.operator,
+:not(.dark-palette) .token.url {
+  color: #38425c;
 }
 
-:not(.dark-palette) .token.atrule,:not(.dark-palette) .token.attr-value,:not(.dark-palette) .token.keyword {
-    color: #2574a9
+:not(.dark-palette) .token.atrule,
+:not(.dark-palette) .token.attr-value,
+:not(.dark-palette) .token.keyword {
+  color: #2574a9;
 }
 
-:not(.dark-palette) .token.class-name,:not(.dark-palette) .token.function {
-    color: #992900
+:not(.dark-palette) .token.class-name,
+:not(.dark-palette) .token.function {
+  color: #992900;
 }
 
-:not(.dark-palette) .token.important,:not(.dark-palette) .token.regex,:not(.dark-palette) .token.variable {
-    color: #856514
+:not(.dark-palette) .token.important,
+:not(.dark-palette) .token.regex,
+:not(.dark-palette) .token.variable {
+  color: #856514;
 }
 
-:not(.dark-palette) .line-numbers-rows>span:before {
-    color: #62707f
+:not(.dark-palette) .line-numbers-rows > span:before {
+  color: #62707f;
 }
 
 /* ###################################################################################### */
 /* ###################################################################################### */
 
 /* T193R-W00D5: I'm not sure if this style is used */
-:not(.dark-palette)code[class*=language-],:not(.dark-palette)pre[class*=language-] {
-    word-wrap: normal;
-    color: var(--secondary-color);    
-    font-family: Broadway; /* T193R-W00D5: set this font to see if it does anything */
-    /* font-family: var(--main-font-family); */
-    /* font-size: 1em; */
-    /* -ms-hyphens: none; */
-    /* hyphens: none; */
-    line-height: 5; /* T193R-W00D5: I made this line height really big to test if it does anything */
-    -moz-tab-size: 4;
-    -o-tab-size: 4;
-    tab-size: 4;
-    text-align: left;
-    text-shadow: none;
-    white-space: pre;
-    word-break: normal;
-    word-spacing: normal;
+:not(.dark-palette)code[class*="language-"],
+:not(.dark-palette)pre[class*="language-"] {
+  word-wrap: normal;
+  color: var(--secondary-color);
+  /* T193R-W00D5: set this font to see if it does anything */
+  font-family: Broadway, "Times New Roman", serif;
+  /* font-family: var(--main-font-family); */
+  /* font-size: 1em; */
+  /* -ms-hyphens: none; */
+  /* hyphens: none; */
+  line-height: 5; /* T193R-W00D5: I made this line height really big to test if it does anything */
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  text-align: left;
+  text-shadow: none;
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
 }
 
 /* T193R-W00D5: I'm not sure if this style is used */
-:not(.dark-palette)pre[class*=language-] code[class*=language-] {
-    /* color: var(--quaternary-color); */    
-    color: purple; /* T193R-W00D5: set this color to see if it does anything */
+:not(.dark-palette)pre[class*="language-"] code[class*="language-"] {
+  /* color: var(--quaternary-color); */
+  color: purple; /* T193R-W00D5: set this color to see if it does anything */
 }
 
 /* T193R-W00D5: I'm not sure if this style is used */
-:not(.dark-palette)pre[class*=language-] {
-    /* margin: .5em 0; */
-    /* overflow: auto; */    
-    overflow: wrap; /* T193R-W00D5: changed from auto to wrap to see if it does anything */
-    /* padding: 1em; */
+:not(.dark-palette)pre[class*="language-"] {
+  /* margin: .5em 0; */
+  /* overflow: auto; */
+  overflow: scroll; /* T193R-W00D5: 12/19/2025: changed from wrap to scroll. wrap is not a valid setting. */
+  /* padding: 1em; */
 }
 
-:not(.dark-palette):not(pre)>code[class*=language-],:not(.dark-palette)pre[class*=language-] {
-    background: var(--primary-background);
+:not(.dark-palette):not(pre) > code[class*="language-"],
+/* :not(.dark-palette)pre[class*="language-"] {background: var(--primary-background);} */
+
+:not(.dark-palette)code[class*="language-"] ::-moz-selection,
+:not(.dark-palette)code[class*="language-"]::-moz-selection,
+:not(.dark-palette)pre[class*="language-"] ::-moz-selection,
+/* :not(.dark-palette)pre[class*="language-"]::-moz-selection {background: var(--selection-color);} */
+
+/* eslint-disable-next-line css/use-baseline */
+:not(.dark-palette)code[class*="language-"] ::selection,
+/* eslint-disable-next-line css/use-baseline */
+:not(.dark-palette)code[class*="language-"]::selection,
+/* eslint-disable-next-line css/use-baseline */
+:not(.dark-palette)pre[class*="language-"] ::selection,
+/* :not(.dark-palette)pre[class*="language-"]::selection {background: var(--selection-color);} */
+
+:not(.dark-palette):not(pre) > code[class*="language-"] {
+  border-radius: 0.3em;
+  /* padding: .1em; */
+  white-space: normal;
 }
 
-:not(.dark-palette)code[class*=language-] ::-moz-selection,:not(.dark-palette)code[class*=language-]::-moz-selection,:not(.dark-palette)pre[class*=language-] ::-moz-selection,:not(.dark-palette)pre[class*=language-]::-moz-selection {
-    background: var(--selection-color);
-}
-
-:not(.dark-palette)code[class*=language-] ::selection,:not(.dark-palette)code[class*=language-]::selection,:not(.dark-palette)pre[class*=language-] ::selection,:not(.dark-palette)pre[class*=language-]::selection {
-    background: var(--selection-color);
-}
-
-:not(.dark-palette):not(pre)>code[class*=language-] {
-    border-radius: .3em;
-    /* padding: .1em; */
-    white-space: normal;
-}
-
-:not(.dark-palette).token.block-comment,:not(.dark-palette).token.cdata,:not(.dark-palette).token.comment,:not(.dark-palette).token.doctype,:not(.dark-palette).token.prolog {
-    color: #608b4e
+:not(.dark-palette).token.block-comment,
+:not(.dark-palette).token.cdata,
+:not(.dark-palette).token.comment,
+:not(.dark-palette).token.doctype,
+:not(.dark-palette).token.prolog {
+  color: #608b4e;
 }
 
 /* T193R-W00D5: This sets the style of punctuation in the <pre> code blocks */
 :not(.dark-palette).token.punctuation {
-    color: #ff0;
-    /* T193R-W00D5: set color below for testing */
-    /* color: orange; */
+  color: #ff0;
+  /* T193R-W00D5: set color below for testing */
+  /* color: orange; */
 }
 
-:not(.dark-palette).token.attr-name,:not(.dark-palette).token.deleted,:not(.dark-palette).token.namespace,:not(.dark-palette).token.tag {
-    color: #e2777a
+:not(.dark-palette).token.attr-name,
+:not(.dark-palette).token.deleted,
+:not(.dark-palette).token.namespace,
+:not(.dark-palette).token.tag {
+  color: #e2777a;
 }
 
 :not(.dark-palette).token.function-name {
-    color: #d4d4d4
+  color: #d4d4d4;
 }
 
-:not(.dark-palette).token.boolean,:not(.dark-palette).token.function,:not(.dark-palette).token.number {
-    /* color: #569cd6 */
-    color: orange; /* T193R-W00D5: set this color to see if it does anything */
+:not(.dark-palette).token.boolean,
+:not(.dark-palette).token.function,
+:not(.dark-palette).token.number {
+  /* color: #569cd6 */
+  color: orange; /* T193R-W00D5: set this color to see if it does anything */
 }
 
-:not(.dark-palette).token.class-name,:not(.dark-palette).token.constant,:not(.dark-palette).token.property,:not(.dark-palette).token.symbol {
-    color: #f8c555
+:not(.dark-palette).token.class-name,
+:not(.dark-palette).token.constant,
+:not(.dark-palette).token.property,
+:not(.dark-palette).token.symbol {
+  color: #f8c555;
 }
 
-:not(.dark-palette).token.atrule,:not(.dark-palette).token.builtin,:not(.dark-palette).token.important,:not(.dark-palette).token.keyword,:not(.dark-palette).token.selector {
-    /* color: #569cd6 */
-    color: orange; /* T193R-W00D5: set this color to see if it does anything */
+:not(.dark-palette).token.atrule,
+:not(.dark-palette).token.builtin,
+:not(.dark-palette).token.important,
+:not(.dark-palette).token.keyword,
+:not(.dark-palette).token.selector {
+  /* color: #569cd6 */
+  color: orange; /* T193R-W00D5: set this color to see if it does anything */
 }
 
-:not(.dark-palette).token.attr-value,:not(.dark-palette).token.char,:not(.dark-palette).token.regex,:not(.dark-palette).token.string,:not(.dark-palette).token.variable {
-    color: #7ec699;
+:not(.dark-palette).token.attr-value,
+:not(.dark-palette).token.char,
+:not(.dark-palette).token.regex,
+:not(.dark-palette).token.string,
+:not(.dark-palette).token.variable {
+  color: #7ec699;
 }
 
 /*T193R-W00D5: This sets the style of attribute values in html tags of the <pre> code blocks */
 :not(.dark-palette).token.attr-value {
-    color: #7ec699;
-    /* T193R-W00D5: set color below for testing */
-    /* color: orange;  */
+  color: #7ec699;
+  /* T193R-W00D5: set color below for testing */
+  /* color: orange;  */
 }
-
 
 /* ####################################################################################### */
 /* ####################################################################################### */
 
-:not(.dark-palette).language-css .token.string,:not(.dark-palette).style .token.string {
-    background: hsla(0,0%,100%,.12);
-    color: #ec9126
+:not(.dark-palette).language-css .token.string,
+:not(.dark-palette).style .token.string {
+  background: hsla(0, 0%, 100%, 0.12);
+  color: #ec9126;
 }
 
-:not(.dark-palette).token.entity,:not(.dark-palette).token.operator,:not(.dark-palette).token.url {
-    background: none;
-    color: #67cdcc
+:not(.dark-palette).token.entity,
+:not(.dark-palette).token.operator,
+:not(.dark-palette).token.url {
+  background: none;
+  color: #67cdcc;
 }
 
-:not(.dark-palette).token.bold,:not(.dark-palette).token.important {
-    font-weight: 700
+:not(.dark-palette).token.bold,
+:not(.dark-palette).token.important {
+  font-weight: 700;
 }
 
 :not(.dark-palette).token.italic {
-    font-style: italic
+  font-style: italic;
 }
 
 :not(.dark-palette).token.entity {
-    cursor: help
+  cursor: help;
 }
 
 :not(.dark-palette).token.inserted {
-    color: green
+  color: green;
 }
 
 /* ####################################################################################### */
@@ -424,124 +491,168 @@ code[class=language-markup] {
 } */
 
 /* T193R-W00D5: language-css stuff */
-.dark-palette .language-css .token.string,.dark-palette .style .token.string,.dark-palette .token.entity,.dark-palette .token.operator,.dark-palette .token.url {
-    color: #38425c
+.dark-palette .language-css .token.string,
+.dark-palette .style .token.string,
+.dark-palette .token.entity,
+.dark-palette .token.operator,
+.dark-palette .token.url {
+  color: #38425c;
 }
 
 /* ####################################################################################### */
 /* ####################################################################################### */
-
 
 .hide-scrollable-anchor {
-    display: block;
-    max-height: 0
+  display: block;
+  max-height: 0;
 }
 
-pre[class*=language-].line-numbers {
-    counter-reset: linenumber;
-    padding-left: 3.8em;
-    position: relative
+pre[class*="language-"].line-numbers {
+  counter-reset: linenumber;
+  padding-left: 3.8em;
+  position: relative;
 }
 
-pre[class*=language-].line-numbers>code {
-    position: relative;
-    white-space: inherit
+pre[class*="language-"].line-numbers > code {
+  position: relative;
+  white-space: inherit;
 }
 
-code[class*=language-],pre[class*=language-] {
-    border: none; /* T193R-W00D5: turn off code text border in language-<pre> code block */
-    border-radius: 0;
-    word-wrap: normal;
-    background: none;
-    color: var(--main-text-color);
-    font-family: Consolas,Monaco,Andale Mono,Ubuntu Mono,monospace;
-    font-size: 1.05em; /* T193R-W00D5: This sets font size in language- <pre> code block */
-    /* -ms-hyphens: none; */
-    /* hyphens: none; */
-    line-height: 1.5;
-    /* -moz-tab-size: 4; */
-    /* -o-tab-size: 4; */
-    /* tab-size: 4; */
-    text-align: left;
-    text-shadow: 0 1px #fff;
-    /* white-space: pre; */
-    word-break: normal;
-    word-spacing: normal
+code[class*="language-"],
+pre[class*="language-"] {
+  border: none; /* T193R-W00D5: turn off code text border in language-<pre> code block */
+  border-radius: 0;
+  word-wrap: normal;
+  background: none;
+  color: var(--main-text-color);
+  font-family:
+    Consolas,
+    Monaco,
+    Andale Mono,
+    Ubuntu Mono,
+    monospace;
+  font-size: 1.05em; /* T193R-W00D5: This sets font size in language- <pre> code block */
+  /* -ms-hyphens: none; */
+  /* hyphens: none; */
+  line-height: 1.5;
+  /* -moz-tab-size: 4; */
+  /* -o-tab-size: 4; */
+  /* tab-size: 4; */
+  text-align: left;
+  text-shadow: 0 1px #fff;
+  /* white-space: pre; */
+  word-break: normal;
+  word-spacing: normal;
 }
 
-code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none
+code[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection,
+pre[class*="language-"] ::-moz-selection,
+pre[class*="language-"]::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
 }
 
-code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection {
-    background: #b3d4fc;
-    text-shadow: none
+/* eslint-disable-next-line css/use-baseline */
+code[class*="language-"] ::selection,
+/* eslint-disable-next-line css/use-baseline */
+code[class*="language-"]::selection,
+/* eslint-disable-next-line css/use-baseline */
+pre[class*="language-"] ::selection,
+/* eslint-disable-next-line css/use-baseline */
+pre[class*="language-"]::selection {
+  background: #b3d4fc;
+  text-shadow: none;
 }
 
 /* T193R-W00D5: This is the main style for the language- <pre> <code> block */
-pre[class*=language-] {
-    overflow: auto;
-    padding: 0.5em; /* T193R-W00D5: This is the padding for the language- <pre> <code> block */
-    margin-left: 0em; /* T193R-W00D5: margin of the <pre> <code> block to the main element */
-    padding-left: 0em; /* T193R-W00D5: left padding of text within the <pre> <code> block */
+pre[class*="language-"] {
+  overflow: auto;
+  padding: 0.5em; /* T193R-W00D5: This is the padding for the language- <pre> <code> block */
+  margin-left: 0em; /* T193R-W00D5: margin of the <pre> <code> block to the main element */
+  padding-left: 0em; /* T193R-W00D5: left padding of text within the <pre> <code> block */
 }
 
-:not(pre)>code[class*=language-],pre[class*=language-] {
-    background: #1b1931;
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #1b1931;
 }
 
-:not(pre)>code[class*=language-] {
-    border-radius: .3em;
-    padding: .1em;
-    white-space: normal
+:not(pre) > code[class*="language-"] {
+  border-radius: 0.3em;
+  padding: 0.1em;
+  white-space: normal;
 }
 
-.token.cdata,.token.comment,.token.doctype,.token.prolog {
-    color: #708090
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+  color: #708090;
 }
 
 .token.punctuation {
-    color: #999
+  color: #999;
 }
 
 .token.namespace {
-    opacity: .7
+  opacity: 0.7;
 }
 
-.token.boolean,.token.constant,.token.deleted,.token.number,.token.property,.token.symbol,.token.tag {
-    color: #905
+.token.boolean,
+.token.constant,
+.token.deleted,
+.token.number,
+.token.property,
+.token.symbol,
+.token.tag {
+  color: #905;
 }
 
-.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string {
-    color: #690
+.token.attr-name,
+.token.builtin,
+.token.char,
+.token.inserted,
+.token.selector,
+.token.string {
+  color: #690;
 }
 
-.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url {
-    background: hsla(0,0%,100%,.5);
-    color: #9a6e3a
+.language-css .token.string,
+.style .token.string,
+.token.entity,
+.token.operator,
+.token.url {
+  background: hsla(0, 0%, 100%, 0.5);
+  color: #9a6e3a;
 }
 
-.token.atrule,.token.attr-value,.token.keyword {
-    color: #07a
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #07a;
 }
 
-.token.class-name,.token.function {
-    color: #dd4a68
+.token.class-name,
+.token.function {
+  color: #dd4a68;
 }
 
-.token.important,.token.regex,.token.variable {
-    color: #e90
+.token.important,
+.token.regex,
+.token.variable {
+  color: #e90;
 }
 
-.token.bold,.token.important {
-    font-weight: 700
+.token.bold,
+.token.important {
+  font-weight: 700;
 }
 
 .token.italic {
-    font-style: italic
+  font-style: italic;
 }
 
 .token.entity {
-    cursor: help
+  cursor: help;
 }

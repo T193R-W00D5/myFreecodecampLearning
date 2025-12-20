@@ -1,0 +1,314 @@
+---
+layout: default
+title: "Basic HTML - Lab - Build a Cat Photo App"
+description: "Build a cat photo app using basic HTML elements"
+prism: false
+prev_page: "/pages/s100101-CFSDc/c100101-Basic-HTML/Basic-HTML-p100601-Lecture-Understanding-the-HTML-Boilerplate.html"
+next_page: "/pages/s100101-CFSDc/c100101-Basic-HTML/Basic-HTML-p100661-recipes.html"
+section_home: "/pages/s100101-CFSDc/c100101-Basic-HTML/Home-Basic-HTML.html"
+section_name: "Basic HTML Home"
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title | default: site.title }}</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ '/assets/favicon/Wizard.ico' | relative_url }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ '/css/styles.css' | relative_url }}"
+    />
+  </head>
+<body>
+
+<h1>Cat Photo App</h1>
+  
+  <section>
+
+    <h2>Welcome to the Cat Photo App</h2>
+
+      <p>
+        This is a simple app to showcase cat photos and some interactive features.
+<!--         <img
+          class="surprise-cat"
+          aria-label="surprise-cat"
+          title="A cat sharpening its nails with an emory board"
+          id="surpriseCat"
+          src="{{ '/assets/gifs/black-cat-sharpening-nails.gif' | relative_url }}"
+          alt="A gif of a cat sharpening its nails with an emory board."/> -->
+      </p>
+
+      <p>
+        Click the button to change the cat image below:
+        <button
+          aria-label="message_test"
+          name="message_test"
+          title="Click the button to show a message"
+          id="messageBtn">Click Me</button>
+          <div id="messageBox">
+            <p id="textMessage">Purr ..... I'm waiting ...</p>
+            <img
+              class="gifs-cats"
+              aria-label="gifs-of-cats"
+              title="Gifs of Cats ... mostly"
+              id="catGif"
+              src="{{ '/assets/gifs/black-cat-sharpening-nails.gif' | relative_url }}"
+              alt="Cats, maybe"/>
+          </div>
+      </p>
+      
+      <h2>Cat Photos</h2>
+
+      <p>
+        Everyone loves
+        <a
+          href="https://cdn.freecodecamp.org/curriculum/cat-photo-app/running-cats.jpg">
+          cute cats;
+        </a>
+          online!
+      </p>
+
+      <p>
+        See more
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://freecatphotoapp.com">cat photos;
+        </a>
+        in our gallery.
+      </p>
+
+      <a
+        href="https://freecatphotoapp.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        > 
+        <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg"
+        alt="A cute orange cat lying on its back"></a>
+
+  </section>
+    
+  <h2>Cat Lists</h2>
+    
+    <section>
+      
+      Below are some lists of things cats love and hate:
+
+      <h3>Things cats love:</h3>
+
+        <ul>
+          <li>catnip</li>
+          <li>laser pointers</li>
+          <li>writing <code>code</code> to take over the world</li>
+          <li>lasagna</li>
+        </ul>
+
+        <figure
+          aria-label="lasagna-figure"
+          class="lasagna-figure">
+          <img
+            src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/lasagna.jpg"
+            alt="A slice of lasagna on a plate.">
+          <figcaption>Cats <stong>love</strong> lasagna.</figcaption>
+        </figure>
+
+      <h3>Top 3 things cats hate:</h3>
+
+        <ol>
+          <li>flea treatment</li>
+          <li>thunder</li>
+          <li>other cats</li>
+        </ol>
+
+        <div class="pane_ex01">
+          <figure
+            aria-label="cats-figure"
+            class="cats-figure">
+            <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/cats.jpg"
+            alt="Five cats looking around a field."> 
+            <figcaption>Cats <strong>hate</strong> other cats.</figcaption>
+          </figure>
+        </div>
+
+    </section>
+  
+  <section>
+    <h2>Cat Form</h2>
+    <form class="formA" action="https://freecatphotoapp.com/submit-cat-photo">
+      <fieldset class="fieldsetA">
+        <legend>Is your cat an indoor or outdoor cat?</legend>
+        <div class="option-group">
+          <label><input class="radio-button" id="indoor" type="radio" name="indoor-outdoor" value="indoor" checked>Indoor</label>
+          <label><input class="radio-button" id="outdoor" type="radio" name="indoor-outdoor" value="outdoor">Outdoor</label>
+        </div>
+      </fieldset>
+      <fieldset class="fieldsetA">
+        <legend>What are your cat's personalities?</legend>
+        <div class="option-group">
+          <!-- <input id="loving" type="checkbox" name="personality" value="loving" checked> <label for="loving">Loving</label> -->
+          <!-- <input id="lazy" type="checkbox" name="personality" value="lazy"> <label for="lazy">Lazy</label> -->
+          <!-- <input id="energetic" type="checkbox" name="personality" value="energetic"> <label for="energetic">Energetic</label> -->
+          <label><input class="check-box" id="loving" type="checkbox" name="personality" value="loving">Loving</label>
+          <label><input class="check-box" id="lazy" type="checkbox" name="personality" value="lazy">Lazy</label>
+          <label><input class="check-box" id="energetic" type="checkbox" name="personality" value="energetic">Energetic</label>
+        </div>
+      </fieldset>
+<!--       <input class="urlTextbox" type="text" name="catphotourl" placeholder="cat photo URL" required>
+      <button
+        class="button"
+        type="submit"
+        id="submit-cat-photo"   
+        aria-label="submit-cat-photo" 
+        name="submit-cat-photo"
+        title="Click to submit the cat photo URL"
+        disabled="true">Submit</button> -->
+    </form>
+  </section>
+
+<h1>Examples of tables</h1>
+
+<section>
+  <table class="tableA">
+    <caption>Cat Breeds</caption>
+    <thead>
+      <tr>
+        <th>Breed</th>
+        <th>Origin</th>
+        <th>Life Expectancy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Siamese</td>
+        <td>Thailand</td>
+        <td>12-20 years</td>
+      </tr>
+      <tr>
+        <td>Maine Coon</td>
+        <td>U.S.</td>
+        <td>12-20 years</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <table class="tableA">
+    <caption>
+      Superheros and sidekicks
+    </caption>
+    <colgroup>
+      <col />
+      <col span="2" class="batman" />
+      <col span="2" class="flash" />
+    </colgroup>
+    <tr>
+      <td></td>
+      <th scope="col">Batman</th>
+      <th scope="col">Robin</th>
+      <th scope="col">The Flash</th>
+      <th scope="col">Kid Flash</th>
+    </tr>
+    <tr>
+      <th scope="row">Skill</th>
+      <td>Smarts, strong</td>
+      <td>Dex, acrobat</td>
+      <td>Super speed</td>
+      <td>Super speed</td>
+    </tr>
+  </table>
+</section>
+
+<h1>Examples of paragraphs, quoutes and citations</h1>
+
+  <section>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+      non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    
+    <p>
+      W3C's current statement on its
+      <cite>
+        <a
+          href="https://www.w3.org/Consortium/"
+          target="_blank"
+          rel="noopener noreferrer">
+          About W3C</a>
+      </cite> page (as of July 4, 2025) is this:
+      <q><em>Making the web work, for everyone. W3C brings together global stakeholders to develop
+      open standards that enable a World Wide Web that connects and empowers humanity.</em></q>
+    </p>
+
+  </section>
+
+<h1>Interactive Features</h1>
+
+  <section>
+    
+    <p>Try out the interactive features below:</p>
+
+    <button
+      class="button"
+      type="button"
+      aria-label="alert_test"
+      name="alert_test"
+      title="Click the button to perform an Alert Test"
+      id="alert_test">Alert Test</button>
+    <div id="snackbar_alert_test">alert test</div>
+
+    <button
+      class="button"
+      type="button"
+      aria-label="console_log_test"
+      name="console_log_test"
+      title="Click the button to send a timestamped message to the browser dev tools console"
+      id="console_log_test">Console Log Test</button>
+    <div id="snackbar_console_log_test">console log test</div>
+    
+    <p>
+      <!-- Text box for console_log_test -->
+      <textarea
+        class="console-output"
+        type="text"
+        name="console_output"
+        aria-live="polite"
+        aria-relevant="additions text"
+        aria-atomic="true"
+        aria-describedby="consoleOutput"
+        aria-labelledby="consoleOutput"
+        aria-controls="consoleOutput"
+        aria-haspopup="true"
+        aria-autocomplete="list"
+        aria-required="true"
+        aria-label="console_output"
+        id="consoleOutput"
+        rows="10"
+        readonly
+        title="Console output area"
+        placeholder="Console output will appear here"></textarea>
+    </p>
+
+  </section>
+
+<p><a href="#top">Back to Top</a></p>
+
+<footer>
+  <p>&copy; example copywright</p>
+</footer>
+
+<script type="module" src="{{ 'src/scripts/script-catPhotoApp.js' | relative_url }}"></script>
+
+</body>
+</html>

@@ -12,9 +12,9 @@ env:
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   assert_matrix:
@@ -71,20 +71,18 @@ jobs:
         # GitHub doesn't allow using env.* inside the strategy.matrix expression.
         # Use an explicit list here. Update this list if you want to change the matrix.
         node-version:
-          - '18.x'
-          - '20.x'
-          - '22.x'
-          - '24.x'
+          - "18.x"
+          - "20.x"
+          - "22.x"
+          - "24.x"
     steps:
       - uses: actions/checkout@v4
-
-
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Verify Node
         run: |
@@ -113,13 +111,11 @@ jobs:
           if [ -z "$NODE_PIN" ]; then echo "volta.node not found in package.json"; exit 1; fi
           echo "version=$NODE_PIN" >> $GITHUB_OUTPUT
 
-      
-
       - name: Setup Node.js (pinned)
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.node_pin.outputs.version }}
-          cache: 'npm'
+          cache: "npm"
 
       - name: Verify Node
         run: |
