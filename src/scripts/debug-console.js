@@ -16,7 +16,7 @@ export const debugConsole = {
    */
   log: (...args) => {
     if (bDebug) {
-      console.log('[DEBUG]', ...args);
+      console.log("[DEBUG]", ...args);
     }
   },
 
@@ -26,7 +26,7 @@ export const debugConsole = {
    */
   info: (...args) => {
     if (bDebug) {
-      console.info('[DEBUG-INFO]', ...args);
+      console.info("[DEBUG-INFO]", ...args);
     }
   },
 
@@ -36,7 +36,7 @@ export const debugConsole = {
    */
   warn: (...args) => {
     if (bDebug) {
-      console.warn('[DEBUG-WARN]', ...args);
+      console.warn("[DEBUG-WARN]", ...args);
     }
   },
 
@@ -46,7 +46,7 @@ export const debugConsole = {
    */
   error: (...args) => {
     if (bDebug) {
-      console.error('[DEBUG-ERROR]', ...args);
+      console.error("[DEBUG-ERROR]", ...args);
     }
   },
 
@@ -55,7 +55,7 @@ export const debugConsole = {
    * @param {...any} args - Arguments to log
    */
   force: (...args) => {
-    console.log('[FORCE]', ...args);
+    console.log("[FORCE]", ...args);
   },
 
   /**
@@ -75,7 +75,7 @@ export const debugConsole = {
     if (bDebug) {
       console.groupEnd();
     }
-  }
+  },
 };
 
 /**

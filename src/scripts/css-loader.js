@@ -6,8 +6,8 @@
  */
 
 // Add critical CSS styles immediately
-(function() {
-    const criticalCSS = `
+(function () {
+  const criticalCSS = `
         :root {
             --main-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
             --main-font-size: 1.05rem;
@@ -106,26 +106,26 @@
         }
     `;
 
-    const style = document.createElement('style');
-    style.innerHTML = criticalCSS;
-    document.head.appendChild(style);
+  const style = document.createElement("style");
+  style.innerHTML = criticalCSS;
+  document.head.appendChild(style);
 
-    // Load full CSS asynchronously
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'style';
-    link.href = '/css/styles-tigercuriosity.css';
-    link.onload = function() {
-        this.onload = null;
-        this.rel = 'stylesheet';
-    };
-    document.head.appendChild(link);
+  // Load full CSS asynchronously
+  const link = document.createElement("link");
+  link.rel = "preload";
+  link.as = "style";
+  link.href = "/css/styles-tigercuriosity.css";
+  link.onload = function () {
+    this.onload = null;
+    this.rel = "stylesheet";
+  };
+  document.head.appendChild(link);
 
-    // Fallback for browsers that don't support preload
-    const noscript = document.createElement('noscript');
-    const fallbackLink = document.createElement('link');
-    fallbackLink.rel = 'stylesheet';
-    fallbackLink.href = '/css/styles-tigercuriosity.css';
-    noscript.appendChild(fallbackLink);
-    document.head.appendChild(noscript);
+  // Fallback for browsers that don't support preload
+  const noscript = document.createElement("noscript");
+  const fallbackLink = document.createElement("link");
+  fallbackLink.rel = "stylesheet";
+  fallbackLink.href = "/css/styles-tigercuriosity.css";
+  noscript.appendChild(fallbackLink);
+  document.head.appendChild(noscript);
 })();

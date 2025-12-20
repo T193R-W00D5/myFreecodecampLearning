@@ -1,62 +1,63 @@
-import { handleConsoleLogTest } from './scripts/consoleLogHandler.js';
-import { showSnackbar } from './components/Snackbar.js';
+import { handleConsoleLogTest } from "./scripts/consoleLogHandler.js";
+import { showSnackbar } from "./components/Snackbar.js";
 
 const COPYRIGHT_TEXT = `no copyright`;
 
 // Browser code (event listeners, DOM manipulation) wrapped in the guard.
 // - This ensures it only runs in a browser environment.
 // - This is necessary for Jest because it runs in a Node environment by default.
-if (typeof document !== 'undefined') {
-  const copyrightEl = document.getElementById('copyright');
+if (typeof document !== "undefined") {
+  const copyrightEl = document.getElementById("copyright");
   if (copyrightEl) {
-  /* Use innerHTML to render HTML entities
+    /* Use innerHTML to render HTML entities
      This allows us to use &copy; instead of the actual © character
      Using .innerHTML is safe here because COPYRIGHT_TEXT is a hardcoded string
      and not coming from user input or any external/untrusted source. */
     copyrightEl.innerHTML = COPYRIGHT_TEXT;
   }
   // Add event listeners for buttons
-  const messageTestBtn = document.getElementById('messageBtn');
+  const messageTestBtn = document.getElementById("messageBtn");
   if (messageTestBtn) {
-    messageTestBtn.addEventListener('click', function() {
+    messageTestBtn.addEventListener("click", function () {
       showMessage();
     });
   }
-  const alertBtn = document.getElementById('alert_test');
+  const alertBtn = document.getElementById("alert_test");
   if (alertBtn) {
-    alertBtn.addEventListener('click', function() {
-      showSnackbar('snackbar_alert_test', 'Alert Test button clicked!');
+    alertBtn.addEventListener("click", function () {
+      showSnackbar("snackbar_alert_test", "Alert Test button clicked!");
     });
   }
-  const consoleLogTestBtn = document.getElementById('console_log_test');
+  const consoleLogTestBtn = document.getElementById("console_log_test");
   if (consoleLogTestBtn) {
-    consoleLogTestBtn.addEventListener('click', function() {
+    consoleLogTestBtn.addEventListener("click", function () {
       handleConsoleLogTest(showSnackbar);
     });
   }
-  document.querySelectorAll('.snackbar-close').forEach(btn => {
-    btn.addEventListener('click', function() {
-      this.parentElement.classList.remove('show');
+  document.querySelectorAll(".snackbar-close").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      this.parentElement.classList.remove("show");
     });
   });
 }
-  
+
 const typedMessage = [
   {
-    message: "This is test message 1"
+    message: "This is test message 1",
   },
   {
-    message: "This is test message 2"
-  }
+    message: "This is test message 2",
+  },
 ];
 
 let typeTextIntervalId = null; // Store interval ID globally
 
 function typeText(elementOrId, text, speed = 50) {
   // Resolve element if a string ID is passed
-  const element = typeof elementOrId === 'string'
-    ? document.getElementById(elementOrId)
-    : elementOrId;
+  const element =
+    typeof elementOrId === "string"
+      ? document.getElementById(elementOrId)
+      : elementOrId;
 
   if (!element) return;
 

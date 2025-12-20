@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Environment detection - set base path immediately
+      window.basePath =
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+          ? "/"
+          : "/tigercuriosity/";
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My freecodecamp learning - Review - Basic HTML Review</title>
+
+    <script>
+      document.write(
+        '<link rel="icon" type="image/x-icon" href="' +
+          window.basePath +
+          'assets/favicon/Wizard.ico">',
+      );
+      document.write(
+        '<link rel="stylesheet" href="' +
+          window.basePath +
+          'css/styles-tigercuriosity.css">',
+      );
+    </script>
+
+    <!-- Preload critical resources -->
+    <!-- <link rel="preload" href="/assets/images/bg-techy-003.svg" as="image"> -->
+
+    <!-- Load CSS asynchronously to prevent render blocking -->
+    <!-- <link rel="preload" href="/css/styles-tigercuriosity.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/styles-tigercuriosity.css"></noscript> -->
+  </head>
+  <body>
+    <!----- Start <header> ---------------------------------------------------------------------------->
+    <header id="idheader">
+      <section class="header-nav">
+        <div class="header-left">
+          <a class="prev-link">
+            <button type="button" aria-label="Go to previous page">
+              Previous
+            </button>
+          </a>
+        </div>
+        <div class="header-center">
+          <a href="#idFooter">Bottom of page</a> |
+          <a class="home-link-header">Home</a> |
+          <a
+            href="/pages/s100101-CFSDc/c100101-Basic-HTML/Home-Basic-HTML.html"
+            >Basic HTML Home</a
+          >
+        </div>
+        <div class="header-right">
+          <a class="next-link">
+            <button type="button" aria-label="Go to next page">
+              Basic HTML Home
+            </button>
+          </a>
+        </div>
+      </section>
+    </header>
+    <br />
+    <hr />
+    <br />
+    <!----- End <header> ------------------------------------------------------------------------------>
+
+    <!----- Start <main> ------------------------------------------------------------------------------>
+    <main>
+      <!---------- Start mainContent -------------------------------------------------------------------->
+
+      <section id="mainContent">
+        <h1 tabindex="0">Basic HTML &#9655; Review</h1>
+        <br />
+
+        <section id="description">
+          <h2>HTML Basics</h2>
+          <ul>
+            <li>
+              <strong>Role of HTML</strong>: HTML represents the content and
+              structure of the web page.
+            </li>
+            <li>
+              <strong>HTML Elements</strong>: Elements are the building blocks
+              for an HTML document. They represent headings, paragraphs, links,
+              images and more. Most HTML elements consist of an opening tag
+              (<code>&lt;elementName&gt;</code>) and a closing tag
+              (<code>&lt;/elementName&gt;</code>).
+            </li>
+          </ul>
+          <p>Here is the basic syntax:</p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>elementName</span><span class="token punctuation">&gt;</span></span>Content goes here<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>elementName</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Void Elements</strong>: Void elements cannot have any
+              content and only have a start tag. Examples include
+              <code>img</code> and <code>meta</code> elements.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            It is common to see some codebases that include a forward slash
+            <code>/</code> inside the void element. Both of these are
+            acceptable:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span><span class="token punctuation">/&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Attributes</strong>: An attribute is a value placed inside
+              the opening tag of an HTML element. Attributes provide additional
+              information about the element or specify how the element should
+              behave. Here is the basic syntax for an attribute:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>element</span> <span class="token attr-name">attribute</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>value<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>element</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            A boolean attribute is an attribute that can either be present or
+            absent in an HTML tag. If present, the value is true otherwise it is
+            false. Examples of boolean attributes include <code>disabled</code>,
+            <code>readonly</code>, and <code>required</code>.
+          </p>
+          <ul>
+            <li>
+              <strong>Comments</strong>: Comments are used in programming to
+              leave notes for yourself and other developers in your code. Here
+              is the syntax for a comment in HTML:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token comment">&lt;!--This is an HTML comment.--&gt;</span>
+</code></pre>
+          <h2>Common HTML elements</h2>
+          <ul>
+            <li>
+              <strong>Heading Elements</strong>: There are six heading elements
+              in HTML. The <code>h1</code> through <code>h6</code> heading
+              elements are used to signify the importance of content below them.
+              The lower the number, the higher the importance, so
+              <code>h2</code> elements have less importance than
+              <code>h1</code> elements.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>most important heading element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>second most important heading element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h3</span><span class="token punctuation">&gt;</span></span>third most important heading element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h3</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h4</span><span class="token punctuation">&gt;</span></span>fourth most important heading element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h4</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h5</span><span class="token punctuation">&gt;</span></span>fifth most important heading element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h5</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h6</span><span class="token punctuation">&gt;</span></span>least important heading element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h6</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <!-- <pre><code>h1<br>h2<br>h3</code></pre> -->
+          <!-- I used this and next line to determine how to fix syling to get 1st chars to lign up in code boxes -->
+          <!-- <code>h1<br>h2<br>h3</code> -->
+          <ul>
+            <li>
+              <strong>Paragraph Elements</strong>: This is used for paragraphs
+              on a web page.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is a paragraph element.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>img</code> Elements</strong>: The
+              <code>img</code> element is used to add images to the web page.
+              The <code>src</code> attribute is used to specify the location for
+              that image. For image elements, it's good practice to include
+              another attribute called the <code>alt</code> attribute. Here's an
+              example of an <code>img</code> element with the
+              <code>src</code> and <code>alt</code> attributes:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.freecodecamp.org/curriculum/cat-photo-app/lasagna.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>A slice of lasagna on a plate.<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>body</code> Element</strong>: This element is used
+              to represent the content for the HTML document.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>CatPhotoApp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is a paragraph element.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>    
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>section</code> Elements</strong>: This element is
+              used to divide up content into smaller sections.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>section</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>About Me<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Hi, I am Jane Doe and I am a web developer.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>section</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>div</code> Elements</strong>: This element is a
+              generic HTML element that does not hold any semantic meaning. It
+              is used as a generic container to hold other HTML elements.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>I am a heading<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>I am a paragraph<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Anchor (<code>a</code>) Elements</strong>: These elements
+              are used to apply links to a web page. The
+              <code>href</code> attribute is used to specify where the link
+              should go when the user clicks on it.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.freecodecamp.org/curriculum/cat-photo-app/running-cats.jpg<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>cute cats<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong
+                >Unordered (<code>ul</code>) and Ordered (<code>ol</code>) List
+                Elements</strong
+              >: To create a bulleted list of items you should use the
+              <code>ul</code> element with one or more <code>li</code> elements
+              nested inside like this:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>catnip<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>laser pointers<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>lasagna<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            To create an ordered list of items you should use the
+            <code>ol</code> element:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ol</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>flea treatment<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>thunder<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>other cats<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ol</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Emphasis (<code>em</code>) Element</strong>: This is used
+              to place emphasis on a piece of text.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Cats <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>em</span><span class="token punctuation">&gt;</span></span>love<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>em</span><span class="token punctuation">&gt;</span></span> lasagna.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>  
+</code></pre>
+          <ul>
+            <li>
+              <strong>Strong Importance (<code>strong</code>) Element</strong>:
+              This element is used to place strong emphasis on text to indicate
+              a sense of urgency and seriousness.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>Important:<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span> Before proceeding, make sure to wear your safety goggles. 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong
+                ><code>figure</code> and
+                <code>figcaption</code> Elements</strong
+              >: The <code>figure</code> element is used to group content like
+              images and diagrams. The <code>figcaption</code> element is used
+              to represent a caption for that content inside the
+              <code>figure</code> element.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figure</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.freecodecamp.org/curriculum/cat-photo-app/cats.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Five cats looking around a field.<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>figcaption</span><span class="token punctuation">&gt;</span></span>Cats <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>hate<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span> other cats.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figcaption</span><span class="token punctuation">&gt;</span></span>  
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>figure</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>main</code> Element</strong>: This element is used
+              to represent the main content for a web page.
+            </li>
+            <li>
+              <strong><code>footer</code> Element</strong>: This element is
+              placed at the bottom of the HTML document and usually contains
+              copyright information and other important page links.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+    No Copyright - <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.freecodecamp.org<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>freeCodeCamp.org<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <h2>Identifiers and Grouping</h2>
+          <ul>
+            <li>
+              <strong>IDs</strong>: Unique element identifiers for HTML
+              elements. ID names should only be used once per HTML document.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Movie Review Page<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            ID names cannot have spaces. If your ID name contains multiple words
+            then you can use dashes between the words like this:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>red-box<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Classes</strong>: Classes are used to group elements for
+              styling and behavior.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            Unlike IDs, you can reuse the same class name throughout the HTML
+            document. The <code>class</code> value can also have spaces like
+            this:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box red-box<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>box blue-box<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <h2>Special Characters and Linking</h2>
+          <ul>
+            <li>
+              <strong>HTML entities</strong>: An HTML entity, or character
+              reference, is a set of characters used to represent a reserved
+              character in HTML. Examples include the ampersand
+              (<code>&amp;amp;</code>) symbol and the less than symbol
+              (<code>&amp;lt;</code>).
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is an <span class="token entity named-entity" title="&lt;">&amp;lt;</span>img /<span class="token entity named-entity" title="&gt;">&amp;gt;</span> element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>link</code> Element</strong>: This element is used
+              to link to external resources like stylesheets and site icons.
+              Here is the basic syntax for using the <code>link</code> element
+              for an external CSS file:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./styles-tigercuriosity.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+          <p>
+            The <code>rel</code> attribute is used to specify the relationship
+            between the linked resource and the HTML document. The
+            <code>href</code> attribute is used to specify the location of the
+            URL for the external resource.
+          </p>
+          <ul>
+            <li>
+              <strong><code>script</code> Element</strong>: This element is used
+              to embed executable code.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"Welcome to freeCodeCamp"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            While you can technically write all of your JavaScript code inside
+            the <code>script</code> tags, it is considered best practice to link
+            to an external JavaScript file instead. Here is an example of using
+            the <code>script</code> element to link to an external JavaScript
+            file:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>path-to-javascript-file.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            The <code>src</code> attribute is used here to specify the location
+            for that external JavaScript file.
+          </p>
+          <h2>Boilerplate and Encoding</h2>
+          <ul>
+            <li>
+              <strong>HTML boilerplate</strong>: This is a boilerplate that
+              includes the basic structure and essential elements every HTML
+              document needs.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>en<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>freeCodeCamp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>./styles-tigercuriosity.css<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!--Headings, paragraphs, images, etc. go inside here--&gt;</span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>DOCTYPE</code></strong
+              >: This is used to tell browsers which version of HTML you're
+              using.
+            </li>
+            <li>
+              <strong><code>html</code> Element</strong>: This represents the
+              top level element or the root of an HTML document. To specify the
+              language for the document, you should use the
+              <code>lang</code> attribute.
+            </li>
+            <li>
+              <strong><code>head</code> Element</strong>: The
+              <code>head</code> section contains important meta data which is
+              behind-the-scenes information needed for browsers and search
+              engines.
+            </li>
+            <li>
+              <strong><code>meta</code> Elements</strong>: These elements
+              represent your site's metadata. These element have details about
+              things like character encoding, and how websites like Twitter
+              should preview your page's link and more.
+            </li>
+            <li>
+              <strong><code>title</code> Element</strong>: This element is used
+              to set the text that appears in the browser tab or window.
+            </li>
+            <li>
+              <strong>UTF-8 character encoding</strong>: UTF-8, or UCS
+              Transformation Format 8, is a standardized character encoding
+              widely used on the web. Character encoding is the method computers
+              use to store characters as data. The
+              <code>charset</code> attribute is used inside of a
+              <code>meta</code> element to set the character encoding to UTF-8.
+            </li>
+          </ul>
+          <h2>SEO and Social Sharing</h2>
+          <ul>
+            <li>
+              <strong>SEO</strong>: Search Engine Optimization is a practice
+              that optimizes web pages so they become more visible and rank
+              higher on search engines.
+            </li>
+            <li>
+              <strong>Meta (<code>description</code>) Element</strong>: This is
+              used to provide a short description for the web page and impacting
+              SEO.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>
+  <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>description<span class="token punctuation">"</span></span>
+  <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Discover expert tips and techniques for gardening in small spaces, choosing the right plants, and maintaining a thriving garden.<span class="token punctuation">"</span></span>
+<span class="token punctuation">/&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Open Graph tags</strong>: The open graph protocol enables
+              you to control how your website's content appears across various
+              social media platforms, such as Facebook, LinkedIn, and many more.
+            </li>
+          </ul>
+          <p>
+            By setting these open graph properties, you can entice users to want
+            to click and engage with your content. You can set these properties
+            through a collection of <code>meta</code> elements inside your HTML
+            <code>head</code> section.
+          </p>
+          <ul>
+            <li>
+              <strong><code>og:title</code> Property</strong>: This is used to
+              set the title that displays for social media posts.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>freeCodeCamp.org<span class="token punctuation">"</span></span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:title<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>og:type</code> Property</strong>: The
+              <code>type</code> property is used to represent the type of
+              content being shared on social media. Examples of this content
+              include articles, websites, videos, or music.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:type<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>website<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>og:image</code> Property</strong>: This is used to
+              set the image shown for social media posts.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>
+  <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png<span class="token punctuation">"</span></span>
+  <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:image<span class="token punctuation">"</span></span>
+<span class="token punctuation">/&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>og:url</code> Property</strong>: This is used to set
+              the URL that users will click on for the social media posts.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">property</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>og:url<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.freecodecamp.org<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+          <h2>Media Elements and Optimization</h2>
+          <ul>
+            <li>
+              <strong>Replaced elements</strong>: A replaced element is an
+              element whose content is determined by an external resource rather
+              than by CSS itself. An example would be an
+              <code>iframe</code> element. <code>iframe</code> stands for inline
+              frame. It's an inline element used to embed other HTML content
+              directly within the HTML page.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.example.com<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Example Site<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            You can include the <code>allowfullscreen</code> attribute which
+            allows the user to display the iframe in full screen mode.
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>video-url<span class="token punctuation">"</span></span>
+  <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width-value<span class="token punctuation">"</span></span>
+  <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>height-value<span class="token punctuation">"</span></span>
+  <span class="token attr-name">allowfullscreen</span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            To embed a video within an <code>iframe</code> you can copy it
+            directly from popular video services like YouTube and Vimeo, or
+            define it yourself with the <code>src</code> attribute pointing to
+            the URL of that video. Here's an example of embedding a popular
+            freeCodeCamp course from YouTube:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>A freeCodeCamp YouTube Video Embedded with the iframe Element<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>iframe</span>
+  <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>560<span class="token punctuation">"</span></span>
+  <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>315<span class="token punctuation">"</span></span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://www.youtube.com/embed/PkZNo7MFNFg?si=-UBVIUNM3csdeiWF<span class="token punctuation">"</span></span>
+  <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>YouTube video player<span class="token punctuation">"</span></span>
+  <span class="token attr-name">allow</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share<span class="token punctuation">"</span></span>
+  <span class="token attr-name">referrerpolicy</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>strict-origin-when-cross-origin<span class="token punctuation">"</span></span>
+  <span class="token attr-name">allowfullscreen</span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>iframe</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            There are some other replaced elements, such as <code>video</code>,
+            and <code>embed</code>. And some elements behave as replaced
+            elements under specific circumstances. Here's an example of an
+            <code>input</code> element with the <code>type</code> attribute set
+            to <code>image</code>:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>image<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>Descriptive text goes here<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>example-img-url<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Optimizing media</strong>: There are three tools to
+              consider when using media, such as images, on your web pages: the
+              size, the format, and the compression. A compression algorithm is
+              used to reduce the size for files or data.
+            </li>
+            <li>
+              <strong>Image formats</strong>: Two of the most common file
+              formats are PNG and JPG, but these are no longer the most ideal
+              formats for serving images. Unless you need support for older
+              browsers, you should consider using a more optimized format, like
+              WEBP or AVIF.
+            </li>
+            <li>
+              <strong>Image licenses</strong>: An image under the public domain
+              has no copyright attached to it and is free to be used without any
+              restrictions. Images licensed specifically under the Creative
+              Commons 0 license are considered public domain. Some images might
+              be released under a permissive license, like a Creative Commons
+              license, or the BSD license that freeCodeCamp uses.
+            </li>
+            <li>
+              <strong>SVGs</strong>: Scalable Vector Graphics track data based
+              on paths and equations to plot points, lines, and curves. What
+              this really means is that a vector graphic, like an SVG, can be
+              scaled to any size without impacting the quality.
+            </li>
+          </ul>
+          <h2>Multimedia Integration</h2>
+          <ul>
+            <li>
+              <strong><code>audio</code> and <code>video</code> Elements</strong
+              >: The <code>audio</code> and <code>video</code> elements allow
+              you to add sound and video content to your HTML documents. The
+              <code>audio</code> element supports popular audio formats like
+              mp3, wav, and ogg. The <code>video</code> element supports mp4,
+              ogg, and webm formats.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>CrystalizeThatInnerChild.mp3<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            If you want to see the audio player on the page, then you can add
+            the <code>audio</code> element with the
+            <code>controls</code> attribute:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>CrystalizeThatInnerChild.mp3<span class="token punctuation">"</span></span> <span class="token attr-name">controls</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            The <code>controls</code> attribute enables users to manage audio
+            playback, including adjusting volume, and pausing, or resuming
+            playback. The <code>controls</code> attribute is a boolean attribute
+            that can be added to an element to enable built-in playback
+            controls. If omitted, no controls will be shown.
+          </p>
+          <ul>
+            <li>
+              <strong><code>loop</code> Attribute</strong>: The
+              <code>loop</code> attribute is a boolean attribute that makes the
+              audio replay continuously.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.freecodecamp.org/curriculum/js-music-player/can't-stay-down.mp3<span class="token punctuation">"</span></span>
+  <span class="token attr-name">loop</span>
+  <span class="token attr-name">controls</span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>muted</code> Attribute</strong>: When present in the
+              <code>audio</code> element, the <code>muted</code> boolean
+              attribute will start the audio in a muted state.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://cdn.freecodecamp.org/curriculum/js-music-player/can't-stay-down.mp3<span class="token punctuation">"</span></span>
+  <span class="token attr-name">loop</span>
+  <span class="token attr-name">controls</span>
+  <span class="token attr-name">muted</span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>source</code> Element</strong>: When it comes to
+              audio file types, there are differences in which browsers support
+              which type. To accommodate this, you can use
+              <code>source</code> elements inside the <code>audio</code> element
+              and the browser will select the first source that it understands.
+              Here's an example of using multiple <code>source</code> elements
+              for an <code>audio</code> element:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>audio</span> <span class="token attr-name">controls</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>audio.ogg<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>audio/ogg<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>audio.wav<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>audio/wav<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>source</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>audio.mp3<span class="token punctuation">"</span></span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>audio/mpeg<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>audio</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <p>
+            All the attributes we have learned so far are also supported in the
+            <code>video</code> element. Here's an example of using a
+            <code>video</code> element with the <code>loop</code>,
+            <code>controls</code>, and <code>muted</code> attributes:
+          </p>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4<span class="token punctuation">"</span></span>
+  <span class="token attr-name">loop</span>
+  <span class="token attr-name">controls</span>
+  <span class="token attr-name">muted</span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>poster</code> Attribute</strong>: If you wanted to
+              display an image while the video is downloading, you can use the
+              <code>poster</code> attribute. This attribute is not available for
+              <code>audio</code> elements and is unique to the
+              <code>video</code> element.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>video</span>
+  <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4<span class="token punctuation">"</span></span>
+  <span class="token attr-name">loop</span>
+  <span class="token attr-name">controls</span>
+  <span class="token attr-name">muted</span>
+  <span class="token attr-name">poster</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217<span class="token punctuation">"</span></span>
+  <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>620<span class="token punctuation">"</span></span>
+<span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>video</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <h2>Target attribute types</h2>
+          <ul>
+            <li>
+              <strong><code>target</code> Attribute</strong>: This attribute
+              tells the browser where to open the URL for the anchor element.
+              There are four important possible values for this attribute:
+              <code>_self</code>, <code>_blank</code>, <code>_parent</code> and
+              <code>_top</code>. There is a fifth value, called
+              <code>_unfencedTop</code>, which is currently used for the
+              experimental <code>FencedFrame</code> API. You probably won't have
+              a reason to use this one yet.
+            </li>
+            <li>
+              <strong><code>_self</code> Value</strong>: This is the default
+              value for the <code>target</code> attribute. This opens the link
+              in the current browsing context. In most cases, this will be the
+              current tab or window.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://freecodecamp.org<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_self<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Visit freeCodeCamp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>_blank</code> Value</strong>: This opens the link in
+              a new browsing context. Typically, this will open in a new tab.
+              But some users might configure their browsers to open a new window
+              instead.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://freecodecamp.org<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_blank<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Visit freeCodeCamp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>_parent</code> Value</strong>: This opens the link
+              in the parent of the current context. For example, if your website
+              has an iframe, a <code>_parent</code> value in that iframe would
+              open in your website's tab/window, not in the embedded frame.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://freecodecamp.org<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_parent<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Visit freeCodeCamp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong><code>_top</code> Value</strong>: This opens the link in
+              the top-most browsing context - think "the parent of the parent".
+              This is similar to <code>_parent</code>, but the link will always
+              open in the full browser tab/window, even for nested embedded
+              frames.
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://freecodecamp.org<span class="token punctuation">"</span></span> <span class="token attr-name">target</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_top<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Visit freeCodeCamp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <h2>Absolute vs. Relative Paths</h2>
+          <ul>
+            <li>
+              <strong>Path definition</strong>: A path is a string that
+              specifies the location of a file or directory in a file system. In
+              web development, paths let developers link to resources like
+              images, stylesheets, scripts, and other web pages.
+            </li>
+            <li>
+              <strong>Path Syntax</strong>: There are three key syntaxes to
+              know. First is the slash, which can be a backslash
+              (<code>\</code>) or forward slash (<code>/</code>) depending on
+              your operating system. The second is the single dot
+              (<code>.</code>). And finally, we have the double dot
+              (<code>..</code>). The slash is known as the "path separator". It
+              is used to indicate a break in the text between folder or file
+              names. A single dot points to the current directory, and two dots
+              point to the parent directory.
+            </li>
+          </ul>
+          <pre
+            class="language-md"
+            tabindex="0"
+            role="region"
+            aria-label=" code example"
+          ><code class="language-md">public/index.html
+./favicon.ico
+../src/index.css
+</code></pre>
+          <ul>
+            <li>
+              <strong>Absolute Path</strong>: An absolute path is a complete
+              link to a resource. It starts from the root directory, includes
+              every other directory, and finally the filename and extension. The
+              "root directory" refers to the top-level directory or folder in a
+              hierarchy. An absolute path also includes the protocol - which
+              could be <code>http</code>, <code>https</code>, and
+              <code>file</code> and the domain name if the resource is on the
+              web. Here's an example of an absolute path that links to the
+              freeCodeCamp logo:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>https://design-style-guide.freecodecamp.org/img/fcc_secondary_small.svg<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  View fCC Logo
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <ul>
+            <li>
+              <strong>Relative Path</strong>: A relative path specifies the
+              location of a file relative to the directory of the current file.
+              It does not include the protocol or the domain name, making it
+              shorter and more flexible for internal links within the same
+              website. Here's an example of linking to the
+              <code>about.html</code> page from the
+              <code>contact.html</code> page, both of which are in the same
+              folder:
+            </li>
+          </ul>
+          <pre
+            class="language-html"
+            tabindex="0"
+            role="region"
+            aria-label="HTML code example"
+          ><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+  Read more on the
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>about.html<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>About Page<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>a</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+          <h2>Link states</h2>
+          <ul>
+            <li>
+              <strong><code>:link</code></strong
+              >: This is the default state. This state represents a link which
+              the user has not visited, clicked, or interacted with yet. You can
+              think of this state as providing the base styles for all links on
+              your page. The other states build on top of it.
+            </li>
+            <li>
+              <strong><code>:visited</code></strong
+              >: This applies when a user has already visited the page being
+              linked to. By default, this turns the link purple - but you can
+              leverage CSS to provide a different visual indication to the user.
+            </li>
+            <li>
+              <strong><code>:hover</code></strong
+              >: This state applies when a user is hovering their cursor over a
+              link. This state is helpful for providing extra attention to a
+              link, to ensure a user actually intends to click it.
+            </li>
+            <li>
+              <strong><code>:focus</code></strong
+              >: This state applies when we focus on a link.
+            </li>
+            <li>
+              <strong><code>:active</code></strong
+              >: This state applies to links that are being activated by the
+              user. This typically means clicking on the link with the primary
+              mouse button by left clicking, in most cases.
+            </li>
+          </ul>
+        </section>
+        <!---------- End lectureTopic --------------------------------------------------------------------->
+      </section>
+      <!---------- End mainContent ---------------------------------------------------------------------->
+    </main>
+    <!----- End <main> -------------------------------------------------------------------------------->
+
+    <!----- Start <footer> ---------------------------------------------------------------------------->
+    <br />
+    <hr />
+    <br />
+    <footer id="idFooter">
+      <section class="footer-nav">
+        <div class="footer-left">
+          <a class="prev-link">
+            <button type="button" aria-label="Go to previous page">
+              Previous
+            </button>
+          </a>
+        </div>
+        <div class="footer-center">
+          <a href="#idHeader">Top of page</a> |
+          <a class="home-link-footer">Home</a> |
+          <a
+            href="/pages/s100101-CFSDc/c100101-Basic-HTML/Home-Basic-HTML.html"
+            >Basic HTML Home</a
+          >
+        </div>
+        <div class="footer-right">
+          <a class="next-link">
+            <button type="button" aria-label="Go to Basic HTML Home">
+              Basic HTML Home
+            </button>
+          </a>
+        </div>
+      </section>
+    </footer>
+    <!----- End <footer> ------------------------------------------------------------------------------>
+
+    <!----- Start scripts ----------------------------------------------------------------------------->
+
+    <script>
+      // Environment-aware module imports
+      const basePath = window.basePath || "/";
+      const sharedConstantsPath =
+        basePath + "src/scripts/sharedConstants-__main.js";
+      const basicHtmlHelperPath =
+        basePath + "src/scripts/sharedConstants-CFSD-basic-html-helper.js";
+
+      Promise.all([import(sharedConstantsPath), import(basicHtmlHelperPath)])
+        .then(([mainModule, helperModule]) => {
+          const { paths, ariaLabels } = mainModule;
+          const { p100901, pHome_Basic_HTML } = helperModule;
+
+          // Wait for DOM to be ready
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", setupNavigation);
+          } else {
+            setupNavigation();
+          }
+
+          function setupNavigation() {
+            // Set home links
+            document
+              .querySelector(".home-link-header")
+              ?.setAttribute(
+                "aria-label",
+                ariaLabels.ariaLabel_homeLink_header,
+              );
+            document
+              .querySelector(".home-link-header")
+              ?.setAttribute("href", paths.path_home);
+            document
+              .querySelector(".home-link-footer")
+              ?.setAttribute(
+                "aria-label",
+                ariaLabels.ariaLabel_homeLink_header,
+              );
+            document
+              .querySelector(".home-link-footer")
+              ?.setAttribute("href", paths.path_home);
+
+            // Set navigation links
+            document
+              .querySelectorAll(".prev-link")
+              .forEach((el) => (el.href = p100901));
+            document
+              .querySelectorAll(".next-link")
+              .forEach((el) => (el.href = pHome_Basic_HTML));
+          }
+        })
+        .catch((error) => {
+          console.error("Failed to load navigation modules:", error);
+        });
+    </script>
+    <!----- End scripts ------------------------------------------------------------------------------->
+  </body>
+</html>
